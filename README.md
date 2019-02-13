@@ -29,3 +29,5 @@ in the configuration images:
 > **card with Grey shallow** means that 在recycle moves回合中已经被移动到其他地方的卡片
 
 > **card with Green shallow** means that 在recycle moves回合中从其他地方移动过来的卡片
+
+****Test 5 6 7 has passed. Test 7: player 2 should win, cause player1 choose dots. When player2 palce the card, which is satisfied color and dots. But Player 2 palce card, according to rule, player 2 win
