@@ -250,15 +250,15 @@ def is_valid(move,card,cindex):
                 return False
     return True
 
-def winning_move(board,user):
+def winning_move(board,user1,user2):
     for c in range(ROW_COUNT-3):
         for r in range(COL_COUNT):
-            if user==1:
-                if board[r][c][1] == 'O' and board[r][c+1][1] == 'O' and board[r][c+2][1] == 'O' and board[r][c+3][1] == 'O':
+            if user1==1 and user2==2:
+                if board[r][c][1]=='O'and board[r][c+1][1]=='O' and board[r][c+2][1] == 'O' and board[r][c+3][1] =='O':
                     return 1
-                elif board[r][c][1] == 'X' and board[r][c+1][1] == 'X' and board[r][c+2][1] == 'X' and board[r][c+3][1] == 'X':
+                elif board[r][c][1] =='X' and board[r][c+1][1]=='X' and board[r][c+2][1]=='X'and board[r][c+3][1]=='X':
                     return 1
-            elif user==2:
+            elif user1==2 and user2==1:
                 if board[r][c][0]=='W' and board[r][c+1][0]=='W' and board[r][c+2][0]=='W' and board[r][c+3][0]=='W':
                     return 0
                 elif board[r][c][0]=='R' and board[r][c+1][0]=='R' and board[r][c+2][0]=='R' and board[r][c+3][0]=='R':
@@ -267,45 +267,42 @@ def winning_move(board,user):
 
     for c in range(ROW_COUNT):
         for r in range(COL_COUNT-3):
-            if str==1:
-                if board[r][c][1] == 'O' and board[r+1][c][1] == 'O' and board[r+2][c][1] == 'O' and board[r+3][c][1] == 'O':
+            if user1==1 and user2==2:
+                if board[r][c][1] =='O'and board[r+1][c][1] =='O'and board[r+2][c][1] =='O' and board[r+3][c][1] == 'O':
                     return 1
-                elif board[r][c][1] == 'X' and board[r+1][c][1] == 'X' and board[r+2][c][1] == 'X' and board[r+3][c][1] == 'X':
+                elif board[r][c][1] =='X'and board[r+1][c][1] =='X'and board[r+2][c][1]=='X' and board[r+3][c][1]== 'X':
                     return 1
-            elif str==2:
-
+            elif user1 == 2 and user2 == 1:
                 if board[r][c][0]=='W' and board[r+1][c][0]=='W' and board[r+2][c][0]=='W' and board[r+3][c][0]=='W':
                     return 0
                 elif board[r][c][0]=='R' and board[r+1][c][0]=='R' and board[r+2][c][0]=='R' and board[r+3][c][0]=='R':
                     return 0
 
     for c in range(ROW_COUNT-3):
-        for r in range(COL_COUNT-3):
-            if str==1:
-                if board[r][c][1] == 'O' and board[r+1][c+1][1] == 'O' and board[r+2][c+2][1] == 'O' and board[r+3][c+3][1] == 'O':
+        for r in range(3,COL_COUNT):
+            if user1==1 and user2==2:
+                if board[r][c][1]=='O'and board[r-1][c+1][1]=='O'and board[r-2][c+2][1]=='O'and board[r-3][c+3][1]=='O':
                     return 1
-                elif board[r][c][1] == 'X' and board[r+1][c+1][1] == 'X' and board[r+2][c+2][1] == 'X' and board[r+3][c+3][1] == 'X':
+                elif board[r][c][1]=='X'and board[r-1][c+1][1]=='X'and board[r-2][c+2][1]=='X'and board[r-3][c+3][1]=='X':
                     return 1
-            elif str==2:
-                if board[r][c][0]=='W' and board[r+1][c+1][0]=='W' and board[r+2][c+2][0]=='W' and board[r+3][c+3][0]=='W':
+            elif user1 == 2 and user2 == 1:
+                if board[r][c][0]=='W' and board[r-1][c+1][0]=='W' and board[r-2][c+2][0]=='W' and board[r-3][c+3][0]=='W':
                     return 0
-                elif board[r][c][0]=='R' and board[r+1][c+1][0]=='R' and board[r+2][c+2][0]=='R' and board[r+3][c+3][0]=='R':
+                elif board[r][c][0]=='R' and board[r-1][c+1][0]=='R' and board[r-2][c+2][0]=='R' and board[r-3][c+3][0]=='R':
                     return 0
 
     for c in range(ROW_COUNT-3):
-        for r in range(0,COL_COUNT-2):
-            if str == 1:
-                if board[r][c][1] == 'O' and board[r - 1][c + 1][1] == 'O' and board[r + 2][c + 2][1] == 'O' and board[r + 3][c + 3][1] == 'O':
+        for r in range(COL_COUNT-3):
+            if user1==1 and user2==2:
+                if board[r][c][1] =='O'and board[r+1][c+1][1]=='O'and board[r+2][c +2][1]=='O'and board[r+3][c+3][1]=='O':
                     return 1
-                elif board[r][c][1] == 'X' and board[r - 1][c + 1][1] == 'X' and board[r + 2][c + 2][1] == 'X' and board[r + 3][c + 3][1] == 'X':
+                elif board[r][c][1] =='X'and board[r+1][c+1][1] =='X'and board[r+2][c+2][1]=='X'and board[r+3][c+3][1]=='X':
                     return 1
-            elif str==2:
-                if board[r][c][0]=='W' and board[r-1][c+1][0]=='W' and board[r+2][c+2][0]=='W' and board[r+3][c+3][0]=='W':
+            elif user1 == 2 and user2 == 1:
+                if board[r][c][0]=='W' and board[r+1][c+1][0]=='W' and board[r+2][c+2][0]=='W' and board[r+3][c+3][0]=='W':
                     return 0
-                if board[r][c][0]=='R' and board[r-1][c+1][0]=='R' and board[r+2][c+2][0]=='R' and board[r+3][c+3][0]=='R':
+                if board[r][c][0]=='R' and board[r+1][c+1][0]=='R' and board[r+2][c+2][0]=='R' and board[r+3][c+3][0]=='R':
                     return 0
-
-
 
 def which_card(move):
     try:
@@ -356,6 +353,8 @@ def which_cindex(move):
         return index
     except UnboundLocalError:
         return UnboundLocalError
+
+
 def play(user1,user2,turn,game_over):
     firstuser=[]
     while not game_over:
@@ -378,16 +377,18 @@ def play(user1,user2,turn,game_over):
                     elif drop==True:
                         firstuser.append(move)
                     if user1==1:
-                        win = winning_move(board, user1)
+                        win = winning_move(board, user1,user2)
                         if win==1:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user1))
+                            print("*****GAME END*****")
                             break
                     elif user1==2:
-                        win = winning_move(board, user1)
-                        if win==0:
+                        win = winning_move(board, user2,user1)
+                        if win==1:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user1))
+                            print("*****GAME END*****")
                             break
                 else:
                     print("try again")
@@ -417,13 +418,14 @@ def play(user1,user2,turn,game_over):
                     elif drop==True:
                         firstuser.append(move)
                     if user2==1:
-                        win = winning_move(board, user2)
-                        if win==1:
+                        win = winning_move(board, user1,user2)
+                        if win==0:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user2))
+                            print("*****GAME END*****")
                             break
                     elif user2==2:
-                        win = winning_move(board, user2)
+                        win = winning_move(board, user2,user1)
                         if win==0:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user2))
@@ -438,6 +440,7 @@ def play(user1,user2,turn,game_over):
         print(*board, sep='\n')
         turn +=1
         turn=turn % 2
+        print("Overall steps: ",end="")
         print(len(firstuser))
         if(len(firstuser)==24):
             print("In regualr game, game ends in a draw. They need go head to next section")
@@ -446,7 +449,7 @@ def play(user1,user2,turn,game_over):
 def recycling(list1,game_over,user1,user2,turn):
     global remo
     global remove
-    sum=0
+    sum=24
     card_id=''
     initial_card=list1[23][1]
     while not game_over:
@@ -510,14 +513,14 @@ def recycling(list1,game_over,user1,user2,turn):
                     print("try again")
                     continue
                 if user1==1:
-                    win = winning_move(board, user1)
+                    win = winning_move(board, user1,user2)
                     if win==1:
                         print(*board, sep='\n')
                         print("player {0} winning".format(user1))
                         break
                 elif user1==2:
-                    win = winning_move(board, user1)
-                    if win==0:
+                    win = winning_move(board, user2,user1)
+                    if win==1:
                         print(*board, sep='\n')
                         print("player {0} winning".format(user1))
                         break
@@ -585,13 +588,13 @@ def recycling(list1,game_over,user1,user2,turn):
                         print("try again")
                         continue
                     if user2==1:
-                        win = winning_move(board, user2)
-                        if win==1:
+                        win = winning_move(board, user1,user2)
+                        if win==0:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user2))
                             break
                     elif user2==2:
-                        win = winning_move(board, user2)
+                        win = winning_move(board, user2,user1)
                         if win==0:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user2))
@@ -603,6 +606,8 @@ def recycling(list1,game_over,user1,user2,turn):
         print(*board, sep='\n')
         turn +=1
         turn=turn % 2
+        print("Overall steps: ",end="")
+        print(sum)
         if sum==36:
             print("After regualr and recycling game, game ends in a draw")
             break

@@ -10,10 +10,10 @@ class Card:
     card8 = Type()
 
     def __init__(self):
-        self.card5.left = "WO"
-        self.card5.right = 'RX'
-        self.card1.left ='WO'
-        self.card1.right = 'RX'
+        self.card5.left = "RO"
+        self.card5.right = 'WX'
+        self.card1.left ='RX'
+        self.card1.right = 'WO'
         self.card2.top = 'RX'
         self.card2.below = 'WO'
         self.card3.left = 'WO'
