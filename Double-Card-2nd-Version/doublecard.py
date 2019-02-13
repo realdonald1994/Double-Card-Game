@@ -377,17 +377,29 @@ def play(user1,user2,turn,game_over):
                     elif drop==True:
                         firstuser.append(move)
                     if user1==1:
-                        win = winning_move(board, user1,user2)
-                        if win==1:
+                        win1 = winning_move(board, user1,user2)
+                        win2 = winning_move(board, user2,user1)
+                        if win1==1:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user1))
                             print("*****GAME END*****")
                             break
+                        elif win2==0:
+                            print(*board, sep='\n')
+                            print("player {0} winning".format(user2))
+                            print("*****GAME END*****")
+                            break
                     elif user1==2:
-                        win = winning_move(board, user2,user1)
-                        if win==1:
+                        win1 = winning_move(board, user2,user1)
+                        win2 = winning_move(board, user1, user2)
+                        if win1==1:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user1))
+                            print("*****GAME END*****")
+                            break
+                        elif win2==0:
+                            print(*board, sep='\n')
+                            print("player {0} winning".format(user2))
                             print("*****GAME END*****")
                             break
                 else:
@@ -418,17 +430,29 @@ def play(user1,user2,turn,game_over):
                     elif drop==True:
                         firstuser.append(move)
                     if user2==1:
-                        win = winning_move(board, user1,user2)
-                        if win==0:
+                        win1 = winning_move(board, user1,user2)
+                        win2 = winning_move(board, user2, user1)
+                        if win1==0:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user2))
                             print("*****GAME END*****")
                             break
+                        elif win2==1:
+                            print(*board, sep='\n')
+                            print("player {0} winning".format(user1))
+                            print("*****GAME END*****")
+                            break
                     elif user2==2:
-                        win = winning_move(board, user2,user1)
-                        if win==0:
+                        win1 = winning_move(board, user2,user1)
+                        win2 = winning_move(board, user1,user2)
+                        if win1==0:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user2))
+                            print("*****GAME END*****")
+                            break
+                        elif win2==1:
+                            print(*board, sep='\n')
+                            print("player {0} winning".format(user1))
                             print("*****GAME END*****")
                             break
                 else:
@@ -513,16 +537,30 @@ def recycling(list1,game_over,user1,user2,turn):
                     print("try again")
                     continue
                 if user1==1:
-                    win = winning_move(board, user1,user2)
-                    if win==1:
+                    win1 = winning_move(board, user1, user2)
+                    win2 = winning_move(board, user2, user1)
+                    if win1 == 1:
                         print(*board, sep='\n')
                         print("player {0} winning".format(user1))
+                        print("*****GAME END*****")
+                        break
+                    elif win2 == 0:
+                        print(*board, sep='\n')
+                        print("player {0} winning".format(user2))
+                        print("*****GAME END*****")
                         break
                 elif user1==2:
-                    win = winning_move(board, user2,user1)
-                    if win==1:
+                    win1 = winning_move(board, user2, user1)
+                    win2 = winning_move(board, user1, user2)
+                    if win1 == 1:
                         print(*board, sep='\n')
                         print("player {0} winning".format(user1))
+                        print("*****GAME END*****")
+                        break
+                    elif win2 == 0:
+                        print(*board, sep='\n')
+                        print("player {0} winning".format(user2))
+                        print("*****GAME END*****")
                         break
             else:
                 print("try again")
@@ -588,16 +626,29 @@ def recycling(list1,game_over,user1,user2,turn):
                         print("try again")
                         continue
                     if user2==1:
-                        win = winning_move(board, user1,user2)
-                        if win==0:
+                        win1 = winning_move(board, user1,user2)
+                        win2 = winning_move(board, user2, user1)
+                        if win1==0:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user2))
+                            print("*****GAME END*****")
+                            break
+                        elif win2==1:
+                            print(*board, sep='\n')
+                            print("player {0} winning".format(user1))
+                            print("*****GAME END*****")
                             break
                     elif user2==2:
-                        win = winning_move(board, user2,user1)
-                        if win==0:
+                        win1 = winning_move(board, user2,user1)
+                        win2 = winning_move(board, user1,user2)
+                        if win1==0:
                             print(*board, sep='\n')
                             print("player {0} winning".format(user2))
+                            print("*****GAME END*****")
+                            break
+                        elif win2==1:
+                            print(*board, sep='\n')
+                            print("player {0} winning".format(user1))
                             print("*****GAME END*****")
                             break
                 else:
