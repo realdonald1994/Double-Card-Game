@@ -22,9 +22,9 @@ counter four
 | #11| ... <br> (recycle前输入与#8相同) <br> (recycle moves start) A 9 B 9 3 F 8 <br> F 8 G 8 4 E 4 | <img src="test_result_images/configuration-11-recycle-starts.jpg" width="380"> <br><br> (recycle moves start) <br><br> <img src="test_result_images/configuration-11-recycle-move-invalid-card.jpg" width="380">  | Failed <br> 程序显示player2 wins，<br> 但是应该提示player2不能移动player1刚刚动过的卡片  | 测试recycle环节 <br> player2拿起player1刚刚移动过的卡片 <br> 应提示player2重新选择要拿起的卡片 |
 | #12| ... <br> (recycle前输入与#8相同) <br> (recycle moves start) A 9 B 9 1 A 9 | <img src="test_result_images/configuration-12-recycle-starts.jpg" width="380"> <br><br> (recycle moves start) <br><br> <img src="test_result_images/configuration-12-recycle-invalid-move.jpg" width="380">  | 测试通过  | 测试recycle环节 <br> player1拿起一张卡片不做任何操作，放回原先位置情况，应提示player1重新选择落字的位置  |
 | #13| ... <br> (recycle前输入与#8相同) <br> (recycle moves start) C 2 D 2 3 D 4 | <img src="test_result_images/configuration-13-recycle-starts.jpg" width="380"> <br><br> (recycle moves start) <br><br> <img src="test_result_images/configuration-13-recycle-move-invalid-card.jpg" width="380">  | 测试通过  | 测试recycle环节 <br> 由于player1拿起的一张卡片而导致board出现invalid configuration的情况，应当提示player1重新选择要拿起的卡片  |
-| #14| ...  | ...  | ...  | 测试player1选择颜色，player1赢的情况  |
-| #15| ...  | ...  | ...  | 测试player1选择颜色，player1输得情况 |
-| #15|   |   |   |   |
+| #14| colors <br> 0 1 B 1 <br> 0 2 D 1 <br> 0 2 E 1 <br> 0 1 D 3 <br> 0 1 D 4 <br> 0 6 F 1  | <img src="test_result_images/configuration-14-player1-wins.jpg" width="380">  | 测试通过  | 测试player1选择颜色，player1赢的情况  |
+| #15| colors <br> 0 1 B 1 <br> 0 2 D 1 <br> 0 2 E 1 <br> 0 1 D 3 <br> 0 6 C 2 <br> 0 6 B 2  | <img src="test_result_images/configuration-15-player2-wins.jpg" width="380">  | 测试通过  | 测试player1选择颜色，player1输得情况 |
+| #16|   |   |   |   |
 
 in the configuration images:
 > **Blue square** means the piece that player1 drops
