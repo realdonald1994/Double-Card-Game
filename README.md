@@ -26,4 +26,6 @@ in the configuration images:
 
 > **Green square** means that the winning position
 
-> **card with Grey shallow** means that the card that has been moved to another place in recycle moves
+> **card with Grey shallow** means that 在recycle moves回合中已经被移动到其他地方的卡片
+
+> **card with Green shallow** means that 在recycle moves回合中从其他地方移动过来的卡片
