@@ -31,3 +31,4 @@ in the configuration images:
 > **card with Green shallow** means that 在recycle moves回合中从其他地方移动过来的卡片
 
 ****Test 5 6 7 has passed. Test 7: player 2 should win, cause player1 choose dots. When player2 palce the card, which is satisfied color and dots. But Player 2 palce card, according to rule, player 2 win
+****Test 8 has passed. Test 8: when player 2 input 0 3 C 3, the player 1 statisfy condition of win. Because the sum of diagonal equals to 4. The game is ended
