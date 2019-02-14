@@ -382,26 +382,38 @@ def play(user1,user2,turn,game_over):
                         win2 = winning_move(board, user2,user1)
                         if win1==1:
                             print(*board, sep='\n')
+                            print(*board, sep='\n', file=open("output.txt", 'a'))
                             print("player {0} winning".format(user1))
+                            print("player {0} winning".format(user1), file=open("output.txt", 'a'))
                             print("*****GAME END*****")
+                            print("*****GAME END*****", file=open("output.txt", 'a'))
                             break
                         elif win2==0:
                             print(*board, sep='\n')
+                            print(*board, sep='\n', file=open("output.txt", 'a'))
                             print("player {0} winning".format(user2))
+                            print("player {0} winning".format(user2), file=open("output.txt", 'a'))
                             print("*****GAME END*****")
+                            print("*****GAME END*****", file=open("output.txt", 'a'))
                             break
                     elif user1==2:
                         win1 = winning_move(board, user2,user1)
                         win2 = winning_move(board, user1, user2)
                         if win1==1:
                             print(*board, sep='\n')
+                            print(*board, sep='\n', file=open("output.txt", 'a'))
                             print("player {0} winning".format(user1))
+                            print("player {0} winning".format(user1), file=open("output.txt", 'a'))
                             print("*****GAME END*****")
+                            print("*****GAME END*****", file=open("output.txt", 'a'))
                             break
                         elif win2==0:
                             print(*board, sep='\n')
+                            print(*board, sep='\n', file=open("output.txt", 'a'))
                             print("player {0} winning".format(user2))
+                            print("player {0} winning".format(user2), file=open("output.txt", 'a'))
                             print("*****GAME END*****")
+                            print("*****GAME END*****", file=open("output.txt", 'a'))
                             break
                 else:
                     print("not valid")
@@ -438,26 +450,38 @@ def play(user1,user2,turn,game_over):
                         win2 = winning_move(board, user2, user1)
                         if win1==0:
                             print(*board, sep='\n')
+                            print(*board, sep='\n', file=open("output.txt", 'a'))
                             print("player {0} winning".format(user2))
+                            print("player {0} winning".format(user2), file=open("output.txt", 'a'))
                             print("*****GAME END*****")
+                            print("*****GAME END*****", file=open("output.txt", 'a'))
                             break
                         elif win2==1:
                             print(*board, sep='\n')
+                            print(*board, sep='\n', file=open("output.txt", 'a'))
                             print("player {0} winning".format(user1))
+                            print("player {0} winning".format(user1), file=open("output.txt", 'a'))
                             print("*****GAME END*****")
+                            print("*****GAME END*****", file=open("output.txt", 'a'))
                             break
                     elif user2==2:
                         win1 = winning_move(board, user2,user1)
                         win2 = winning_move(board, user1,user2)
                         if win1==0:
                             print(*board, sep='\n')
+                            print(*board, sep='\n', file=open("output.txt", 'a'))
                             print("player {0} winning".format(user2))
+                            print("player {0} winning".format(user2), file=open("output.txt", 'a'))
                             print("*****GAME END*****")
+                            print("*****GAME END*****", file=open("output.txt", 'a'))
                             break
                         elif win2==1:
                             print(*board, sep='\n')
+                            print(*board, sep='\n', file=open("output.txt", 'a'))
                             print("player {0} winning".format(user1))
+                            print("player {0} winning".format(user1), file=open("output.txt", 'a'))
                             print("*****GAME END*****")
+                            print("*****GAME END*****", file=open("output.txt", 'a'))
                             break
                 else:
                     print("not valid")
@@ -468,12 +492,16 @@ def play(user1,user2,turn,game_over):
                 print("try again")
                 continue
         print(*board, sep='\n')
+        print(*board, sep='\n', file=open("output.txt", 'a'))
         turn +=1
         turn=turn % 2
         print("Overall steps: ",end="")
+        print("Overall steps: ", end="", file=open("output.txt", 'a'))
         print(len(firstuser))
+        print(len(firstuser), file=open("output.txt", 'a'))
         if(len(firstuser)==24):
             print("In regualr game, game ends in a draw. They need go head to next section")
+            print("In regualr game, game ends in a draw. They need go head to next section", file=open("output.txt", 'a'))
             lastcol = firstuser[23][2]
             lastraw = firstuser[23][3]
             sum = len(firstuser)
@@ -569,26 +597,38 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
                     win2 = winning_move(board, user2, user1)
                     if win1 == 1:
                         print(*board, sep='\n')
+                        print(*board, sep='\n',file=open("output.txt", 'a'))
                         print("player {0} winning".format(user1))
+                        print("player {0} winning".format(user1),file=open("output.txt", 'a'))
                         print("*****GAME END*****")
+                        print("*****GAME END*****",file=open("output.txt", 'a'))
                         break
                     elif win2 == 0:
                         print(*board, sep='\n')
+                        print(*board, sep='\n',file=open("output.txt", 'a'))
                         print("player {0} winning".format(user2))
+                        print("player {0} winning".format(user2),file=open("output.txt", 'a'))
                         print("*****GAME END*****")
+                        print("*****GAME END*****",file=open("output.txt", 'a'))
                         break
                 elif user1==2:
                     win1 = winning_move(board, user2, user1)
                     win2 = winning_move(board, user1, user2)
                     if win1 == 1:
                         print(*board, sep='\n')
+                        print(*board, sep='\n',file=open("output.txt", 'a'))
                         print("player {0} winning".format(user1))
+                        print("player {0} winning".format(user1),file=open("output.txt", 'a'))
                         print("*****GAME END*****")
+                        print("*****GAME END*****",file=open("output.txt", 'a'))
                         break
                     elif win2 == 0:
                         print(*board, sep='\n')
+                        print(*board, sep='\n',file=open("output.txt", 'a'))
                         print("player {0} winning".format(user2))
+                        print("player {0} winning".format(user2),file=open("output.txt", 'a'))
                         print("*****GAME END*****")
+                        print("*****GAME END*****",file=open("output.txt", 'a'))
                         break
             else:
                 print("not valid")
@@ -673,58 +713,84 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
                     win2 = winning_move(board, user2, user1)
                     if win1==0:
                         print(*board, sep='\n')
+                        print(*board, sep='\n',file=open("output.txt", 'a'))
                         print("player {0} winning".format(user2))
+                        print("player {0} winning".format(user2),file=open("output.txt", 'a'))
                         print("*****GAME END*****")
+                        print("*****GAME END*****",file=open("output.txt", 'a'))
                         break
                     elif win2==1:
                         print(*board, sep='\n')
+                        print(*board, sep='\n',file=open("output.txt", 'a'))
                         print("player {0} winning".format(user1))
+                        print("player {0} winning".format(user1),file=open("output.txt", 'a'))
                         print("*****GAME END*****")
+                        print("*****GAME END*****",file=open("output.txt", 'a'))
                         break
                 elif user2==2:
                     win1 = winning_move(board, user2,user1)
                     win2 = winning_move(board, user1,user2)
                     if win1==0:
                         print(*board, sep='\n')
+                        print(*board, sep='\n',file=open("output.txt", 'a'))
                         print("player {0} winning".format(user2))
+                        print("player {0} winning".format(user2),file=open("output.txt", 'a'))
                         print("*****GAME END*****")
+                        print("*****GAME END*****",file=open("output.txt", 'a'))
                         break
                     elif win2==1:
                         print(*board, sep='\n')
+                        print(*board, sep='\n',file=open("output.txt", 'a'))
                         print("player {0} winning".format(user1))
+                        print("player {0} winning".format(user1),file=open("output.txt", 'a'))
                         print("*****GAME END*****")
+                        print("*****GAME END*****",file=open("output.txt", 'a'))
                         break
             else:
                 print("not valid")
                 print("try again")
                 continue
         print(*board, sep='\n')
+        print(*board, sep='\n',file=open("output.txt", 'a'))
         turn +=1
         turn=turn % 2
         print("Overall steps: ",end="")
+        print("Overall steps: ", end="",file=open("output.txt", 'a'))
         print(sum)
+        print(sum,file=open("output.txt", 'a'))
         if sum==36:
             print("After regualr and recycling game, game ends in a draw")
+            print("After regualr and recycling game, game ends in a draw",file=open("output.txt", 'a'))
             break
 
 
 if __name__ == '__main__':
     print("*****WELCOME TO DOUBLE-CARD GAME*****")
+    print("*****WELCOME TO DOUBLE-CARD GAME*****",file=open("output.txt", 'a'))
     print("SUPPORT: "
           "W: White "
           "R: Red "
           "X: Solid "
           "O: Hollow")
-    str = input("Player 1 will play dots or colors?" )
+    print("SUPPORT: "
+          "W: White "
+          "R: Red "
+          "X: Solid "
+          "O: Hollow",file=open("output.txt", 'a'))
+    str = input("Player 1 will play dots or colors?")
     if str=="dots":
         print("Player1 choose dots")
+        print("Player1 choose dots",file=open("output.txt", 'a'))
         print("Player2 choose colors")
+        print("Player2 choose colors",file=open("output.txt", 'a'))
         user1=1
         user2=2
         turn =0
     elif(str=="colors"):
         print("Player1 choose colors")
+        print("Player1 choose colors", file=open("output.txt", 'a'))
         print("Player2 choose dots")
+        print("Player2 choose dots", file=open("output.txt", 'a'))
         user1=2
         user2=1
         turn =1
@@ -733,18 +799,24 @@ if __name__ == '__main__':
         str = input("Player 1 will play dots or colors?")
         if str == "dots":
             print("Player1 choose dots")
+            print("Player1 choose dots", file=open("output.txt", 'a'))
             print("Player2 choose colors")
+            print("Player2 choose colors", file=open("output.txt", 'a'))
             user1 = 1
             user2 = 2
             turn = 0
         elif (str == "colors"):
             print("Player1 choose colors")
+            print("Player1 choose colors", file=open("output.txt", 'a'))
             print("Player2 choose dots")
+            print("Player2 choose dots", file=open("output.txt", 'a'))
             user1 = 2
             user2 = 1
             turn = 1
     game_over = False
     board = create_board()
     print(*board, sep='\n')
+    print(*board, sep='\n', file=open("output.txt", 'a'))
+    print("*****************************************************", file=open("output.txt", 'a'))
     play(user1,user2,turn,game_over)
 
