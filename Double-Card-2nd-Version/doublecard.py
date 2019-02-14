@@ -817,6 +817,6 @@ if __name__ == '__main__':
     board = create_board()
     print(*board, sep='\n')
     print(*board, sep='\n', file=open("output.txt", 'a'))
-    print("*****************************************************", file=open("output.txt", 'a'))
+    print("************************************************", file=open("output.txt", 'a'))
     play(user1,user2,turn,game_over)
 
