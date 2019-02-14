@@ -500,8 +500,8 @@ def play(user1,user2,turn,game_over):
         print(len(firstuser))
         print(len(firstuser), file=open("output.txt", 'a'))
         if(len(firstuser)==24):
-            print("In regualr game, game ends in a draw. They need go head to next section")
-            print("In regualr game, game ends in a draw. They need go head to next section", file=open("output.txt", 'a'))
+            print("In regular game, game ends in a draw. They need go head to next section")
+            print("In regular game, game ends in a draw. They need go head to next section", file=open("output.txt", 'a'))
             lastcol = firstuser[23][2]
             lastraw = firstuser[23][3]
             sum = len(firstuser)
