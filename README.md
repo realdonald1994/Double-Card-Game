@@ -42,4 +42,4 @@ in the configuration images:
 ****Test 8 has passed. Test 8: when player 2 input 0 3 C 3, the player 1 statisfy condition of win. Because the sum of diagonal equals to 4. The game is ended<br>
 **-----------------------------------------------**
 
-
+**** Each test is passed ****
