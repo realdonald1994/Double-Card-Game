@@ -572,6 +572,7 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
             newcol=min(move[0],move[2])
             newcindex = which_cindex(newcol)
             lastcindex = which_cindex(lastcol)
+            newraw = min(move[1],move[3])
             if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
                 continue
             if move[0]==move[2]:
@@ -731,6 +732,7 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
             newcol=min(move[0],move[2])
             newcindex = which_cindex(newcol)
             lastcindex = which_cindex(lastcol)
+            newraw = min(move[1], move[3])
             if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
                 continue
             if move[0]==move[2]:
