@@ -3,6 +3,9 @@ Python3 Version: Python3.6.5
 
 SUPPORT: W: White R: Red X: Solid O: Hollow
 
+Run: Open shell->input python3 doublecard.py 
+The project will run.
+
 Start Step:
 1. For Player1, choosing dots or colours. And Player 2 choose another.
 2. Input player's step, for example: 0 3 C 3. When input player's step, the console will show the current board.
