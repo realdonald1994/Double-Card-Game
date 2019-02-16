@@ -353,7 +353,7 @@ def which_cindex(move):
         return index
     except UnboundLocalError:
         return UnboundLocalError
-def cardinformation(move,cindex,rindex,card,):
+def cardinformation(move,cindex,rindex,card):
     if (card is Card.card1):
         nextcindex = cindex+1
         nextrindex = rindex
@@ -395,7 +395,102 @@ def cardinformation(move,cindex,rindex,card,):
         move.append(nextcindex)
         move.append(nextrindex)
     return move
+def samecard(move,cindex1,cindex2,list1,card_id):
 
+    if move[0] == move[2]:
+        num = 1
+        minmove = move[0]
+    elif cindex1 == cindex2 - 1 or cindex1 == cindex2 + 1:
+        num = 2
+        minmove = min(move[0], move[2])
+    else:
+        print("invalid col input")
+        card_id ="colerror"
+        return card_id
+    if num == 1:
+        for j in list1:
+            for i in j:
+                if minmove == i:
+                    if list1[list1.index(j)][3] == move[1]:
+                        if 12 - list1[list1.index(j)][5] == int(move[3]):
+                            if list1.index(j) < len(list1) - 1:
+                                if move[5] == move[0] == move[2] == list1[list1.index(j)][2] and move[6] == move[1] == \
+                                        list1[list1.index(j)][3]:
+                                    card_id = list1[list1.index(j)][1]
+                                    return card_id
+                                else:
+                                    card_id = 'pass'
+                                    continue
+                            else:
+                                if move[0] == list1[list1.index(j)][2] and move[1] == list1[list1.index(j)][3]:
+                                    card_id = 'notpass'
+                                    return card_id
+                        else:
+                            continue
+                    elif int(list1[list1.index(j)][3]) == int(move[1]) - 1:
+                        if 12 - list1[list1.index(j)][5] == int(move[3]) + 1:
+                            if list1.index(j) < len(list1) - 1:
+                                if move[5] == move[0] == move[2] == list1[list1.index(j)][2] and move[6] == move[3] == \
+                                        list1[list1.index(j)][3]:
+                                    card_id = list1[list1.index(j)][1]
+                                    return card_id
+                                else:
+                                    card_id = 'pass'
+                                    continue
+
+                            else:
+                                if move[2] == list1[list1.index(j)][2] and move[3] == list1[list1.index(j)][3]:
+                                    card_id = 'notpass'
+                                    return card_id
+                        else:
+                            continue
+                    else:
+                        continue
+    elif num == 2:
+
+        for j in list1:
+            for i in j:
+                if minmove == i:
+                    if list1[list1.index(j)][2] == move[0]:
+                        judgemove = which_cindex(move[2])
+                        if judgemove == list1[list1.index(j)][4]:
+                            if list1.index(j) < len(list1) - 1:
+                                if move[1] == move[3] == move[6] == list1[list1.index(j)][3] and move[5] == move[0] == \
+                                        list1[list1.index(j)][2]:
+                                    card_id = list1[list1.index(j)][1]
+                                    return card_id
+                                else:
+                                    card_id = 'pass'
+                                    continue
+
+                            else:
+                                if move[1] == list1[list1.index(j)][3]:
+                                    card_id = 'notpass'
+                                    return card_id
+                        else:
+                            continue
+                    elif list1[list1.index(j)][2] == move[2]:
+                        judgemove = which_cindex(move[0])
+                        if judgemove == list1[list1.index(j)][4]:
+                            if list1.index(j) < len(list1) - 1:
+                                if move[1] == move[3] == move[6] == list1[list1.index(j)][3] and move[5] == move[2] == \
+                                        list1[list1.index(j)][2]:
+                                    card_id = list1[list1.index(j)][1]
+                                    return card_id
+                                else:
+                                    card_id = 'pass'
+                                    continue
+
+                            else:
+                                if move[3] == list1[list1.index(j)][3]:
+                                    card_id = 'notpass'
+                                    return card_id
+
+                        else:
+                            continue
+                    else:
+                        continue
+    return card_id
 def play(user1,user2,turn,game_over):
     firstuser=[]
     while not game_over:
@@ -556,98 +651,41 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
     global remo
     global remove
     global card_id
+    global cardnum
     global newcol
     global newraw
     global newcindex
     global lastcindex
     global judgemove
+    global recyclinglist
     while not game_over:
-        card_id=''
+        cardnum = ''
         if turn == 0:
             move = input("Input a slot player {0}: ".format(user1))
-            sum+=1
             move = move.split(' ')
             cindex1 = which_cindex(move[0])
             cindex2 = which_cindex(move[2])
             newcol=min(move[0],move[2])
             newcindex = which_cindex(newcol)
-            lastcindex = which_cindex(lastcol)
             newraw = min(move[1],move[3])
             if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
                 continue
-            if move[0]==move[2]:
-                num=1
-                minmove=move[0]
-            elif cindex1==cindex2-1 or cindex1==cindex2+1:
-                num=2
-                minmove=min(move[0],move[2])
-            else:
-                print("invalid col input")
+
+            card_id=samecard(move,cindex1,cindex2,list1,cardnum)
+            if card_id == move[4]:
+                print("cannot be same card")
+                print("try again")
                 continue
-            if num==1:
-                for j in list1:
-                    for i in j:
-                        if minmove==i:
-                            if list1[list1.index(j)][3]==move[1]:
-                                if 12-list1[list1.index(j)][5]==int(move[3]):
-                                    if move[5]==move[0]==move[2] and move[6]==move[1]:
-                                        card_id = list1[list1.index(j)][1]
-
-                                    else:
-                                        card_id = 'pass'
-                                else:
-                                    print("invalid raw input")
-                                    continue
-                            elif int(list1[list1.index(j)][3])==int(move[1])-1:
-                                if 12-list1[list1.index(j)][5]==int(move[3])+1:
-                                    if move[5]==move[0]==move[2] and move[6]==move[3]:
-                                        card_id = list1[list1.index(j)][1]
-                                    else:
-                                        card_id = 'pass'
-                                else:
-                                    print("invalid raw input")
-                                    continue
-                            else:
-                                continue
-            elif num==2:
-                for j in list1:
-                    for i in j:
-                        if minmove==i:
-                            if list1[list1.index(j)][2]==move[0]:
-                                judgemove = which_cindex(move[2])
-                                if judgemove==list1[list1.index(j)][4]:
-                                    if move[1] == move[3] ==move[6] and move[5]==move[0]:
-                                        card_id = list1[list1.index(j)][1]
-                                    else:
-                                        card_id = 'pass'
-                                else:
-                                    print("different card input")
-                                    continue
-                            elif list1[list1.index(j)][2]==move[2]:
-                                judgemove = which_cindex(move[0])
-                                if judgemove==list1[list1.index(j)][4]:
-                                    if move[1] == move[3] == move[6] and move[5] == move[2]:
-                                        card_id = list1[list1.index(j)][1]
-                                    else:
-                                        card_id = 'pass'
-
-                                else:
-                                    print("different card input")
-                                    continue
-                            else:
-                                continue
-            if card_id=='':
-                print("error input")
-                continue
-
-            if newcindex==lastcindex and int(lastraw)==int(newraw):
+            elif card_id=='notpass':
                 print("cannot place card in other player just placed")
                 print("try again")
                 continue
 
-
-
-
+            elif card_id=='':
+                print("error input")
+                continue
+            elif card_id=="colerror":
+                continue
             if is_valid2(move[1],move[3]):
                 rindex1 = 12 - int(move[1])
                 rindex2 = 12 - int(move[3])
@@ -660,10 +698,7 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
                 print("not valid")
                 print("try again")
                 continue
-            if move[4]==card_id:
-                print("cannot be same direction")
-                print("try again")
-                continue
+
             card = which_card(move[4])
             cindex3 = which_cindex(move[5])
             if card==UnboundLocalError:
@@ -678,8 +713,14 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
                     print("try again")
                     continue
                 elif drop==True:
-                    lastcol=move[5]
-                    lastraw=move[6]
+                    sum += 1
+                    recyclinglist=[]
+                    recyclinglist.append('0')
+                    recyclinglist.append(move[4])
+                    recyclinglist.append(move[5])
+                    recyclinglist.append(move[6])
+                    transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
+                    list1.append(transfermove)
                 if user1==1:
                     win1 = winning_move(board, user1, user2)
                     win2 = winning_move(board, user2, user1)
@@ -725,87 +766,28 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
 
         else:
             move = input("Input a slot player {0}: ".format(user2))
-            sum+=1
             move = move.split(' ')
             cindex1 = which_cindex(move[0])
             cindex2 = which_cindex(move[2])
             newcol=min(move[0],move[2])
             newcindex = which_cindex(newcol)
-            lastcindex = which_cindex(lastcol)
             newraw = min(move[1], move[3])
             if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
                 continue
-            if move[0]==move[2]:
-                num=1
-                minmove=move[0]
-            elif cindex1 == cindex2 - 1 or cindex1 == cindex2 + 1:
-                num = 2
-                minmove = min(move[0], move[2])
-            else:
-                print("invalid col input")
+            card_id = samecard(move, cindex1, cindex2, list1, cardnum)
+            if card_id == move[4]:
+                print("cannot be same card")
+                print("try again")
                 continue
-            if num==1:
-                for j in list1:
-                    for i in j:
-                        if minmove==i:
-                            if list1[list1.index(j)][3]==move[1]:
-                                if 12-list1[list1.index(j)][5]==int(move[3]):
-                                    if move[5]==move[0]==move[2] and move[6]==move[1]:
-                                        card_id = list1[list1.index(j)][1]
-
-                                    else:
-                                        card_id = 'pass'
-                                else:
-                                    print("invalid raw input")
-                                    continue
-                            elif int(list1[list1.index(j)][3])==int(move[1])-1:
-                                if 12-list1[list1.index(j)][5]==int(move[3])+1:
-                                    if move[5]==move[0]==move[2] and move[6]==move[3]:
-                                        card_id = list1[list1.index(j)][1]
-                                    else:
-                                        card_id = 'pass'
-                                else:
-                                    print("invalid raw input")
-                                    continue
-                            else:
-                                continue
-            elif num==2:
-                for j in list1:
-                    for i in j:
-                        if minmove==i:
-                            if list1[list1.index(j)][2]==move[0]:
-                                judgemove = which_cindex(move[2])
-                                if judgemove==list1[list1.index(j)][4]:
-                                    if move[1] == move[3] ==move[6] and move[5]==move[0]:
-                                        card_id = list1[list1.index(j)][1]
-                                    else:
-                                        card_id = 'pass'
-                                else:
-                                    print("different card input")
-                                    continue
-                            elif list1[list1.index(j)][2]==move[2]:
-                                judgemove = which_cindex(move[0])
-                                if judgemove==list1[list1.index(j)][4]:
-                                    if move[1] == move[3] == move[6] and move[5] == move[2]:
-                                        card_id = list1[list1.index(j)][1]
-                                    else:
-                                        card_id = 'pass'
-
-                                else:
-                                    print("different card input")
-                                    continue
-                            else:
-                                continue
-
-            if card_id=='':
-                print("error input")
-                continue
-
-            if newcindex == lastcindex and int(lastraw) == int(newraw):
+            elif card_id=='notpass':
                 print("cannot place card in other player just placed")
                 print("try again")
                 continue
-
+            elif card_id=='':
+                print("error input")
+                continue
+            elif card_id=="colerror":
+                continue
             if is_valid2(move[1], move[3]):
                 rindex1 = 12 - int(move[1])
                 rindex2 = 12 - int(move[3])
@@ -818,10 +800,7 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
                 print("not valid")
                 print("try again")
                 continue
-            if move[4] == card_id:
-                print("cannot be same direction")
-                print("try again")
-                continue
+
             card = which_card(move[4])
             cindex3 = which_cindex(move[5])
             if card == UnboundLocalError:
@@ -837,8 +816,14 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
                     print("try again")
                     continue
                 elif drop == True:
-                    lastcol = move[5]
-                    lastraw = move[6]
+                    sum += 1
+                    recyclinglist=[]
+                    recyclinglist.append('0')
+                    recyclinglist.append(move[4])
+                    recyclinglist.append(move[5])
+                    recyclinglist.append(move[6])
+                    transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
+                    list1.append(transfermove)
                 if user2==1:
                     win1 = winning_move(board, user1,user2)
                     win2 = winning_move(board, user2, user1)

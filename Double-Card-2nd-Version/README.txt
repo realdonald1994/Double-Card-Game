@@ -3,6 +3,8 @@ Python3 Version: Python3.6.5
 
 SUPPORT: W: White R: Red X: Solid O: Hollow
 
+At the very beginning, execute module load python/3.5.1 on the shell
+
 Run: Open shell->input python3 doublecard.py 
 The project will run.
 
