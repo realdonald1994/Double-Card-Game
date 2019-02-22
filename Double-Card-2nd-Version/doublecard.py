@@ -663,207 +663,216 @@ def recycling(list1,game_over,user1,user2,turn,lastcol,lastraw,sum):
         if turn == 0:
             move = input("Input a slot player {0}: ".format(user1))
             move = move.split(' ')
-            cindex1 = which_cindex(move[0])
-            cindex2 = which_cindex(move[2])
-            newcol=min(move[0],move[2])
-            newcindex = which_cindex(newcol)
-            newraw = min(move[1],move[3])
-            if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
-                continue
+            if move[0]!='0':
 
-            card_id=samecard(move,cindex1,cindex2,list1,cardnum)
-            if card_id == move[4]:
-                print("cannot be same card")
-                print("try again")
-                continue
-            elif card_id=='notpass':
-                print("cannot place card in other player just placed")
-                print("try again")
-                continue
+                cindex1 = which_cindex(move[0])
+                cindex2 = which_cindex(move[2])
+                newcol=min(move[0],move[2])
+                newcindex = which_cindex(newcol)
+                newraw = min(move[1],move[3])
+                if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
+                    continue
 
-            elif card_id=='':
-                print("error input")
-                continue
-            elif card_id=="colerror":
-                continue
-            if is_valid2(move[1],move[3]):
-                rindex1 = 12 - int(move[1])
-                rindex2 = 12 - int(move[3])
-                remo = remove(board,rindex1,cindex1,rindex2,cindex2)
-                if remo==False:
-                    print("remove failure")
+                card_id=samecard(move,cindex1,cindex2,list1,cardnum)
+                if card_id == move[4]:
+                    print("cannot be same card")
+                    print("try again")
+                    continue
+                elif card_id=='notpass':
+                    print("cannot place card in other player just placed")
+                    print("try again")
+                    continue
+
+                elif card_id=='':
+                    print("error input")
+                    continue
+                elif card_id=="colerror":
+                    continue
+                if is_valid2(move[1],move[3]):
+                    rindex1 = 12 - int(move[1])
+                    rindex2 = 12 - int(move[3])
+                    remo = remove(board,rindex1,cindex1,rindex2,cindex2)
+                    if remo==False:
+                        print("remove failure")
+                        print("try again")
+                        continue
+                else:
+                    print("not valid")
+                    print("try again")
+                    continue
+
+                card = which_card(move[4])
+                cindex3 = which_cindex(move[5])
+                if card==UnboundLocalError:
+                    continue
+                elif cindex3==UnboundLocalError:
+                    continue
+                if is_valid(move[6],card,cindex3):
+                    rindex = 12-int(move[6])
+                    drop = drop_piece(board, rindex, cindex3, card)
+                    if drop==False:
+                        print("drop failure")
+                        print("try again")
+                        continue
+                    elif drop==True:
+                        sum += 1
+                        recyclinglist=[]
+                        recyclinglist.append('0')
+                        recyclinglist.append(move[4])
+                        recyclinglist.append(move[5])
+                        recyclinglist.append(move[6])
+                        transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
+                        list1.append(transfermove)
+                    if user1==1:
+                        win1 = winning_move(board, user1, user2)
+                        win2 = winning_move(board, user2, user1)
+                        if win1 == 1:
+                            print(*board, sep='\n')
+                            print(*board, sep='\n',file=open("output.txt", 'a'))
+                            print("player {0} winning".format(user1))
+                            print("player {0} winning".format(user1),file=open("output.txt", 'a'))
+                            print("*****GAME END*****")
+                            print("*****GAME END*****",file=open("output.txt", 'a'))
+                            break
+                        elif win2 == 0:
+                            print(*board, sep='\n')
+                            print(*board, sep='\n',file=open("output.txt", 'a'))
+                            print("player {0} winning".format(user2))
+                            print("player {0} winning".format(user2),file=open("output.txt", 'a'))
+                            print("*****GAME END*****")
+                            print("*****GAME END*****",file=open("output.txt", 'a'))
+                            break
+                    elif user1==2:
+                        win1 = winning_move(board, user2, user1)
+                        win2 = winning_move(board, user1, user2)
+                        if win1 == 1:
+                            print(*board, sep='\n')
+                            print(*board, sep='\n',file=open("output.txt", 'a'))
+                            print("player {0} winning".format(user1))
+                            print("player {0} winning".format(user1),file=open("output.txt", 'a'))
+                            print("*****GAME END*****")
+                            print("*****GAME END*****",file=open("output.txt", 'a'))
+                            break
+                        elif win2 == 0:
+                            print(*board, sep='\n')
+                            print(*board, sep='\n',file=open("output.txt", 'a'))
+                            print("player {0} winning".format(user2))
+                            print("player {0} winning".format(user2),file=open("output.txt", 'a'))
+                            print("*****GAME END*****")
+                            print("*****GAME END*****",file=open("output.txt", 'a'))
+                            break
+                else:
+                    print("not valid")
                     print("try again")
                     continue
             else:
-                print("not valid")
-                print("try again")
-                continue
-
-            card = which_card(move[4])
-            cindex3 = which_cindex(move[5])
-            if card==UnboundLocalError:
-                continue
-            elif cindex3==UnboundLocalError:
-                continue
-            if is_valid(move[6],card,cindex3):
-                rindex = 12-int(move[6])
-                drop = drop_piece(board, rindex, cindex3, card)
-                if drop==False:
-                    print("drop failure")
-                    print("try again")
-                    continue
-                elif drop==True:
-                    sum += 1
-                    recyclinglist=[]
-                    recyclinglist.append('0')
-                    recyclinglist.append(move[4])
-                    recyclinglist.append(move[5])
-                    recyclinglist.append(move[6])
-                    transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
-                    list1.append(transfermove)
-                if user1==1:
-                    win1 = winning_move(board, user1, user2)
-                    win2 = winning_move(board, user2, user1)
-                    if win1 == 1:
-                        print(*board, sep='\n')
-                        print(*board, sep='\n',file=open("output.txt", 'a'))
-                        print("player {0} winning".format(user1))
-                        print("player {0} winning".format(user1),file=open("output.txt", 'a'))
-                        print("*****GAME END*****")
-                        print("*****GAME END*****",file=open("output.txt", 'a'))
-                        break
-                    elif win2 == 0:
-                        print(*board, sep='\n')
-                        print(*board, sep='\n',file=open("output.txt", 'a'))
-                        print("player {0} winning".format(user2))
-                        print("player {0} winning".format(user2),file=open("output.txt", 'a'))
-                        print("*****GAME END*****")
-                        print("*****GAME END*****",file=open("output.txt", 'a'))
-                        break
-                elif user1==2:
-                    win1 = winning_move(board, user2, user1)
-                    win2 = winning_move(board, user1, user2)
-                    if win1 == 1:
-                        print(*board, sep='\n')
-                        print(*board, sep='\n',file=open("output.txt", 'a'))
-                        print("player {0} winning".format(user1))
-                        print("player {0} winning".format(user1),file=open("output.txt", 'a'))
-                        print("*****GAME END*****")
-                        print("*****GAME END*****",file=open("output.txt", 'a'))
-                        break
-                    elif win2 == 0:
-                        print(*board, sep='\n')
-                        print(*board, sep='\n',file=open("output.txt", 'a'))
-                        print("player {0} winning".format(user2))
-                        print("player {0} winning".format(user2),file=open("output.txt", 'a'))
-                        print("*****GAME END*****")
-                        print("*****GAME END*****",file=open("output.txt", 'a'))
-                        break
-            else:
-                print("not valid")
                 print("try again")
                 continue
 
         else:
             move = input("Input a slot player {0}: ".format(user2))
             move = move.split(' ')
-            cindex1 = which_cindex(move[0])
-            cindex2 = which_cindex(move[2])
-            newcol=min(move[0],move[2])
-            newcindex = which_cindex(newcol)
-            newraw = min(move[1], move[3])
-            if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
-                continue
-            card_id = samecard(move, cindex1, cindex2, list1, cardnum)
-            if card_id == move[4]:
-                print("cannot be same card")
-                print("try again")
-                continue
-            elif card_id=='notpass':
-                print("cannot place card in other player just placed")
-                print("try again")
-                continue
-            elif card_id=='':
-                print("error input")
-                continue
-            elif card_id=="colerror":
-                continue
-            if is_valid2(move[1], move[3]):
-                rindex1 = 12 - int(move[1])
-                rindex2 = 12 - int(move[3])
-                remo = remove(board, rindex1, cindex1, rindex2, cindex2)
-                if remo == False:
-                    print("remove failure")
+            if move[0]!='0':
+                cindex1 = which_cindex(move[0])
+                cindex2 = which_cindex(move[2])
+                newcol=min(move[0],move[2])
+                newcindex = which_cindex(newcol)
+                newraw = min(move[1], move[3])
+                if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
+                    continue
+                card_id = samecard(move, cindex1, cindex2, list1, cardnum)
+                if card_id == move[4]:
+                    print("cannot be same card")
+                    print("try again")
+                    continue
+                elif card_id=='notpass':
+                    print("cannot place card in other player just placed")
+                    print("try again")
+                    continue
+                elif card_id=='':
+                    print("error input")
+                    continue
+                elif card_id=="colerror":
+                    continue
+                if is_valid2(move[1], move[3]):
+                    rindex1 = 12 - int(move[1])
+                    rindex2 = 12 - int(move[3])
+                    remo = remove(board, rindex1, cindex1, rindex2, cindex2)
+                    if remo == False:
+                        print("remove failure")
+                        print("try again")
+                        continue
+                else:
+                    print("not valid")
+                    print("try again")
+                    continue
+
+                card = which_card(move[4])
+                cindex3 = which_cindex(move[5])
+                if card == UnboundLocalError:
+                    continue
+                elif cindex3 == UnboundLocalError:
+                    continue
+
+                if is_valid(move[6],card,cindex3):
+                    rindex = 12-int(move[6])
+                    drop= drop_piece(board, rindex, cindex3, card)
+                    if drop==False:
+                        print("drop failure")
+                        print("try again")
+                        continue
+                    elif drop == True:
+                        sum += 1
+                        recyclinglist=[]
+                        recyclinglist.append('0')
+                        recyclinglist.append(move[4])
+                        recyclinglist.append(move[5])
+                        recyclinglist.append(move[6])
+                        transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
+                        list1.append(transfermove)
+                    if user2==1:
+                        win1 = winning_move(board, user1,user2)
+                        win2 = winning_move(board, user2, user1)
+                        if win1==0:
+                            print(*board, sep='\n')
+                            print(*board, sep='\n',file=open("output.txt", 'a'))
+                            print("player {0} winning".format(user2))
+                            print("player {0} winning".format(user2),file=open("output.txt", 'a'))
+                            print("*****GAME END*****")
+                            print("*****GAME END*****",file=open("output.txt", 'a'))
+                            break
+                        elif win2==1:
+                            print(*board, sep='\n')
+                            print(*board, sep='\n',file=open("output.txt", 'a'))
+                            print("player {0} winning".format(user1))
+                            print("player {0} winning".format(user1),file=open("output.txt", 'a'))
+                            print("*****GAME END*****")
+                            print("*****GAME END*****",file=open("output.txt", 'a'))
+                            break
+                    elif user2==2:
+                        win1 = winning_move(board, user2,user1)
+                        win2 = winning_move(board, user1,user2)
+                        if win1==0:
+                            print(*board, sep='\n')
+                            print(*board, sep='\n',file=open("output.txt", 'a'))
+                            print("player {0} winning".format(user2))
+                            print("player {0} winning".format(user2),file=open("output.txt", 'a'))
+                            print("*****GAME END*****")
+                            print("*****GAME END*****",file=open("output.txt", 'a'))
+                            break
+                        elif win2==1:
+                            print(*board, sep='\n')
+                            print(*board, sep='\n',file=open("output.txt", 'a'))
+                            print("player {0} winning".format(user1))
+                            print("player {0} winning".format(user1),file=open("output.txt", 'a'))
+                            print("*****GAME END*****")
+                            print("*****GAME END*****",file=open("output.txt", 'a'))
+                            break
+                else:
+                    print("not valid")
                     print("try again")
                     continue
             else:
-                print("not valid")
-                print("try again")
-                continue
-
-            card = which_card(move[4])
-            cindex3 = which_cindex(move[5])
-            if card == UnboundLocalError:
-                continue
-            elif cindex3 == UnboundLocalError:
-                continue
-
-            if is_valid(move[6],card,cindex3):
-                rindex = 12-int(move[6])
-                drop= drop_piece(board, rindex, cindex3, card)
-                if drop==False:
-                    print("drop failure")
-                    print("try again")
-                    continue
-                elif drop == True:
-                    sum += 1
-                    recyclinglist=[]
-                    recyclinglist.append('0')
-                    recyclinglist.append(move[4])
-                    recyclinglist.append(move[5])
-                    recyclinglist.append(move[6])
-                    transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
-                    list1.append(transfermove)
-                if user2==1:
-                    win1 = winning_move(board, user1,user2)
-                    win2 = winning_move(board, user2, user1)
-                    if win1==0:
-                        print(*board, sep='\n')
-                        print(*board, sep='\n',file=open("output.txt", 'a'))
-                        print("player {0} winning".format(user2))
-                        print("player {0} winning".format(user2),file=open("output.txt", 'a'))
-                        print("*****GAME END*****")
-                        print("*****GAME END*****",file=open("output.txt", 'a'))
-                        break
-                    elif win2==1:
-                        print(*board, sep='\n')
-                        print(*board, sep='\n',file=open("output.txt", 'a'))
-                        print("player {0} winning".format(user1))
-                        print("player {0} winning".format(user1),file=open("output.txt", 'a'))
-                        print("*****GAME END*****")
-                        print("*****GAME END*****",file=open("output.txt", 'a'))
-                        break
-                elif user2==2:
-                    win1 = winning_move(board, user2,user1)
-                    win2 = winning_move(board, user1,user2)
-                    if win1==0:
-                        print(*board, sep='\n')
-                        print(*board, sep='\n',file=open("output.txt", 'a'))
-                        print("player {0} winning".format(user2))
-                        print("player {0} winning".format(user2),file=open("output.txt", 'a'))
-                        print("*****GAME END*****")
-                        print("*****GAME END*****",file=open("output.txt", 'a'))
-                        break
-                    elif win2==1:
-                        print(*board, sep='\n')
-                        print(*board, sep='\n',file=open("output.txt", 'a'))
-                        print("player {0} winning".format(user1))
-                        print("player {0} winning".format(user1),file=open("output.txt", 'a'))
-                        print("*****GAME END*****")
-                        print("*****GAME END*****",file=open("output.txt", 'a'))
-                        break
-            else:
-                print("not valid")
                 print("try again")
                 continue
         print(*board, sep='\n')
