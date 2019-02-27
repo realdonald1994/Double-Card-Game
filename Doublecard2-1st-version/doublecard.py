@@ -4,6 +4,7 @@ ROW_COUNT = 8
 COL_COUNT = 12
 global turn
 turn =0
+DEPTH = 3
 def create_board():
     board = [['□□' for _ in range(ROW_COUNT)] for _ in range(COL_COUNT)]
     return board
@@ -11,11 +12,11 @@ def create_board():
 
 
 
-DEPTH = 3 
 
 
 
-def evaluation(board,user1,AI):
+
+def evaluation(board,user1,AI,judge):
     list = []
     player = 1
     opponent = 2
@@ -25,33 +26,57 @@ def evaluation(board,user1,AI):
         score = +512
     else:
         score = 0
+        if judge[2] is Card.card1:
+            board[judge[0]][judge[1]] = judge[2].left
+            board[judge[0]][judge[1] + 1] = judge[2].right
+        elif judge[2] is Card.card2:
+            board[judge[0]][judge[1]] = judge[2].below
+            board[judge[0] - 1][judge[1]] = judge[2].top
+        elif judge[2] is Card.card3:
+            board[judge[0]][judge[1]] = judge[2].left
+            board[judge[0]][judge[1] + 1] = judge[2].right
+        elif judge[2] is Card.card4:
+            board[judge[0]][judge[1]] = judge[2].below
+            board[judge[0] - 1][judge[1]] = judge[2].top
+        elif judge[2] is Card.card5:
+            board[judge[0]][judge[1]] = judge[2].left
+            board[judge[0]][judge[1] + 1] = judge[2].right
+        elif judge[2] is Card.card6:
+            board[judge[0]][judge[1]] = judge[2].below
+            board[judge[0] - 1][judge[1]] = judge[2].top
+        elif judge[2] is Card.card7:
+            board[judge[0]][judge[1]] = judge[2].left
+            board[judge[0]][judge[1] + 1] = judge[2].right
+        elif judge[2] is Card.card8:
+            board[judge[0]][judge[1]] = judge[2].below
+            board[judge[0] - 1][judge[1]] = judge[2].top
         for c in range(ROW_COUNT - 3):
             for r in range(COL_COUNT):
                 if user1 == 1 and AI == 2:
-                    list.append(board[r][c][1], board[r][c + 1][1], board[r][c + 2][1], board[r][c + 3][1])
+                    list.append([board[r][c][1], board[r][c + 1][1], board[r][c + 2][1], board[r][c + 3][1]])
                 elif user1 == 2 and AI == 1:
-                    list.append(board[r][c][0],board[r][c + 1][0],board[r][c + 2][0],board[r][c + 3][0])
+                    list.append([board[r][c][0],board[r][c + 1][0],board[r][c + 2][0],board[r][c + 3][0]])
 
         for c in range(ROW_COUNT):
             for r in range(COL_COUNT - 3):
                 if user1 == 1 and AI == 2:
-                    list.append(board[r][c][1],board[r + 1][c][1],board[r + 2][c][1],board[r + 3][c][1])
+                    list.append([board[r][c][1],board[r + 1][c][1],board[r + 2][c][1],board[r + 3][c][1]])
                 elif user1 == 2 and AI == 1:
-                    list.append(board[r][c][0],board[r + 1][c][0],board[r + 2][c][0],board[r + 3][c][0])
+                    list.append([board[r][c][0],board[r + 1][c][0],board[r + 2][c][0],board[r + 3][c][0]])
 
         for c in range(ROW_COUNT - 3):
             for r in range(3, COL_COUNT):
                 if user1 == 1 and AI == 2:
-                    list.append(board[r][c][1],board[r - 1][c + 1][1],board[r - 2][c + 2][1],board[r - 3][c + 3][1])
+                    list.append([board[r][c][1],board[r - 1][c + 1][1],board[r - 2][c + 2][1],board[r - 3][c + 3][1]])
                 elif user1 == 2 and AI == 1:
-                    list.append(board[r][c][0],board[r - 1][c + 1][0],board[r - 2][c + 2][0],board[r - 3][c + 3][0])
+                    list.append([board[r][c][0],board[r - 1][c + 1][0],board[r - 2][c + 2][0],board[r - 3][c + 3][0]])
 
         for c in range(ROW_COUNT - 3):
             for r in range(COL_COUNT - 3):
                 if user1 == 1 and AI == 2:
-                    list.append(board[r][c][1],board[r + 1][c + 1][1],board[r + 2][c + 2][1],board[r + 3][c + 3][1])
+                    list.append([board[r][c][1],board[r + 1][c + 1][1],board[r + 2][c + 2][1],board[r + 3][c + 3][1]])
                 elif user1 == 2 and AI == 1:
-                    list.append(board[r][c][0],board[r + 1][c + 1][0],board[r + 2][c + 2][0],board[r + 3][c + 3][0])
+                    list.append([board[r][c][0],board[r + 1][c + 1][0],board[r + 2][c + 2][0],board[r + 3][c + 3][0]])
 
         if user1 == 1 and AI == 2:
 
@@ -163,26 +188,26 @@ def evaluation(board,user1,AI):
     return score
 
 
-def maxfunction( board, depth, player, alpha, beta,user1):
+def maxfunction( board, depth, player, alpha, beta,user1,judge):
     opponent = SwitchPlayer(player)
     global turn
     turn = opponent
     if (depth == 0):
-        return evaluation(board,user1,AI)
+        return evaluation(board,opponent,player,judge)
     value = -1000000000
-    list = ['1', '2', '3', '4', '5', '6', '7', '8']
-    for i in list:
-        piece = which_card(i)
-        judge = blanklist(board, piece)
+    # list = ['1', '2', '3', '4', '5', '6', '7', '8']
+    # for i in list:
+    # piece = which_card(i)
+    # judge = blanklist(board, piece)
 
-        global search_count
-        search_count += 1
-        value = max(value, minfunction(board, depth - 1, opponent, alpha, beta,user1))
-        if value >= beta:
-            global cut_count
-            cut_count += 1
-            return value
-        alpha = max(alpha, value)
+    global search_count
+    search_count += 1
+    value = max(value, minfunction(board, depth - 1, opponent, alpha, beta,user1,judge))
+    if value >= beta:
+        global cut_count
+        cut_count += 1
+        return value
+    alpha = max(alpha, value)
     return value
 
 def SwitchPlayer(player):
@@ -191,26 +216,26 @@ def SwitchPlayer(player):
     else:
         nextplayer=1
     return nextplayer
-def minfunction(board, depth, opponent, alpha, beta,user1):
+def minfunction(board, depth, opponent, alpha, beta,user1,judge):
     global turn
     player = SwitchPlayer(opponent)
     turn = player
     if (depth == 0):
-        return evaluation(board,user1,AI)
+        return evaluation(board,player,opponent,judge)
     value = 1000000000
-    list = ['1', '2', '3', '4', '5', '6', '7', '8']
-    for i in list:
-        piece = which_card(i)
+    # list = ['1', '2', '3', '4', '5', '6', '7', '8']
+    # for i in list:
+    # piece = which_card(i)
 
-        global search_count
-        search_count += 1
-        value = min(value, maxfunction(board, depth - 1, player, alpha, beta,user1))
+    global search_count
+    search_count += 1
+    value = min(value, maxfunction(board, depth - 1, player, alpha, beta,user1,judge))
 
-        if value <= alpha:
-            global cut_count
-            cut_count += 1
-            return value
-        beta = min(beta, value)
+    if value <= alpha:
+        global cut_count
+        cut_count += 1
+        return value
+    beta = min(beta, value)
     return value
 
 
@@ -219,24 +244,38 @@ def alphabetapruning(board, depth, alpha,beta,AI,user1):
     position= []
     maxvalues= []
     value = -1000000000
-    list = ['1','2','3','4','5','6','7','8']
-    for i in list:
-        piece= which_card(i)
-        judge = blanklist(board,piece)
 
+    # list = ['1','2','3','4','5','6','7','8']
+    # for i in list:
+    piece= which_card('1')
+    candidate = blanklist(board,piece)
+    for i in range(len(candidate)):
         global search_count
         search_count += 1
-        value = max(value, minfunction(board, depth - 1, AI, alpha, beta,user1))
-        position.append(value,judge[0], judge[1], judge[2])
-        values.append(position)
-        maxvalues.append(value)
+        value = max(value, minfunction(board, depth - 1, AI, alpha, beta,user1,candidate[i]))
+        position.append([value,candidate[i][0], candidate[i][1], candidate[i][2]])
+
+    values.append(position)
+    maxvalues.append(value)
 
     largestvalue = max(maxvalues)
-    print(values)
+    print(largestvalue)
+    print(values[0][0][0])
+    # print(values)
+    coordinate = []
     for i in range(len(values)):
-            if largestvalue == values[i][0]:
-                coordinate = values[i][1],values[i][2],values[i][3]
-                return coordinate
+        if largestvalue == values[i][0][0]:
+            coordinate.append(values[i][0][1])
+            coordinate.append(values[i][0][2])
+            coordinate.append(values[i][0][3])
+
+        else:
+            continue
+
+    return coordinate[0], coordinate[1], coordinate[2]
+
+
+
 
 def remove(board,raw1,col1,raw2,col2):
     if col1==col2:
@@ -452,6 +491,7 @@ def drop_piece(board,row,col,piece):
                 print("already fill up")
                 return False
 def blanklist(board,piece):
+    candidate=[]
     for row in range(0,COL_COUNT):
         for col in range(0,ROW_COUNT):
             if(piece is Card.card1):
@@ -459,9 +499,7 @@ def blanklist(board,piece):
                     continue
                 if row==11:
                     if board[row][col] == '□□' and board[row][col+1] == '□□':
-                        board[row][col] = piece.left
-                        board[row][col + 1] = piece.right
-                        return row,col,piece
+                        candidate.append([row,col,piece])
                     else:
                         continue
                 else:
@@ -469,17 +507,15 @@ def blanklist(board,piece):
                         if board[row+1][col] == '□□' or board[row+1][col+1]=='□□':
                             continue
                         else:
-                            board[row][col] = piece.left
-                            board[row][col+1]=piece.right
-                            return row,col,piece
+                            candidate.append([row, col, piece])
                     else:
                         continue
             elif(piece is Card.card2):
+                if row == 0:
+                    continue
                 if row==11:
                     if board[row][col] == '□□' and board[row - 1][col] == '□□':
-                        board[row][col] = piece.below
-                        board[row - 1][col] = piece.top
-                        return row,col,piece
+                        candidate.append([row, col, piece])
                     else:
                         continue
                 else:
@@ -488,17 +524,15 @@ def blanklist(board,piece):
                         if board[row+1][col] == '□□':
                             continue
                         else:
-                            board[row][col] = piece.below
-                            board[row-1][col]=piece.top
-                            return row,col,piece
+                            candidate.append([row, col, piece])
                     else:
                         continue
             elif(piece is Card.card3):
+                if col == 7:
+                    continue
                 if row==11:
                     if board[row][col] == '□□' and board[row][col+1] == '□□':
-                        board[row][col] = piece.left
-                        board[row][col + 1] = piece.right
-                        return row,col,piece
+                        candidate.append([row, col, piece])
                     else:
                         continue
                 else:
@@ -506,17 +540,17 @@ def blanklist(board,piece):
                         if board[row+1][col] == '□□' or board[row+1][col+1]=='□□':
                             continue
                         else:
-                            board[row][col] = piece.left
-                            board[row][col+1]=piece.right
-                            return row,col,piece
+
+                            candidate.append([row, col, piece])
                     else:
                         continue
             elif(piece is Card.card4):
+                if row == 0:
+                    continue
                 if row==11:
                     if board[row][col] == '□□' and board[row - 1][col] == '□□':
-                        board[row][col] = piece.below
-                        board[row - 1][col] = piece.top
-                        return row,col,piece
+
+                        candidate.append([row, col, piece])
                     else:
                         continue
                 else:
@@ -525,17 +559,17 @@ def blanklist(board,piece):
                         if board[row+1][col] == '□□':
                             continue
                         else:
-                            board[row][col] = piece.below
-                            board[row-1][col]=piece.top
-                            return row,col,piece
+
+                            candidate.append([row, col, piece])
                     else:
                         continue
             elif(piece is Card.card5):
+                if col == 7:
+                    continue
                 if row==11:
                     if board[row][col] == '□□' and board[row][col+1] == '□□':
-                        board[row][col] = piece.left
-                        board[row][col + 1] = piece.right
-                        return row,col,piece
+
+                        candidate.append([row, col, piece])
                     else:
                         continue
                 else:
@@ -543,17 +577,16 @@ def blanklist(board,piece):
                         if board[row+1][col] == '□□' or board[row+1][col+1]=='□□':
                             continue
                         else:
-                            board[row][col] = piece.left
-                            board[row][col+1]=piece.right
-                            return row,col,piece
+
+                            candidate.append([row, col, piece])
                     else:
                         continue
             elif(piece is Card.card6):
+                if row == 0:
+                    continue
                 if row==11:
                     if board[row][col] == '□□' and board[row - 1][col] == '□□':
-                        board[row][col] = piece.below
-                        board[row - 1][col] = piece.top
-                        return row,col,piece
+                        candidate.append([row, col, piece])
                     else:
                         continue
                 else:
@@ -562,17 +595,17 @@ def blanklist(board,piece):
                         if board[row+1][col] == '□□':
                             continue
                         else:
-                            board[row][col] = piece.below
-                            board[row-1][col]=piece.top
-                            return row,col,piece
+
+                            candidate.append([row, col, piece])
                     else:
                         continue
             elif(piece is Card.card7):
+                if col == 7:
+                    continue
                 if row==11:
                     if board[row][col] == '□□' and board[row][col+1] == '□□':
-                        board[row][col] = piece.left
-                        board[row][col + 1] = piece.right
-                        return row,col,piece
+
+                        candidate.append([row, col, piece])
                     else:
                         continue
                 else:
@@ -580,17 +613,17 @@ def blanklist(board,piece):
                         if board[row+1][col] == '□□' or board[row+1][col+1]=='□□':
                             continue
                         else:
-                            board[row][col] = piece.left
-                            board[row][col+1]=piece.right
-                            return row,col,piece
+
+                            candidate.append([row, col, piece])
                     else:
                         continue
             elif(piece is Card.card8):
+                if row == 0:
+                    continue
                 if row==11:
                     if board[row][col] == '□□' and board[row - 1][col] == '□□':
-                        board[row][col] = piece.below
-                        board[row - 1][col] = piece.top
-                        return row,col,piece
+
+                        candidate.append([row, col, piece])
                     else:
                         continue
                 else:
@@ -599,11 +632,11 @@ def blanklist(board,piece):
                         if board[row+1][col] == '□□':
                             continue
                         else:
-                            board[row][col] = piece.below
-                            board[row-1][col]=piece.top
-                            return row,col,piece
+
+                            candidate.append([row, col, piece])
                     else:
                         continue
+    return candidate
 def is_valid(move,card,cindex):
     if 0 > int(move) or int(move) > COL_COUNT:
         return False
@@ -1023,8 +1056,8 @@ def play(user1,AI,dotscolor,game_over):
             global search_count  # 统计搜索次数
             search_count = 0
             if dotscolor==0:
-                coordinate = alphabetapruning(board, DEPTH, -99999999, 99999999,AI,user1)
-                drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
+                index = alphabetapruning(board, DEPTH, -99999999, 99999999,AI,user1)
+                drop = drop_piece(board, index[0], index[1], index[2])
                 if drop:
                     transfermove = cardinformation(move, cindex, rindex, card)
                     firstuser.append(transfermove)
@@ -1047,26 +1080,20 @@ def play(user1,AI,dotscolor,game_over):
                             print("*****GAME END*****")
                             print("*****GAME END*****", file=open("output.txt", 'a'))
                             break
-                print("purning：" + str(cut_count))
-                print("searching：" + str(search_count))
+                print("purning：" )
+                print(cut_count)
+                print("searching：")
+                print(search_count)
             elif dotscolor==1:
                 coordinate= alphabetapruning(board, DEPTH, -99999999, 99999999,AI,user1)
                 drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
                 if drop:
                     transfermove = cardinformation(move, cindex, rindex, card)
                     firstuser.append(transfermove)
-                    if user1 == 1:
+                    if AI == 1:
                         win1 = winning_move(board, user1, AI)
                         win2 = winning_move(board, AI, user1)
-                        if win1 == 1:
-                            print(*board, sep='\n')
-                            print(*board, sep='\n', file=open("output.txt", 'a'))
-                            print("player {0} winning".format(user1))
-                            print("player {0} winning".format(user1), file=open("output.txt", 'a'))
-                            print("*****GAME END*****")
-                            print("*****GAME END*****", file=open("output.txt", 'a'))
-                            break
-                        elif win2 == 0:
+                        if win1 == 0:
                             print(*board, sep='\n')
                             print(*board, sep='\n', file=open("output.txt", 'a'))
                             print("player {0} winning".format(AI))
@@ -1074,8 +1101,18 @@ def play(user1,AI,dotscolor,game_over):
                             print("*****GAME END*****")
                             print("*****GAME END*****", file=open("output.txt", 'a'))
                             break
-                print("purning：" + str(cut_count))
-                print("searching：" + str(search_count))
+                        elif win2 == 1:
+                            print(*board, sep='\n')
+                            print(*board, sep='\n', file=open("output.txt", 'a'))
+                            print("player {0} winning".format(user1))
+                            print("player {0} winning".format(user1), file=open("output.txt", 'a'))
+                            print("*****GAME END*****")
+                            print("*****GAME END*****", file=open("output.txt", 'a'))
+                            break
+                print("purning：" )
+                print(cut_count)
+                print("searching：")
+                print(search_count)
 
         print(*board, sep='\n')
         # print(*board, sep='\n', file=open("output.txt", 'a'))
@@ -1085,254 +1122,254 @@ def play(user1,AI,dotscolor,game_over):
         print("Overall steps: ", end="", file=open("output.txt", 'a'))
         print(len(firstuser))
         print(len(firstuser), file=open("output.txt", 'a'))
-        if(len(firstuser)==24):
-            print("In regular game, game ends in a draw. They need go head to next section")
-            print("In regular game, game ends in a draw. They need go head to next section", file=open("output.txt", 'a'))
-            lastcol = firstuser[23][2]
-            lastraw = firstuser[23][3]
-            sum = len(firstuser)
-            recycling(firstuser,game_over,user1,AI,turn,lastcol,lastraw,sum)
-            break
-def recycling(recyclelist,game_over,user1,AI,turn,lastcol,lastraw,sum):
-    global remo
-    global remove
-    global card_id
-    global cardnum
-    global newcol
-    global newraw
-    global newcindex
-    global lastcindex
-    global judgemove
-    global recyclinglist
-    while not game_over:
-        cardnum = ''
-        if turn == 0:
-            move = input("Input a slot player {0}: ".format(user1))
-            move = move.split(' ')
-            if move[0]!='0':
-
-                cindex1 = which_cindex(move[0])
-                cindex2 = which_cindex(move[2])
-                newcol=min(move[0],move[2])
-                newcindex = which_cindex(newcol)
-                newraw = min(move[1],move[3])
-                if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
-                    continue
-
-                card_id=samecard(move,cindex1,cindex2,recyclelist,cardnum)
-                if card_id == move[4]:
-                    print("cannot be same card")
-                    print("try again")
-                    continue
-                elif card_id=='notpass':
-                    print("cannot place card in other player just placed")
-                    print("try again")
-                    continue
-
-                elif card_id=='':
-                    print("error input")
-                    continue
-                elif card_id=="colerror":
-                    continue
-                if is_valid2(move[1],move[3]):
-                    rindex1 = 12 - int(move[1])
-                    rindex2 = 12 - int(move[3])
-                    remo = remove(board,rindex1,cindex1,rindex2,cindex2)
-                    if remo==False:
-                        print("remove failure")
-                        print("try again")
-                        continue
-                else:
-                    print("not valid")
-                    print("try again")
-                    continue
-
-                card = which_card(move[4])
-                cindex3 = which_cindex(move[5])
-                if card==UnboundLocalError:
-                    continue
-                elif cindex3==UnboundLocalError:
-                    continue
-                if is_valid(move[6],card,cindex3):
-                    rindex = 12-int(move[6])
-                    drop = drop_piece(board, rindex, cindex3, card)
-                    if drop==False:
-                        print("drop failure")
-                        print("try again")
-                        continue
-                    elif drop==True:
-                        sum += 1
-                        recyclinglist=[]
-                        recyclinglist.append('0')
-                        recyclinglist.append(move[4])
-                        recyclinglist.append(move[5])
-                        recyclinglist.append(move[6])
-                        transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
-                        recyclelist.append(transfermove)
-                    if user1==1:
-                        win1 = winning_move(board, user1, AI)
-                        win2 = winning_move(board, AI, user1)
-                        if win1 == 1:
-                            print(*board, sep='\n')
-                            print(*board, sep='\n',file=open("output.txt", 'a'))
-                            print("player {0} winning".format(user1))
-                            print("player {0} winning".format(user1),file=open("output.txt", 'a'))
-                            print("*****GAME END*****")
-                            print("*****GAME END*****",file=open("output.txt", 'a'))
-                            break
-                        elif win2 == 0:
-                            print(*board, sep='\n')
-                            print(*board, sep='\n',file=open("output.txt", 'a'))
-                            print("player {0} winning".format(AI))
-                            print("player {0} winning".format(AI),file=open("output.txt", 'a'))
-                            print("*****GAME END*****")
-                            print("*****GAME END*****",file=open("output.txt", 'a'))
-                            break
-                    elif user1==2:
-                        win1 = winning_move(board, AI, user1)
-                        win2 = winning_move(board, user1, AI)
-                        if win1 == 1:
-                            print(*board, sep='\n')
-                            print(*board, sep='\n',file=open("output.txt", 'a'))
-                            print("player {0} winning".format(user1))
-                            print("player {0} winning".format(user1),file=open("output.txt", 'a'))
-                            print("*****GAME END*****")
-                            print("*****GAME END*****",file=open("output.txt", 'a'))
-                            break
-                        elif win2 == 0:
-                            print(*board, sep='\n')
-                            print(*board, sep='\n',file=open("output.txt", 'a'))
-                            print("player {0} winning".format(AI))
-                            print("player {0} winning".format(AI),file=open("output.txt", 'a'))
-                            print("*****GAME END*****")
-                            print("*****GAME END*****",file=open("output.txt", 'a'))
-                            break
-                else:
-                    print("not valid")
-                    print("try again")
-                    continue
-            else:
-                print("try again")
-                continue
-
-        else:
-            move = input("Input a slot player {0}: ".format(AI))
-            move = move.split(' ')
-            if move[0]!='0':
-                cindex1 = which_cindex(move[0])
-                cindex2 = which_cindex(move[2])
-                newcol=min(move[0],move[2])
-                newcindex = which_cindex(newcol)
-                newraw = min(move[1], move[3])
-                if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
-                    continue
-                card_id = samecard(move, cindex1, cindex2, recyclelist, cardnum)
-                if card_id == move[4]:
-                    print("cannot be same card")
-                    print("try again")
-                    continue
-                elif card_id=='notpass':
-                    print("cannot place card in other player just placed")
-                    print("try again")
-                    continue
-                elif card_id=='':
-                    print("error input")
-                    continue
-                elif card_id=="colerror":
-                    continue
-                if is_valid2(move[1], move[3]):
-                    rindex1 = 12 - int(move[1])
-                    rindex2 = 12 - int(move[3])
-                    remo = remove(board, rindex1, cindex1, rindex2, cindex2)
-                    if remo == False:
-                        print("remove failure")
-                        print("try again")
-                        continue
-                else:
-                    print("not valid")
-                    print("try again")
-                    continue
-
-                card = which_card(move[4])
-                cindex3 = which_cindex(move[5])
-                if card == UnboundLocalError:
-                    continue
-                elif cindex3 == UnboundLocalError:
-                    continue
-
-                if is_valid(move[6],card,cindex3):
-                    rindex = 12-int(move[6])
-                    drop= drop_piece(board, rindex, cindex3, card)
-                    if drop==False:
-                        print("drop failure")
-                        print("try again")
-                        continue
-                    elif drop == True:
-                        sum += 1
-                        recyclinglist=[]
-                        recyclinglist.append('0')
-                        recyclinglist.append(move[4])
-                        recyclinglist.append(move[5])
-                        recyclinglist.append(move[6])
-                        transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
-                        recyclelist.append(transfermove)
-                    if AI==1:
-                        win1 = winning_move(board, user1,AI)
-                        win2 = winning_move(board, AI, user1)
-                        if win1==0:
-                            print(*board, sep='\n')
-                            print(*board, sep='\n',file=open("output.txt", 'a'))
-                            print("player {0} winning".format(AI))
-                            print("player {0} winning".format(AI),file=open("output.txt", 'a'))
-                            print("*****GAME END*****")
-                            print("*****GAME END*****",file=open("output.txt", 'a'))
-                            break
-                        elif win2==1:
-                            print(*board, sep='\n')
-                            print(*board, sep='\n',file=open("output.txt", 'a'))
-                            print("player {0} winning".format(user1))
-                            print("player {0} winning".format(user1),file=open("output.txt", 'a'))
-                            print("*****GAME END*****")
-                            print("*****GAME END*****",file=open("output.txt", 'a'))
-                            break
-                    elif AI==2:
-                        win1 = winning_move(board, AI,user1)
-                        win2 = winning_move(board, user1,AI)
-                        if win1==0:
-                            print(*board, sep='\n')
-                            print(*board, sep='\n',file=open("output.txt", 'a'))
-                            print("player {0} winning".format(AI))
-                            print("player {0} winning".format(AI),file=open("output.txt", 'a'))
-                            print("*****GAME END*****")
-                            print("*****GAME END*****",file=open("output.txt", 'a'))
-                            break
-                        elif win2==1:
-                            print(*board, sep='\n')
-                            print(*board, sep='\n',file=open("output.txt", 'a'))
-                            print("player {0} winning".format(user1))
-                            print("player {0} winning".format(user1),file=open("output.txt", 'a'))
-                            print("*****GAME END*****")
-                            print("*****GAME END*****",file=open("output.txt", 'a'))
-                            break
-                else:
-                    print("not valid")
-                    print("try again")
-                    continue
-            else:
-                print("try again")
-                continue
-        print(*board, sep='\n')
-        print(*board, sep='\n',file=open("output.txt", 'a'))
-        turn +=1
-        turn=turn % 2
-        print("Overall steps: ",end="")
-        print("Overall steps: ", end="",file=open("output.txt", 'a'))
-        print(sum)
-        print(sum,file=open("output.txt", 'a'))
-        if sum==36:
-            print("After regualr and recycling game, game ends in a draw")
-            print("After regualr and recycling game, game ends in a draw",file=open("output.txt", 'a'))
-            break
+        # if(len(firstuser)==24):
+        #     print("In regular game, game ends in a draw. They need go head to next section")
+        #     print("In regular game, game ends in a draw. They need go head to next section", file=open("output.txt", 'a'))
+        #     lastcol = firstuser[23][2]
+        #     lastraw = firstuser[23][3]
+        #     sum = len(firstuser)
+        #     recycling(firstuser,game_over,user1,AI,turn,lastcol,lastraw,sum)
+        #     break
+# def recycling(recyclelist,game_over,user1,AI,turn,lastcol,lastraw,sum):
+#     global remo
+#     global remove
+#     global card_id
+#     global cardnum
+#     global newcol
+#     global newraw
+#     global newcindex
+#     global lastcindex
+#     global judgemove
+#     global recyclinglist
+#     while not game_over:
+#         cardnum = ''
+#         if turn == 0:
+#             move = input("Input a slot player {0}: ".format(user1))
+#             move = move.split(' ')
+#             if move[0]!='0':
+#
+#                 cindex1 = which_cindex(move[0])
+#                 cindex2 = which_cindex(move[2])
+#                 newcol=min(move[0],move[2])
+#                 newcindex = which_cindex(newcol)
+#                 newraw = min(move[1],move[3])
+#                 if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
+#                     continue
+#
+#                 card_id=samecard(move,cindex1,cindex2,recyclelist,cardnum)
+#                 if card_id == move[4]:
+#                     print("cannot be same card")
+#                     print("try again")
+#                     continue
+#                 elif card_id=='notpass':
+#                     print("cannot place card in other player just placed")
+#                     print("try again")
+#                     continue
+#
+#                 elif card_id=='':
+#                     print("error input")
+#                     continue
+#                 elif card_id=="colerror":
+#                     continue
+#                 if is_valid2(move[1],move[3]):
+#                     rindex1 = 12 - int(move[1])
+#                     rindex2 = 12 - int(move[3])
+#                     remo = remove(board,rindex1,cindex1,rindex2,cindex2)
+#                     if remo==False:
+#                         print("remove failure")
+#                         print("try again")
+#                         continue
+#                 else:
+#                     print("not valid")
+#                     print("try again")
+#                     continue
+#
+#                 card = which_card(move[4])
+#                 cindex3 = which_cindex(move[5])
+#                 if card==UnboundLocalError:
+#                     continue
+#                 elif cindex3==UnboundLocalError:
+#                     continue
+#                 if is_valid(move[6],card,cindex3):
+#                     rindex = 12-int(move[6])
+#                     drop = drop_piece(board, rindex, cindex3, card)
+#                     if drop==False:
+#                         print("drop failure")
+#                         print("try again")
+#                         continue
+#                     elif drop==True:
+#                         sum += 1
+#                         recyclinglist=[]
+#                         recyclinglist.append('0')
+#                         recyclinglist.append(move[4])
+#                         recyclinglist.append(move[5])
+#                         recyclinglist.append(move[6])
+#                         transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
+#                         recyclelist.append(transfermove)
+#                     if user1==1:
+#                         win1 = winning_move(board, user1, AI)
+#                         win2 = winning_move(board, AI, user1)
+#                         if win1 == 1:
+#                             print(*board, sep='\n')
+#                             print(*board, sep='\n',file=open("output.txt", 'a'))
+#                             print("player {0} winning".format(user1))
+#                             print("player {0} winning".format(user1),file=open("output.txt", 'a'))
+#                             print("*****GAME END*****")
+#                             print("*****GAME END*****",file=open("output.txt", 'a'))
+#                             break
+#                         elif win2 == 0:
+#                             print(*board, sep='\n')
+#                             print(*board, sep='\n',file=open("output.txt", 'a'))
+#                             print("player {0} winning".format(AI))
+#                             print("player {0} winning".format(AI),file=open("output.txt", 'a'))
+#                             print("*****GAME END*****")
+#                             print("*****GAME END*****",file=open("output.txt", 'a'))
+#                             break
+#                     elif user1==2:
+#                         win1 = winning_move(board, AI, user1)
+#                         win2 = winning_move(board, user1, AI)
+#                         if win1 == 1:
+#                             print(*board, sep='\n')
+#                             print(*board, sep='\n',file=open("output.txt", 'a'))
+#                             print("player {0} winning".format(user1))
+#                             print("player {0} winning".format(user1),file=open("output.txt", 'a'))
+#                             print("*****GAME END*****")
+#                             print("*****GAME END*****",file=open("output.txt", 'a'))
+#                             break
+#                         elif win2 == 0:
+#                             print(*board, sep='\n')
+#                             print(*board, sep='\n',file=open("output.txt", 'a'))
+#                             print("player {0} winning".format(AI))
+#                             print("player {0} winning".format(AI),file=open("output.txt", 'a'))
+#                             print("*****GAME END*****")
+#                             print("*****GAME END*****",file=open("output.txt", 'a'))
+#                             break
+#                 else:
+#                     print("not valid")
+#                     print("try again")
+#                     continue
+#             else:
+#                 print("try again")
+#                 continue
+#
+#         else:
+#             move = input("Input a slot player {0}: ".format(AI))
+#             move = move.split(' ')
+#             if move[0]!='0':
+#                 cindex1 = which_cindex(move[0])
+#                 cindex2 = which_cindex(move[2])
+#                 newcol=min(move[0],move[2])
+#                 newcindex = which_cindex(newcol)
+#                 newraw = min(move[1], move[3])
+#                 if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
+#                     continue
+#                 card_id = samecard(move, cindex1, cindex2, recyclelist, cardnum)
+#                 if card_id == move[4]:
+#                     print("cannot be same card")
+#                     print("try again")
+#                     continue
+#                 elif card_id=='notpass':
+#                     print("cannot place card in other player just placed")
+#                     print("try again")
+#                     continue
+#                 elif card_id=='':
+#                     print("error input")
+#                     continue
+#                 elif card_id=="colerror":
+#                     continue
+#                 if is_valid2(move[1], move[3]):
+#                     rindex1 = 12 - int(move[1])
+#                     rindex2 = 12 - int(move[3])
+#                     remo = remove(board, rindex1, cindex1, rindex2, cindex2)
+#                     if remo == False:
+#                         print("remove failure")
+#                         print("try again")
+#                         continue
+#                 else:
+#                     print("not valid")
+#                     print("try again")
+#                     continue
+#
+#                 card = which_card(move[4])
+#                 cindex3 = which_cindex(move[5])
+#                 if card == UnboundLocalError:
+#                     continue
+#                 elif cindex3 == UnboundLocalError:
+#                     continue
+#
+#                 if is_valid(move[6],card,cindex3):
+#                     rindex = 12-int(move[6])
+#                     drop= drop_piece(board, rindex, cindex3, card)
+#                     if drop==False:
+#                         print("drop failure")
+#                         print("try again")
+#                         continue
+#                     elif drop == True:
+#                         sum += 1
+#                         recyclinglist=[]
+#                         recyclinglist.append('0')
+#                         recyclinglist.append(move[4])
+#                         recyclinglist.append(move[5])
+#                         recyclinglist.append(move[6])
+#                         transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
+#                         recyclelist.append(transfermove)
+#                     if AI==1:
+#                         win1 = winning_move(board, user1,AI)
+#                         win2 = winning_move(board, AI, user1)
+#                         if win1==0:
+#                             print(*board, sep='\n')
+#                             print(*board, sep='\n',file=open("output.txt", 'a'))
+#                             print("player {0} winning".format(AI))
+#                             print("player {0} winning".format(AI),file=open("output.txt", 'a'))
+#                             print("*****GAME END*****")
+#                             print("*****GAME END*****",file=open("output.txt", 'a'))
+#                             break
+#                         elif win2==1:
+#                             print(*board, sep='\n')
+#                             print(*board, sep='\n',file=open("output.txt", 'a'))
+#                             print("player {0} winning".format(user1))
+#                             print("player {0} winning".format(user1),file=open("output.txt", 'a'))
+#                             print("*****GAME END*****")
+#                             print("*****GAME END*****",file=open("output.txt", 'a'))
+#                             break
+#                     elif AI==2:
+#                         win1 = winning_move(board, AI,user1)
+#                         win2 = winning_move(board, user1,AI)
+#                         if win1==0:
+#                             print(*board, sep='\n')
+#                             print(*board, sep='\n',file=open("output.txt", 'a'))
+#                             print("player {0} winning".format(AI))
+#                             print("player {0} winning".format(AI),file=open("output.txt", 'a'))
+#                             print("*****GAME END*****")
+#                             print("*****GAME END*****",file=open("output.txt", 'a'))
+#                             break
+#                         elif win2==1:
+#                             print(*board, sep='\n')
+#                             print(*board, sep='\n',file=open("output.txt", 'a'))
+#                             print("player {0} winning".format(user1))
+#                             print("player {0} winning".format(user1),file=open("output.txt", 'a'))
+#                             print("*****GAME END*****")
+#                             print("*****GAME END*****",file=open("output.txt", 'a'))
+#                             break
+#                 else:
+#                     print("not valid")
+#                     print("try again")
+#                     continue
+#             else:
+#                 print("try again")
+#                 continue
+#         print(*board, sep='\n')
+#         print(*board, sep='\n',file=open("output.txt", 'a'))
+#         turn +=1
+#         turn=turn % 2
+#         print("Overall steps: ",end="")
+#         print("Overall steps: ", end="",file=open("output.txt", 'a'))
+#         print(sum)
+#         print(sum,file=open("output.txt", 'a'))
+#         if sum==36:
+#             print("After regualr and recycling game, game ends in a draw")
+#             print("After regualr and recycling game, game ends in a draw",file=open("output.txt", 'a'))
+#             break
 
 
 if __name__ == '__main__':
