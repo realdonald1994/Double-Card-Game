@@ -1,5 +1,5 @@
 from card import Card
-
+import copy
 ROW_COUNT = 8
 COL_COUNT = 12
 global turn
@@ -19,7 +19,7 @@ def create_board():
 def evaluation(board,user1,AI,judge):
     list = []
     player = 1
-    opponent = 2
+    board2 = copy.deepcopy(board)
     if winning_move(board,user1,AI ):
         score = -512
     elif winning_move(board,user1,AI):
@@ -27,56 +27,56 @@ def evaluation(board,user1,AI,judge):
     else:
         score = 0
         if judge[2] is Card.card1:
-            board[judge[0]][judge[1]] = judge[2].left
-            board[judge[0]][judge[1] + 1] = judge[2].right
+            board2[judge[0]][judge[1]] = judge[2].left
+            board2[judge[0]][judge[1] + 1] = judge[2].right
         elif judge[2] is Card.card2:
-            board[judge[0]][judge[1]] = judge[2].below
-            board[judge[0] - 1][judge[1]] = judge[2].top
+            board2[judge[0]][judge[1]] = judge[2].below
+            board2[judge[0] - 1][judge[1]] = judge[2].top
         elif judge[2] is Card.card3:
-            board[judge[0]][judge[1]] = judge[2].left
-            board[judge[0]][judge[1] + 1] = judge[2].right
+            board2[judge[0]][judge[1]] = judge[2].left
+            board2[judge[0]][judge[1] + 1] = judge[2].right
         elif judge[2] is Card.card4:
-            board[judge[0]][judge[1]] = judge[2].below
-            board[judge[0] - 1][judge[1]] = judge[2].top
+            board2[judge[0]][judge[1]] = judge[2].below
+            board2[judge[0] - 1][judge[1]] = judge[2].top
         elif judge[2] is Card.card5:
-            board[judge[0]][judge[1]] = judge[2].left
-            board[judge[0]][judge[1] + 1] = judge[2].right
+            board2[judge[0]][judge[1]] = judge[2].left
+            board2[judge[0]][judge[1] + 1] = judge[2].right
         elif judge[2] is Card.card6:
-            board[judge[0]][judge[1]] = judge[2].below
-            board[judge[0] - 1][judge[1]] = judge[2].top
+            board2[judge[0]][judge[1]] = judge[2].below
+            board2[judge[0] - 1][judge[1]] = judge[2].top
         elif judge[2] is Card.card7:
-            board[judge[0]][judge[1]] = judge[2].left
-            board[judge[0]][judge[1] + 1] = judge[2].right
+            board2[judge[0]][judge[1]] = judge[2].left
+            board2[judge[0]][judge[1] + 1] = judge[2].right
         elif judge[2] is Card.card8:
-            board[judge[0]][judge[1]] = judge[2].below
-            board[judge[0] - 1][judge[1]] = judge[2].top
+            board2[judge[0]][judge[1]] = judge[2].below
+            board2[judge[0] - 1][judge[1]] = judge[2].top
         for c in range(ROW_COUNT - 3):
             for r in range(COL_COUNT):
                 if user1 == 1 and AI == 2:
-                    list.append([board[r][c][1], board[r][c + 1][1], board[r][c + 2][1], board[r][c + 3][1]])
+                    list.append([board2[r][c][1], board2[r][c + 1][1], board2[r][c + 2][1], board2[r][c + 3][1]])
                 elif user1 == 2 and AI == 1:
-                    list.append([board[r][c][0],board[r][c + 1][0],board[r][c + 2][0],board[r][c + 3][0]])
+                    list.append([board2[r][c][0],board2[r][c + 1][0],board2[r][c + 2][0],board2[r][c + 3][0]])
 
         for c in range(ROW_COUNT):
             for r in range(COL_COUNT - 3):
                 if user1 == 1 and AI == 2:
-                    list.append([board[r][c][1],board[r + 1][c][1],board[r + 2][c][1],board[r + 3][c][1]])
+                    list.append([board2[r][c][1],board2[r + 1][c][1],board2[r + 2][c][1],board2[r + 3][c][1]])
                 elif user1 == 2 and AI == 1:
-                    list.append([board[r][c][0],board[r + 1][c][0],board[r + 2][c][0],board[r + 3][c][0]])
+                    list.append([board2[r][c][0],board2[r + 1][c][0],board2[r + 2][c][0],board2[r + 3][c][0]])
 
         for c in range(ROW_COUNT - 3):
             for r in range(3, COL_COUNT):
                 if user1 == 1 and AI == 2:
-                    list.append([board[r][c][1],board[r - 1][c + 1][1],board[r - 2][c + 2][1],board[r - 3][c + 3][1]])
+                    list.append([board2[r][c][1],board2[r - 1][c + 1][1],board2[r - 2][c + 2][1],board2[r - 3][c + 3][1]])
                 elif user1 == 2 and AI == 1:
-                    list.append([board[r][c][0],board[r - 1][c + 1][0],board[r - 2][c + 2][0],board[r - 3][c + 3][0]])
+                    list.append([board2[r][c][0],board2[r - 1][c + 1][0],board2[r - 2][c + 2][0],board2[r - 3][c + 3][0]])
 
         for c in range(ROW_COUNT - 3):
             for r in range(COL_COUNT - 3):
                 if user1 == 1 and AI == 2:
-                    list.append([board[r][c][1],board[r + 1][c + 1][1],board[r + 2][c + 2][1],board[r + 3][c + 3][1]])
+                    list.append([board2[r][c][1],board2[r + 1][c + 1][1],board2[r + 2][c + 2][1],board2[r + 3][c + 3][1]])
                 elif user1 == 2 and AI == 1:
-                    list.append([board[r][c][0],board[r + 1][c + 1][0],board[r + 2][c + 2][0],board[r + 3][c + 3][0]])
+                    list.append([board2[r][c][0],board2[r + 1][c + 1][0],board2[r + 2][c + 2][0],board2[r + 3][c + 3][0]])
 
         if user1 == 1 and AI == 2:
 
@@ -238,7 +238,6 @@ def minfunction(board, depth, opponent, alpha, beta,user1,judge):
     beta = min(beta, value)
     return value
 
-
 def alphabetapruning(board, depth, alpha,beta,AI,user1):
     values = []
     position= []
@@ -253,21 +252,19 @@ def alphabetapruning(board, depth, alpha,beta,AI,user1):
         global search_count
         search_count += 1
         value = max(value, minfunction(board, depth - 1, AI, alpha, beta,user1,candidate[i]))
-        position.append([value,candidate[i][0], candidate[i][1], candidate[i][2]])
-
-    values.append(position)
-    maxvalues.append(value)
+        values.append([value,candidate[i][0], candidate[i][1], candidate[i][2]])
+        maxvalues.append(value)
 
     largestvalue = max(maxvalues)
     print(largestvalue)
-    print(values[0][0][0])
+    print(values[0][0])
     # print(values)
     coordinate = []
     for i in range(len(values)):
-        if largestvalue == values[i][0][0]:
-            coordinate.append(values[i][0][1])
-            coordinate.append(values[i][0][2])
-            coordinate.append(values[i][0][3])
+        if largestvalue == values[i][0]:
+            coordinate.append(values[i][1])
+            coordinate.append(values[i][2])
+            coordinate.append(values[i][3])
 
         else:
             continue
