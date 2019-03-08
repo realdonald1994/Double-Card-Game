@@ -2,9 +2,10 @@ from card import Card
 from point import Point
 ROW_COUNT = 8
 COL_COUNT = 12
-DEPTH = 3
+DEPTH = 2
 search_count=0
 cut_count = 0
+en_count =0
 def create_board():
     board = [['□□' for _ in range(ROW_COUNT)] for _ in range(COL_COUNT)]
     return board
@@ -72,6 +73,25 @@ def which_card(move):
     except UnboundLocalError:
         return UnboundLocalError
 
+def return_card(piece):
+    str=''
+    if (piece is Card.card1):
+        str = '1'
+    elif (piece is Card.card2):
+        str = '2'
+    elif (piece is Card.card3):
+        str = '3'
+    elif (piece is Card.card4):
+        str = '4'
+    elif (piece is Card.card5):
+        str = '5'
+    elif (piece is Card.card6):
+        str = '6'
+    elif (piece is Card.card7):
+        str = '7'
+    elif (piece is Card.card8):
+        str = '8'
+    return str
 
 def which_cindex(move):
     index = 0
@@ -97,6 +117,27 @@ def which_cindex(move):
         return index
     except UnboundLocalError:
         return UnboundLocalError
+
+def returnindex(colindex):
+    str=''
+    if (colindex == 0):
+        str = 'A'
+    elif (colindex ==1 ):
+        str = 'B'
+    elif (colindex == 2):
+        str = 'C'
+    elif (colindex == 3):
+        str = 'D'
+    elif (colindex ==4 ):
+        str = 'E'
+    elif (colindex == 5):
+        str = 'F'
+    elif (colindex == 6):
+        str = 'G'
+    elif (colindex == 7):
+        str = 'H'
+    return str
+
 def dropindex(cindex,rindex,card):
     if (card is Card.card1):
         nextcindex = cindex+1
@@ -194,6 +235,12 @@ def is_valid(move,card,cindex):
             if 12-int(move)==0:
                 return False
     return True
+
+def is_valid2(move1,move2):
+    if 0 > int(move1) or int(move1) > COL_COUNT or 0 > int(move2) or int(move2)> COL_COUNT:
+        return False
+    return True
+
 def drop_piece(board,row,col,piece):
     if(piece is Card.card1):
         if row==11:
@@ -404,16 +451,30 @@ def drop_piece2(board2,row,col,piece):
 
 
 
-def drop_piece3(board,row,col,piece):
+def drop_piece3(board3,row,col,piece):
     if piece is Card.card2 or piece is Card.card4 or piece is Card.card6 or piece is Card.card8:
-        board[row][col] = piece.below
-        board[row - 1][col] = piece.top
+        board3[row][col] = piece.below
+        board3[row - 1][col] = piece.top
     else:
-        board[row][col] = piece.left
-        board[row][col + 1] = piece.right
+        board3[row][col] = piece.left
+        board3[row][col + 1] = piece.right
 
 
-
+def drop_recycling(board,board2,board3,row,col,row2,col2,piece):
+    if piece is Card.card1 or piece is Card.card3 or piece is Card.card5 or piece is Card.card7:
+        board3[row][col] = piece.left
+        board3[row2][col2] = piece.right
+        board[row][col] = piece.left[0]
+        board[row2][col2] = piece.right[0]
+        board2[row][col][0] = 1
+        board2[row2][col2][0] = 1
+    else:
+        board3[row][col] = piece.top
+        board3[row2][col2] = piece.below
+        board[row][col] = piece.top[0]
+        board[row2][col2] = piece.below[0]
+        board2[row][col][0] = 1
+        board2[row2][col2][0] = 1
 
 
 def blanklist(board, piece):
@@ -614,6 +675,112 @@ def remove_piece2(board2,row,col,piece):
         board2[row][col][0] = 0
         board2[xindex2][yindex2][0] = 0
 
+def remove(board,board2,board3,raw1,col1,raw2,col2):
+    if col1==col2:
+        col=col1
+        raw=max(raw1,raw2)
+        turn =1
+    else:
+        raw=raw1
+        col=min(col1,col2)
+        turn=2
+
+    if turn==1:
+        if raw ==1:
+            board[raw1][col1] = '□□'
+            board[raw2][col2] = '□□'
+            board3[raw1][col1] = '□□'
+            board3[raw2][col2] = '□□'
+            board2[raw1][col1][0]=0
+            board2[raw2][col2][0] = 0
+        else:
+
+            if board[raw-2][col]=='□□':
+                board[raw1][col1] = '□□'
+                board[raw2][col2] = '□□'
+                board3[raw1][col1] = '□□'
+                board3[raw2][col2] = '□□'
+                board2[raw1][col1][0] = 0
+                board2[raw2][col2][0] = 0
+                return True
+            else:
+                return False
+    elif turn==2:
+        if raw==0:
+            board[raw1][col1] = '□□'
+            board[raw2][col2] = '□□'
+            board3[raw1][col1] = '□□'
+            board3[raw2][col2] = '□□'
+            board2[raw1][col1][0]=0
+            board2[raw2][col2][0] = 0
+        else:
+
+            if board[raw-1][col]=='□□' and board[raw-1][col+1]=='□□':
+                board[raw1][col1] = '□□'
+                board[raw2][col2] = '□□'
+                board3[raw1][col1] = '□□'
+                board3[raw2][col2] = '□□'
+                board2[raw1][col1][0] = 0
+                board2[raw2][col2][0] = 0
+                return True
+            else:
+                return False
+
+def remove_recyclingpiece(board3):
+    candidate = []
+    for row in range(0, COL_COUNT):
+        for col in range(0, ROW_COUNT-1):
+            if board3[row][col] !='□□' and board3[row][col+1]!='□□':
+                if board3[row][col][3] is board3[row][col+1][3]:
+                    piece = board3[row][col][3]
+                    if row==0:
+                        row2 = row
+                        col2 =col+1
+                        candidate.append([row, col,row2,col2, piece])
+                    else:
+                        if board3[row - 1][col] == '□□' and board3[row - 1][col + 1] == '□□':
+                            row2 = row
+                            col2 = col + 1
+                            candidate.append([row, col, row2,col2, piece])
+                        else:
+                            continue
+                else:
+                    continue
+    for row in range(0, COL_COUNT - 1):
+        for col in range(0, ROW_COUNT):
+            if board3[row][col] !='□□' and board3[row+1][col]!='□□':
+                if board3[row][col][3] is board3[row+1][col][3]:
+                    piece = board3[row][col][3]
+                    if row ==0:
+                        row2 = row+1
+                        col2 = col
+                        candidate.append([row, col,row2,col2, piece])
+                    else:
+                        if board3[row-1][col]=='□□':
+                            row2 = row + 1
+                            col2 = col
+                            candidate.append([row, col,row2,col2,piece])
+                        else:
+                            continue
+                else:
+                    continue
+            else:
+                continue
+    return candidate
+
+def real_removerecycle(board,board2,board3,row,col,row2,col2):
+
+    board3[row][col] = '□□'
+    board3[row2][col2] = '□□'
+    board[row][col] = '□□'
+    board[row2][col2] = '□□'
+    board2[row][col][0] = 0
+    board2[row2][col2][0] = 0
+
+
+
+
+
 def winning_move(board,user1,user2):
     for c in range(ROW_COUNT-3):
         for r in range(COL_COUNT):
@@ -670,6 +837,8 @@ def winning_move(board,user1,user2):
 #   ##############################################################################3
 
 def evaluation(board,board2,board3,player):
+    global en_count
+    en_count+=1
     sum1=0
     sum2=0
     sum3=0
@@ -732,6 +901,7 @@ def minimax(board,board2,depth,dotscolor):
                 coordinate.append(values[i][1])
                 coordinate.append(values[i][2])
                 coordinate.append(values[i][3])
+                coordinate.append(values[i][0])
 
             else:
                 continue
@@ -758,10 +928,11 @@ def minimax(board,board2,depth,dotscolor):
                 coordinate.append(values[i][1])
                 coordinate.append(values[i][2])
                 coordinate.append(values[i][3])
+                coordinate.append(values[i][0])
 
             else:
                 continue
-    return coordinate[0], coordinate[1], coordinate[2]
+    return coordinate[0], coordinate[1], coordinate[2], coordinate[3],maxvalues
 
 def maxfunction(board,board2,depth,player) :
     opponent = SwitchPlayer(player)
@@ -839,6 +1010,7 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 coordinate.append(values[i][1])
                 coordinate.append(values[i][2])
                 coordinate.append(values[i][3])
+                coordinate.append(values[i][0])
 
             else:
                 continue
@@ -865,12 +1037,13 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 coordinate.append(values[i][1])
                 coordinate.append(values[i][2])
                 coordinate.append(values[i][3])
+                coordinate.append(values[i][0])
 
             else:
                 continue
-    return coordinate[0], coordinate[1], coordinate[2]
+    return coordinate[0], coordinate[1], coordinate[2],coordinate[3],maxvalues
 
-
+# $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 def alphabetapruningmaxfunction(board,board2,depth,alpha,beta,player) :
     opponent = SwitchPlayer(player)
     value = -1000000000
@@ -921,23 +1094,664 @@ def alphabetapruningminfunction(board,board2,depth,alpha,beta,player):
                 cut_count+=1
                 return value
     return value
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+def minmaxrecycliing(board,board2,depth,dotscolor,list1):
+    values = []
+    maxvalues = []
+    coordinate = []
+    value = -1000000000
+    global search_count
+    if dotscolor == 'colors':
+        candidate1 = remove_recyclingpiece(board3)
+        for k in range(len(candidate1)):
+            real_removerecycle(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3])
+            list = ['1', '2', '3', '4', '5', '6', '7', '8']
+            for i in list:
+                piece = which_card(i)
+                candidate = blanklist(board, piece)
+                for j in range(len(candidate)):
+                    search_count += 1
+                    move=[]
+                    cardnu=''
+                    move.append(returnindex(candidate1[k][1]))
+                    move.append(str(12-candidate1[k][0]).strip())
+                    move.append(returnindex(candidate1[k][3]))
+                    move.append(str(12-candidate1[k][2]).strip())
+                    move.append(return_card(candidate[j][2]))
+                    move.append(returnindex(candidate[j][1]))
+                    move.append(str(12-candidate[j][0]).strip())
+                    cardid = samecard(move,candidate1[k][1],candidate1[k][3],list1,cardnu)
+                    if cardid == return_card(candidate[j][2]):
+                        continue
+                    elif cardid == 'notpass':
+                        continue
+                    elif cardid == '':
+                        continue
+                    elif cardid == "colerror":
+                        continue
+                    else:
+                        recycling_list = []
+                        recycling_list.append('0')
+                        recycling_list.append(return_card(candidate[j][2]))
+                        recycling_list.append(returnindex(candidate[j][1]))
+                        recycling_list.append(str(12-candidate[j][0]).strip())
+                        transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                        list1.append(transfermove)
+                        drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                        drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                        drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                        value = max(value, minrecycling(board, board2, depth - 1, dotscolor,list1))
+                        values.append([value, candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate[j][0], candidate[j][1], candidate[j][2]])
+                        maxvalues.append(value)
+                        del list1[-1]
+                        remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                        remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                        remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+            drop_recycling(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate1[k][4])
+        largestvalue = max(maxvalues)
+        for i in range(len(values)):
+            if largestvalue == values[i][0]:
+                coordinate.append(values[i][1])
+                coordinate.append(values[i][2])
+                coordinate.append(values[i][3])
+                coordinate.append(values[i][4])
+                coordinate.append(values[i][5])
+                coordinate.append(values[i][6])
+                coordinate.append(values[i][7])
+                coordinate.append(values[i][0])
+            else:
+                continue
+
+    elif dotscolor == 'dots':
+        candidate1 = remove_recyclingpiece(board3)
+        for k in range(len(candidate1)):
+            real_removerecycle(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3])
+            list = ['1', '2', '3', '4', '5', '6', '7', '8']
+            for i in list:
+                piece = which_card(i)
+                candidate = blanklist(board, piece)
+                for j in range(len(candidate)):
+                    search_count += 1
+                    move=[]
+                    cardnu=''
+                    move.append(returnindex(candidate1[k][1]))
+                    move.append(str(12-candidate1[k][0]).strip())
+                    move.append(returnindex(candidate1[k][3]))
+                    move.append(str(12-candidate1[k][2]).strip())
+                    move.append(return_card(candidate[j][2]))
+                    move.append(returnindex(candidate[j][1]))
+                    move.append(str(12-candidate[j][0]).strip())
+                    cardid = samecard(move,candidate1[k][1],candidate1[k][3],list1,cardnu)
+                    if cardid == return_card(candidate[j][2]):
+                        continue
+                    elif cardid == 'notpass':
+                        continue
+                    elif cardid == '':
+                        continue
+                    elif cardid == "colerror":
+                        continue
+                    else:
+                        recycling_list = []
+                        recycling_list.append('0')
+                        recycling_list.append(return_card(candidate[j][2]))
+                        recycling_list.append(returnindex(candidate[j][1]))
+                        recycling_list.append(str(12-candidate[j][0]).strip())
+                        transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                        list1.append(transfermove)
+                        drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                        drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                        drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                        value = max(value, minrecycling(board, board2, depth - 1, dotscolor,list1))
+                        values.append([value, candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate[j][0], candidate[j][1], candidate[j][2]])
+                        maxvalues.append(value)
+                        del list1[-1]
+                        remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                        remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                        remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+            drop_recycling(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate1[k][4])
+        largestvalue = max(maxvalues)
+        for i in range(len(values)):
+            if largestvalue == values[i][0]:
+                coordinate.append(values[i][1])
+                coordinate.append(values[i][2])
+                coordinate.append(values[i][3])
+                coordinate.append(values[i][4])
+                coordinate.append(values[i][5])
+                coordinate.append(values[i][6])
+                coordinate.append(values[i][7])
+                coordinate.append(values[i][0])
+            else:
+                continue
+    return coordinate[0], coordinate[1], coordinate[2],coordinate[3],coordinate[4],coordinate[5],coordinate[6],coordinate[7],maxvalues
+def maxrecycling(board,board2,depth,player,list1):
+    opponent = SwitchPlayer(player)
+    value = -1000000000
+    if (depth == 0):
+        return evaluation(board,board2,board3,opponent)
+    candidate1 = remove_recyclingpiece(board3)
+    for k in range(len(candidate1)):
+        real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            piece = which_card(i)
+            candidate = blanklist(board, piece)
+            for j in range(len(candidate)):
+                global search_count
+                search_count += 1
+                move = []
+                cardnu = ''
+                move.append(returnindex(candidate1[k][1]))
+                move.append(str(12-candidate1[k][0]).strip())
+                move.append(returnindex(candidate1[k][3]))
+                move.append(str(12-candidate1[k][2]).strip())
+                move.append(return_card(candidate[j][2]))
+                move.append(returnindex(candidate[j][1]))
+                move.append(str(12-candidate[j][0]).strip())
+                cardid = samecard(move, candidate1[k][1], candidate1[k][3], list1, cardnu)
+                if cardid == return_card(candidate[j][2]):
+                    continue
+                elif cardid == 'notpass':
+                    continue
+                elif cardid == '':
+                    continue
+                elif cardid == "colerror":
+                    continue
+                else:
+                    recycling_list = []
+                    recycling_list.append('0')
+                    recycling_list.append(return_card(candidate[j][2]))
+                    recycling_list.append(returnindex(candidate[j][1]))
+                    recycling_list.append(str(12-candidate[j][0]).strip())
+                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                    list1.append(transfermove)
+                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    bestvalue= minrecycling(board, board2, depth - 1, dotscolor,list1)
+                    del list1[-1]
+                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    if bestvalue > value:
+                        value = bestvalue
+        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],candidate1[k][4])
+    return value
+
+def minrecycling(board,board2,depth,player,list1):
+    opponent = SwitchPlayer(player)
+    value = 1000000000
+    if (depth == 0):
+        return evaluation(board, board2,board3,opponent)
+    candidate1 = remove_recyclingpiece(board3)
+    for k in range(len(candidate1)):
+        real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            piece = which_card(i)
+            candidate = blanklist(board, piece)
+            for j in range(len(candidate)):
+                global search_count
+                search_count += 1
+                minmaxmove = []
+                cardnu = ''
+                minmaxmove.append(returnindex(candidate1[k][1]))
+                minmaxmove.append(str(12-candidate1[k][0]).strip())
+                minmaxmove.append(returnindex(candidate1[k][3]))
+                minmaxmove.append(str(12-candidate1[k][2]).strip())
+                minmaxmove.append(return_card(candidate[j][2]))
+                minmaxmove.append(returnindex(candidate[j][1]))
+                minmaxmove.append(str(12-candidate[j][0]).strip())
+                cardid = samecard(minmaxmove, candidate1[k][1], candidate1[k][3], list1, cardnu)
+                if cardid == return_card(candidate[j][2]):
+                    continue
+                elif cardid == 'notpass':
+                    continue
+                elif cardid == '':
+                    continue
+                elif cardid == "colerror":
+                    continue
+                else:
+                    recycling_list = []
+                    recycling_list.append('0')
+                    recycling_list.append(return_card(candidate[j][2]))
+                    recycling_list.append(returnindex(candidate[j][1]))
+                    recycling_list.append(str(12-candidate[j][0]).strip())
+                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                    list1.append(transfermove)
+                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    bestvalue = maxrecycling(board, board2, depth - 1, opponent,list1)
+                    del list1[-1]
+                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    if bestvalue < value:
+                        value = bestvalue
+        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],candidate1[k][4])
+    return value
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
+    values = []
+    maxvalues = []
+    coordinate = []
+    value = -1000000000
+    global search_count
+    if dotscolor == 'colors':
+        candidate1 = remove_recyclingpiece(board3)
+        for k in range(len(candidate1)):
+            real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                               candidate1[k][3])
+            list = ['1', '2', '3', '4', '5', '6', '7', '8']
+            for i in list:
+                piece = which_card(i)
+                candidate = blanklist(board, piece)
+                for j in range(len(candidate)):
+                    search_count += 1
+                    move = []
+                    cardnu = ''
+                    move.append(returnindex(candidate1[k][1]))
+                    move.append(str(12 - candidate1[k][0]).strip())
+                    move.append(returnindex(candidate1[k][3]))
+                    move.append(str(12 - candidate1[k][2]).strip())
+                    move.append(return_card(candidate[j][2]))
+                    move.append(returnindex(candidate[j][1]))
+                    move.append(str(12 - candidate[j][0]).strip())
+                    cardid = samecard(move, candidate1[k][1], candidate1[k][3], list1, cardnu)
+                    if cardid == return_card(candidate[j][2]):
+                        continue
+                    elif cardid == 'notpass':
+                        continue
+                    elif cardid == '':
+                        continue
+                    elif cardid == "colerror":
+                        continue
+                    else:
+                        recycling_list = []
+                        recycling_list.append('0')
+                        recycling_list.append(return_card(candidate[j][2]))
+                        recycling_list.append(returnindex(candidate[j][1]))
+                        recycling_list.append(str(12 - candidate[j][0]).strip())
+                        transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0],
+                                                       candidate[j][2])
+                        list1.append(transfermove)
+                        drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                        drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                        drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                        value = max(value, recyclingminaplhabetapurning(board, board2, depth - 1, alpha,beta,dotscolor, list1))
+                        values.append([value, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],
+                                       candidate[j][0], candidate[j][1], candidate[j][2]])
+                        maxvalues.append(value)
+                        del list1[-1]
+                        remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                        remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                        remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+            drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                           candidate1[k][3], candidate1[k][4])
+        largestvalue = max(maxvalues)
+        for i in range(len(values)):
+            if largestvalue == values[i][0]:
+                coordinate.append(values[i][1])
+                coordinate.append(values[i][2])
+                coordinate.append(values[i][3])
+                coordinate.append(values[i][4])
+                coordinate.append(values[i][5])
+                coordinate.append(values[i][6])
+                coordinate.append(values[i][7])
+                coordinate.append(values[i][0])
+            else:
+                continue
+
+    elif dotscolor == 'dots':
+        candidate1 = remove_recyclingpiece(board3)
+        for k in range(len(candidate1)):
+            real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                               candidate1[k][3])
+            list = ['1', '2', '3', '4', '5', '6', '7', '8']
+            for i in list:
+                piece = which_card(i)
+                candidate = blanklist(board, piece)
+                for j in range(len(candidate)):
+                    search_count += 1
+                    move = []
+                    cardnu = ''
+                    move.append(returnindex(candidate1[k][1]))
+                    move.append(str(12 - candidate1[k][0]).strip())
+                    move.append(returnindex(candidate1[k][3]))
+                    move.append(str(12 - candidate1[k][2]).strip())
+                    move.append(return_card(candidate[j][2]))
+                    move.append(returnindex(candidate[j][1]))
+                    move.append(str(12 - candidate[j][0]).strip())
+                    cardid = samecard(move, candidate1[k][1], candidate1[k][3], list1, cardnu)
+                    if cardid == return_card(candidate[j][2]):
+                        continue
+                    elif cardid == 'notpass':
+                        continue
+                    elif cardid == '':
+                        continue
+                    elif cardid == "colerror":
+                        continue
+                    else:
+                        recycling_list = []
+                        recycling_list.append('0')
+                        recycling_list.append(return_card(candidate[j][2]))
+                        recycling_list.append(returnindex(candidate[j][1]))
+                        recycling_list.append(str(12 - candidate[j][0]).strip())
+                        transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0],
+                                                       candidate[j][2])
+                        list1.append(transfermove)
+                        drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                        drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                        drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                        value = max(value, recyclingminaplhabetapurning(board, board2, depth - 1, alpha,beta,dotscolor, list1))
+                        values.append([value, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],
+                                       candidate[j][0], candidate[j][1], candidate[j][2]])
+                        maxvalues.append(value)
+                        del list1[-1]
+                        remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                        remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                        remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+            drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                           candidate1[k][3], candidate1[k][4])
+        largestvalue = max(maxvalues)
+        for i in range(len(values)):
+            if largestvalue == values[i][0]:
+                coordinate.append(values[i][1])
+                coordinate.append(values[i][2])
+                coordinate.append(values[i][3])
+                coordinate.append(values[i][4])
+                coordinate.append(values[i][5])
+                coordinate.append(values[i][6])
+                coordinate.append(values[i][7])
+                coordinate.append(values[i][0])
+            else:
+                continue
+    return coordinate[0], coordinate[1], coordinate[2], coordinate[3], coordinate[4], coordinate[5], coordinate[6],coordinate[7],maxvalues
+def recyclingminaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
+    opponent = SwitchPlayer(player)
+    value = 1000000000
+    if (depth == 0):
+        return evaluation(board, board2,board3,opponent)
+    candidate1 = remove_recyclingpiece(board3)
+    for k in range(len(candidate1)):
+        global flag2
+        flag2=1
+        real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            global flag
+            flag=0
+            piece = which_card(i)
+            candidate = blanklist(board, piece)
+            for j in range(len(candidate)):
+                global search_count
+                search_count += 1
+                minmaxmove = []
+                cardnu = ''
+                minmaxmove.append(returnindex(candidate1[k][1]))
+                minmaxmove.append(str(12-candidate1[k][0]).strip())
+                minmaxmove.append(returnindex(candidate1[k][3]))
+                minmaxmove.append(str(12-candidate1[k][2]).strip())
+                minmaxmove.append(return_card(candidate[j][2]))
+                minmaxmove.append(returnindex(candidate[j][1]))
+                minmaxmove.append(str(12-candidate[j][0]).strip())
+                cardid = samecard(minmaxmove, candidate1[k][1], candidate1[k][3], list1, cardnu)
+                if cardid == return_card(candidate[j][2]):
+                    continue
+                elif cardid == 'notpass':
+                    continue
+                elif cardid == '':
+                    continue
+                elif cardid == "colerror":
+                    continue
+                else:
+                    recycling_list = []
+                    recycling_list.append('0')
+                    recycling_list.append(return_card(candidate[j][2]))
+                    recycling_list.append(returnindex(candidate[j][1]))
+                    recycling_list.append(str(12-candidate[j][0]).strip())
+                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                    list1.append(transfermove)
+                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    value = min(value,recyclingmaxaplhabetapurning(board, board2, depth - 1,alpha,beta,opponent,list1))
+                    del list1[-1]
+                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    beta = min(beta, value)
+                    if value <= alpha:
+                        global cut_count
+                        cut_count += 1
+                        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                                       candidate1[k][3], candidate1[k][4])
+                        flag=1
+                        break
+                    else:
+                        flag=0
+                if flag == 1:
+                    flag2 = 0
+                    break
+                else:
+                    continue
+        if flag2==0:
+            continue
+        else:
+            drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                           candidate1[k][3], candidate1[k][4])
+    return value
+def recyclingmaxaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
+
+    opponent = SwitchPlayer(player)
+    value = -1000000000
+    if (depth == 0):
+        return evaluation(board,board2,board3,opponent)
+    candidate1 = remove_recyclingpiece(board3)
+    for k in range(len(candidate1)):
+        global flag2
+        flag2=1
+        real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            global flag
+            flag=0
+            piece = which_card(i)
+            candidate = blanklist(board, piece)
+            for j in range(len(candidate)):
+                global search_count
+                search_count += 1
+                move = []
+                cardnu = ''
+                move.append(returnindex(candidate1[k][1]))
+                move.append(str(12-candidate1[k][0]).strip())
+                move.append(returnindex(candidate1[k][3]))
+                move.append(str(12-candidate1[k][2]).strip())
+                move.append(return_card(candidate[j][2]))
+                move.append(returnindex(candidate[j][1]))
+                move.append(str(12-candidate[j][0]).strip())
+                cardid = samecard(move, candidate1[k][1], candidate1[k][3], list1, cardnu)
+                if cardid == return_card(candidate[j][2]):
+                    continue
+                elif cardid == 'notpass':
+                    continue
+                elif cardid == '':
+                    continue
+                elif cardid == "colerror":
+                    continue
+                else:
+                    recycling_list = []
+                    recycling_list.append('0')
+                    recycling_list.append(return_card(candidate[j][2]))
+                    recycling_list.append(returnindex(candidate[j][1]))
+                    recycling_list.append(str(12-candidate[j][0]).strip())
+                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                    list1.append(transfermove)
+                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    value = max(value,recyclingminaplhabetapurning(board, board2,depth - 1,alpha,beta,opponent,list1))
+                    del list1[-1]
+                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    alpha = max(alpha, value)
+                    if value >= beta:
+                        global cut_count
+                        cut_count += 1
+                        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                                       candidate1[k][3], candidate1[k][4])
+                        flag = 1
+                        break
+                    else:
+                        flag = 0
+                if flag == 1:
+                    flag2 = 0
+                    break
+                else:
+                    continue
+        if flag2==0:
+            continue
+        else:
+            drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                           candidate1[k][3], candidate1[k][4])
+
+    return value
 
 #¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+def samecard(move,cindex1,cindex2,recyclelist,card_id):
+    if move[0] == move[2]:
+        num = 1
+        minmove = move[0]
+    elif cindex1 == cindex2 - 1 or cindex1 == cindex2 + 1:
+        num = 2
+        minmove = min(move[0], move[2])
+    else:
+        print("invalid col input")
+        card_id ="colerror"
+        return card_id
+    if num == 1:
+        for j in recyclelist:
+            for i in j:
+                if minmove == i:
+                    if recyclelist[recyclelist.index(j)][3] == move[1]:
+                        if 12 - recyclelist[recyclelist.index(j)][5] == int(move[3]):
+                            if recyclelist.index(j) < len(recyclelist) - 1:
+                                if move[5] == move[0] == move[2] == recyclelist[recyclelist.index(j)][2] and move[6] == move[1] == \
+                                        recyclelist[recyclelist.index(j)][3]:
+                                    card_id = recyclelist[recyclelist.index(j)][1]
+                                    return card_id
+                                else:
+                                    card_id = 'pass'
+                                    continue
+                            else:
+                                if move[0] == recyclelist[recyclelist.index(j)][2] and move[1] == recyclelist[recyclelist.index(j)][3]:
+                                    card_id = 'notpass'
+                                    return card_id
+                        else:
+                            continue
+                    elif int(recyclelist[recyclelist.index(j)][3]) == int(move[1]) - 1:
+                        if 12 - recyclelist[recyclelist.index(j)][5] == int(move[3]) + 1:
+                            if recyclelist.index(j) < len(recyclelist) - 1:
+                                if move[5] == move[0] == move[2] == recyclelist[recyclelist.index(j)][2] and move[6] == move[3] == \
+                                        recyclelist[recyclelist.index(j)][3]:
+                                    card_id = recyclelist[recyclelist.index(j)][1]
+                                    return card_id
+                                else:
+                                    card_id = 'pass'
+                                    continue
+
+                            else:
+                                if move[2] == recyclelist[recyclelist.index(j)][2] and move[3] == recyclelist[recyclelist.index(j)][3]:
+                                    card_id = 'notpass'
+                                    return card_id
+                        else:
+                            continue
+                    else:
+                        continue
+    elif num == 2:
+
+        for j in recyclelist:
+            for i in j:
+                if minmove == i:
+                    if recyclelist[recyclelist.index(j)][2] == move[0]:
+                        judgemove = which_cindex(move[2])
+                        if judgemove == recyclelist[recyclelist.index(j)][4]:
+                            if recyclelist.index(j) < len(recyclelist) - 1:
+                                if move[1] == move[3] == move[6] == recyclelist[recyclelist.index(j)][3] and move[5] == move[0] == \
+                                        recyclelist[recyclelist.index(j)][2]:
+                                    card_id = recyclelist[recyclelist.index(j)][1]
+                                    return card_id
+                                else:
+                                    card_id = 'pass'
+                                    continue
+
+                            else:
+                                if move[1] == recyclelist[recyclelist.index(j)][3]:
+                                    card_id = 'notpass'
+                                    return card_id
+                        else:
+                            continue
+                    elif recyclelist[recyclelist.index(j)][2] == move[2]:
+                        judgemove = which_cindex(move[0])
+                        if judgemove == recyclelist[recyclelist.index(j)][4]:
+                            if recyclelist.index(j) < len(recyclelist) - 1:
+                                if move[1] == move[3] == move[6] == recyclelist[recyclelist.index(j)][3] and move[5] == move[2] == \
+                                        recyclelist[recyclelist.index(j)][2]:
+                                    card_id = recyclelist[recyclelist.index(j)][1]
+                                    return card_id
+                                else:
+                                    card_id = 'pass'
+                                    continue
+
+                            else:
+                                if move[3] == recyclelist[recyclelist.index(j)][3]:
+                                    card_id = 'notpass'
+                                    return card_id
+
+                        else:
+                            continue
+                    else:
+                        continue
+    return card_id
+# $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
     firstuser=[]
     while not game_over:
+        global en_count
+        global orpurning
         if turn==0:
+
             if aiorhuman=='AI':
-                move=['','','','']
+                orpurning=0
+                print("It’s the turn of AI")
+                en_count=0
                 usercmd= input('Does AI activate alpha-beta? (y/n) : ')
                 if usercmd.lower().startswith('y'):
                     coordinate = alphabetapruning(board,board2, DEPTH, -99999999, 99999999,dotscolor)
+                    orpurning =1
                 else:
                     coordinate = minimax(board,board2,DEPTH,dotscolor)
-
+                    orpurning=2
+                if orpurning==1:
+                    print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                    for i in range(0,len(coordinate[4])):
+                        print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                    print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                else:
+                    print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                    for i in range(0,len(coordinate[4])):
+                        print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
+                    print('\n'.strip(),file=open("output_minmax.txt", 'a'))
                 drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
                 if drop:
+                    colindex = returnindex(coordinate[1])
+                    move = []
+                    move.append('0')
+                    move.append(return_card(coordinate[2]))
+                    move.append(colindex)
+                    move.append(str(12-coordinate[0]).strip())
                     transfermove = cardinformation(move, coordinate[1], coordinate[0], coordinate[2])
                     firstuser.append(transfermove)
                     yindex2, xindex2 = dropindex(coordinate[1], coordinate[0], coordinate[2])
@@ -1036,14 +1850,34 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
                     continue
         else:
             if aiorhuman=='AI':
-                move = ['', '', '', '']
+                orpurning=0
+                print("It’s the turn of AI")
+                en_count=0
                 usercmd= input('Does AI activate alpha-beta? (y/n) : ')
                 if usercmd.lower().startswith('y'):
                     coordinate = alphabetapruning(board,board2,DEPTH, -99999999, 99999999,dotscolor)
+                    orpurning = 1
                 else:
                     coordinate = minimax(board,board2,DEPTH,dotscolor)
+                    orpurning = 2
+                if orpurning==1:
+                    print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                    for i in range(0,len(coordinate[4])):
+                        print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                    print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                else:
+                    print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                    for i in range(0,len(coordinate[4])):
+                        print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
+                    print('\n'.strip(),file=open("output_minmax.txt", 'a'))
                 drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
                 if drop:
+                    colindex = returnindex(coordinate[1])
+                    move = []
+                    move.append('0')
+                    move.append(return_card(coordinate[2]))
+                    move.append(colindex)
+                    move.append(str(12-coordinate[0]).strip())
                     transfermove = cardinformation(move, coordinate[1], coordinate[0], coordinate[2])
                     firstuser.append(transfermove)
                     yindex2, xindex2 = dropindex(coordinate[1], coordinate[0], coordinate[2])
@@ -1149,6 +1983,362 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
         dotscolor =SwitchPlayer(dotscolor)
         print("Overall steps: ",end="")
         print(len(firstuser))
+        if(len(firstuser)==24):
+            print("In regular game, game ends in a draw. They need go head to next section")
+            sum = len(firstuser)
+            recycling(firstuser,game_over,user1,user2,turn,sum,aiorhuman,dotscolor)
+            break
+
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
+    global remo
+    global card_id
+    global cardnum
+    global recyclinglist
+    while not game_over:
+        cardnum = ''
+        global orpurning
+        global en_count
+        if turn == 0:
+            if aiorhuman == 'AI':
+                orpurning=0
+                print("It’s the turn of AI")
+                en_count=0
+                usercmd= input('Does AI activate alpha-beta? (y/n) : ')
+                if usercmd.lower().startswith('y'):
+                    coordinate = alphabetapurningrecycling(board,board2, DEPTH, -99999999, 99999999,dotscolor,recyclelist)
+                    orpurning=1
+                else:
+                    coordinate = minmaxrecycliing(board,board2,DEPTH,dotscolor,recyclelist)
+                    orpurning=2
+                if orpurning==1:
+                    print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                    for i in range(0,len(coordinate[8])):
+                        print(str(coordinate[8][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                    print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                else:
+                    print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                    for i in range(0,len(coordinate[8])):
+                        print(str(coordinate[8][i]).strip(),file=open("output_minmax.txt", 'a'))
+                    print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+                real_removerecycle(board,board2,board3,coordinate[0],coordinate[1],coordinate[2],coordinate[3])
+                drop = drop_piece(board, coordinate[4], coordinate[5], coordinate[6])
+                if drop:
+                    colindex = returnindex(coordinate[5])
+                    recyclinglist = []
+                    recyclinglist.append('0')
+                    recyclinglist.append(return_card(coordinate[6]))
+                    recyclinglist.append(colindex)
+                    recyclinglist.append(str(12-coordinate[4]).strip())
+                    transfermove = cardinformation(recyclinglist, coordinate[5], coordinate[4], coordinate[6])
+                    recyclelist.append(transfermove)
+                    yindex2, xindex2 = dropindex(coordinate[5], coordinate[4], coordinate[6])
+                    board2[coordinate[4]][coordinate[5]][0] = 1
+                    board2[xindex2][yindex2][0] = 1
+                    drop_piece3(board3, coordinate[4], coordinate[5], coordinate[6])
+                    print("searching：")
+                    print(search_count)
+                    print("purning：")
+                    print(cut_count)
+                    if user1 == 'dots':
+                        win1 = winning_move(board, user1, user2)
+                        win2 = winning_move(board, user2, user1)
+                        if win1 == 1:
+                            print(*board, sep='\n')
+                            print("{0} winning".format('AI'))
+                            print("*****GAME END*****")
+                            break
+                        elif win2 == 0:
+                            print(*board, sep='\n')
+                            print("{0} winning".format('human'))
+                            print("*****GAME END*****")
+                            break
+                    elif user1 == 'colors':
+                        win1 = winning_move(board, user2, user1)
+                        win2 = winning_move(board, user1, user2)
+                        if win1 == 1:
+                            print(*board, sep='\n')
+                            print("player {0} winning".format('AI'))
+                            print("*****GAME END*****")
+                            break
+                        elif win2 == 0:
+                            print(*board, sep='\n')
+                            print("{0} winning".format('human'))
+                            print("*****GAME END*****")
+                            break
+            else:
+                move = input("Input a slot player {0}: ".format(aiorhuman))
+                move = move.split(' ')
+                if move[0]!='0':
+                    cindex1 = which_cindex(move[0])
+                    cindex2 = which_cindex(move[2])
+                    if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
+                        continue
+                    card_id=samecard(move,cindex1,cindex2,recyclelist,cardnum)
+                    if card_id == move[4]:
+                        print("cannot be same card")
+                        print("try again")
+                        continue
+                    elif card_id=='notpass':
+                        print("cannot place card in other player just placed")
+                        print("try again")
+                        continue
+
+                    elif card_id=='':
+                        print("error input")
+                        continue
+                    elif card_id=="colerror":
+                        continue
+                    if is_valid2(move[1],move[3]):
+                        rindex1 = 12 - int(move[1])
+                        rindex2 = 12 - int(move[3])
+                        remo = remove(board,board2,board3,rindex1,cindex1,rindex2,cindex2)
+                        if remo==False:
+                            print("remove failure")
+                            print("try again")
+                            continue
+                    else:
+                        print("not valid")
+                        print("try again")
+                        continue
+
+                    card = which_card(move[4])
+                    cindex3 = which_cindex(move[5])
+                    if card==UnboundLocalError:
+                        continue
+                    elif cindex3==UnboundLocalError:
+                        continue
+                    if is_valid(move[6],card,cindex3):
+                        rindex = 12-int(move[6])
+                        drop = drop_piece(board, rindex, cindex3, card)
+                        if drop==False:
+                            print("drop failure")
+                            print("try again")
+                            continue
+                        elif drop==True:
+                            sum += 1
+                            recyclinglist=[]
+                            recyclinglist.append('0')
+                            recyclinglist.append(move[4])
+                            recyclinglist.append(move[5])
+                            recyclinglist.append(move[6])
+                            transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
+                            recyclelist.append(transfermove)
+                            drop_piece3(board3, rindex, cindex3, card)
+                            yindex2, xindex2 = dropindex(cindex3, rindex, card)
+                            board2[rindex][cindex3][0] = 1
+                            board2[xindex2][yindex2][0] = 1
+
+                        if user1=='dots':
+                            win1 = winning_move(board, user1, user2)
+                            win2 = winning_move(board, user2, user1)
+                            if win1 == 1:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format(aiorhuman))
+                                print("*****GAME END*****")
+                                break
+                            elif win2 == 0:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format(SwitchPlayer2(aiorhuman)))
+                                print("*****GAME END*****")
+                                break
+                        elif user1=='colors':
+                            win1 = winning_move(board, user2, user1)
+                            win2 = winning_move(board, user1, user2)
+                            if win1 == 1:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format(aiorhuman))
+                                print("*****GAME END*****")
+                                break
+                            elif win2 == 0:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format(SwitchPlayer2(aiorhuman)))
+                                print("*****GAME END*****")
+                                break
+                    else:
+                        print("not valid")
+                        print("try again")
+                        continue
+                else:
+                    print("try again")
+                    continue
+
+        else:
+            if aiorhuman=='AI':
+                orpurning=0
+                print("It’s the turn of AI")
+                en_count=0
+                usercmd= input('Does AI activate alpha-beta? (y/n) : ')
+                if usercmd.lower().startswith('y'):
+                    coordinate = alphabetapurningrecycling(board,board2,DEPTH, -99999999, 99999999,dotscolor,recyclelist)
+                    orpurning=1
+                else:
+                    coordinate = minmaxrecycliing(board,board2,DEPTH,dotscolor,recyclelist)
+                    orpurning=2
+                if orpurning==1:
+                    print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                    for i in range(0,len(coordinate[8])):
+                        print(str(coordinate[8][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                    print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                else:
+                    print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                    for i in range(0,len(coordinate[8])):
+                        print(str(coordinate[8][i]).strip(),file=open("output_minmax.txt", 'a'))
+                    print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+                real_removerecycle(board, board2, board3, coordinate[0], coordinate[1], coordinate[2], coordinate[3])
+                drop = drop_piece(board, coordinate[4], coordinate[5], coordinate[6])
+                if drop:
+                    colindex = returnindex(coordinate[5])
+                    recyclinglist = []
+                    recyclinglist.append('0')
+                    recyclinglist.append(return_card(coordinate[6]))
+                    recyclinglist.append(colindex)
+                    recyclinglist.append(str(12-coordinate[4]).strip())
+                    transfermove = cardinformation(recyclinglist, coordinate[5], coordinate[4], coordinate[6])
+                    recyclelist.append(transfermove)
+                    yindex2, xindex2 = dropindex(coordinate[5], coordinate[4], coordinate[6])
+                    board2[coordinate[4]][coordinate[5]][0] = 1
+                    board2[xindex2][yindex2][0] = 1
+                    drop_piece3(board3, coordinate[4], coordinate[5], coordinate[6])
+                    print("searching：", end='')
+                    print(search_count)
+                    print("purning：", end='')
+                    print(cut_count)
+                    if user2 == 'dots':
+                        win1 = winning_move(board, user1, user2)
+                        win2 = winning_move(board, user2, user1)
+                        if win1 == 0:
+                            print(*board, sep='\n')
+                            print("{0} winning".format('AI'))
+                            print("*****GAME END*****")
+                            break
+                        elif win2 == 1:
+                            print(*board, sep='\n')
+                            print("{0} winning".format('human'))
+                            print("*****GAME END*****")
+                            break
+                    elif user2 == 'colors':
+                        win1 = winning_move(board, user2, user1)
+                        win2 = winning_move(board, user1, user2)
+                        if win1 == 0:
+                            print(*board, sep='\n')
+                            print("player {0} winning".format('AI'))
+                            print("*****GAME END*****")
+                            break
+                        elif win2 == 1:
+                            print(*board, sep='\n')
+                            print("player {0} winning".format('human'))
+                            print("*****GAME END*****")
+                            break
+
+            else:
+                move = input("Input a slot player {0}: ".format(aiorhuman))
+                move = move.split(' ')
+                if move[0]!='0':
+                    cindex1 = which_cindex(move[0])
+                    cindex2 = which_cindex(move[2])
+
+                    if cindex1==UnboundLocalError or cindex2==UnboundLocalError :
+                        continue
+                    card_id = samecard(move, cindex1, cindex2, recyclelist, cardnum)
+                    if card_id == move[4]:
+                        print("cannot be same card")
+                        print("try again")
+                        continue
+                    elif card_id=='notpass':
+                        print("cannot place card in other player just placed")
+                        print("try again")
+                        continue
+                    elif card_id=='':
+                        print("error input")
+                        continue
+                    elif card_id=="colerror":
+                        continue
+                    if is_valid2(move[1], move[3]):
+                        rindex1 = 12 - int(move[1])
+                        rindex2 = 12 - int(move[3])
+                        remo = remove(board,board2,board3,rindex1, cindex1, rindex2, cindex2)
+                        if remo == False:
+                            print("remove failure")
+                            print("try again")
+                            continue
+                    else:
+                        print("not valid")
+                        print("try again")
+                        continue
+
+                    card = which_card(move[4])
+                    cindex3 = which_cindex(move[5])
+                    if card == UnboundLocalError:
+                        continue
+                    elif cindex3 == UnboundLocalError:
+                        continue
+
+                    if is_valid(move[6],card,cindex3):
+                        rindex = 12-int(move[6])
+                        drop= drop_piece(board, rindex, cindex3, card)
+                        if drop==False:
+                            print("drop failure")
+                            print("try again")
+                            continue
+                        elif drop == True:
+                            sum += 1
+                            recyclinglist=[]
+                            recyclinglist.append('0')
+                            recyclinglist.append(move[4])
+                            recyclinglist.append(move[5])
+                            recyclinglist.append(move[6])
+                            transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
+                            recyclelist.append(transfermove)
+                            drop_piece3(board3, rindex, cindex3, card)
+                            yindex2, xindex2 = dropindex(cindex3, rindex, card)
+                            board2[rindex][cindex3][0] = 1
+                            board2[xindex2][yindex2][0] = 1
+                        if user2=='dots':
+                            win1 = winning_move(board, user1,user2)
+                            win2 = winning_move(board, user2, user1)
+                            if win1==0:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format(aiorhuman))
+                                print("*****GAME END*****")
+                                break
+                            elif win2==1:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format(SwitchPlayer2(aiorhuman)))
+                                print("*****GAME END*****")
+                                break
+                        elif user2=='colors':
+                            win1 = winning_move(board, user2,user1)
+                            win2 = winning_move(board, user1,user2)
+                            if win1==0:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format(aiorhuman))
+                                print("*****GAME END*****")
+                                break
+                            elif win2==1:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format(SwitchPlayer2(aiorhuman)))
+                                print("*****GAME END*****")
+                                break
+                    else:
+                        print("not valid")
+                        print("try again")
+                        continue
+                else:
+                    print("try again")
+                    continue
+        print(*board, sep='\n')
+        turn +=1
+        turn=turn % 2
+        aiorhuman= SwitchPlayer2(aiorhuman)
+        dotscolor =SwitchPlayer(dotscolor)
+        print("Overall steps: ",end="")
+        print(sum)
+        if sum==36:
+            print("After regualr and recycling game, game ends in a draw")
+            break
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 def PlayerGoesFirst():
     print('Does AI play first? (y/n) : ', end="")
     return input().lower().startswith('y')
