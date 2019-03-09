@@ -889,9 +889,10 @@ def minimax(board,board2,depth,dotscolor):
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                value=max(value,minfunction(board, board2, depth - 1, dotscolor))
+                level2value = minfunction(board, board2, depth - 1, dotscolor)
+                value=max(value,level2value)
+                maxvalues.append(level2value)
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
-                maxvalues.append(value)
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
@@ -916,9 +917,10 @@ def minimax(board,board2,depth,dotscolor):
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                value=max(value,minfunction(board, board2, depth - 1, dotscolor))
+                level2value = minfunction(board, board2, depth - 1, dotscolor)
+                value=max(value,level2value)
+                maxvalues.append(level2value)
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
-                maxvalues.append(value)
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
@@ -998,9 +1000,11 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                value=max(value,alphabetapruningminfunction(board, board2, depth - 1,alpha,beta, dotscolor))
+                level2value = alphabetapruningminfunction(board, board2, depth - 1, alpha, beta, dotscolor)
+                value=max(value,level2value)
+                maxvalues.append(level2value)
+                alpha = max(alpha, value)
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
-                maxvalues.append(value)
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
@@ -1016,6 +1020,7 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 continue
 
     elif dotscolor=='dots':
+        alphabetapruningmaxfunction(board, board2, depth, alpha, beta, dotscolor)
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
         for i in list:
             piece = which_card(i)
@@ -1025,9 +1030,11 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                value=max(value,alphabetapruningminfunction(board, board2, depth - 1,alpha,beta, dotscolor))
+                level2value = alphabetapruningminfunction(board, board2, depth - 1, alpha, beta, dotscolor)
+                value = max(value, level2value)
+                maxvalues.append(level2value)
+                alpha = max(alpha, value)
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
-                maxvalues.append(value)
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
@@ -1064,10 +1071,10 @@ def alphabetapruningmaxfunction(board,board2,depth,alpha,beta,player) :
             remove_piece2(board2,candidate[j][0],candidate[j][1],candidate[j][2])
             remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             alpha = max(alpha, value)
-            if value >= beta:
+            if alpha >= beta:
                 global cut_count
                 cut_count+=1
-                return value
+                return alpha
     return value
 def alphabetapruningminfunction(board,board2,depth,alpha,beta,player):
     opponent = SwitchPlayer(player)
@@ -1089,10 +1096,10 @@ def alphabetapruningminfunction(board,board2,depth,alpha,beta,player):
             remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
             remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             beta = min(beta, value)
-            if value <= alpha:
+            if beta <= alpha:
                 global cut_count
                 cut_count+=1
-                return value
+                return beta
     return value
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 def minmaxrecycliing(board,board2,depth,dotscolor,list1):
@@ -1140,9 +1147,10 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
                         drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                         drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                         drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                        value = max(value, minrecycling(board, board2, depth - 1, dotscolor,list1))
+                        level2value =  minrecycling(board, board2, depth - 1, dotscolor,list1)
+                        value = max(value,level2value)
+                        maxvalues.append(level2value)
                         values.append([value, candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate[j][0], candidate[j][1], candidate[j][2]])
-                        maxvalues.append(value)
                         del list1[-1]
                         remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                         remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
@@ -1201,9 +1209,10 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
                         drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                         drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                         drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                        value = max(value, minrecycling(board, board2, depth - 1, dotscolor,list1))
+                        level2value = minrecycling(board, board2, depth - 1, dotscolor, list1)
+                        value = max(value, level2value)
+                        maxvalues.append(level2value)
                         values.append([value, candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate[j][0], candidate[j][1], candidate[j][2]])
-                        maxvalues.append(value)
                         del list1[-1]
                         remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                         remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
@@ -1378,10 +1387,12 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
                         drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                         drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                         drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                        value = max(value, recyclingminaplhabetapurning(board, board2, depth - 1, alpha,beta,dotscolor, list1))
+                        level2value= recyclingminaplhabetapurning(board, board2, depth - 1, alpha,beta,dotscolor, list1)
+                        value = max(value, level2value)
+                        maxvalues.append(level2value)
+                        alpha = max(alpha, value)
                         values.append([value, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],
                                        candidate[j][0], candidate[j][1], candidate[j][2]])
-                        maxvalues.append(value)
                         del list1[-1]
                         remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                         remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
@@ -1443,10 +1454,13 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
                         drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                         drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                         drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                        value = max(value, recyclingminaplhabetapurning(board, board2, depth - 1, alpha,beta,dotscolor, list1))
+                        level2value = recyclingminaplhabetapurning(board, board2, depth - 1, alpha, beta, dotscolor,
+                                                                   list1)
+                        value = max(value, level2value)
+                        maxvalues.append(level2value)
+                        alpha = max(alpha, value)
                         values.append([value, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],
                                        candidate[j][0], candidate[j][1], candidate[j][2]])
-                        maxvalues.append(value)
                         del list1[-1]
                         remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                         remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
@@ -1521,22 +1535,23 @@ def recyclingminaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
                     remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                     remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                     beta = min(beta, value)
-                    if value <= alpha:
+                    if beta <= alpha:
                         global cut_count
                         cut_count += 1
                         drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                                        candidate1[k][3], candidate1[k][4])
-                        flag=1
-                        break
-                    else:
-                        flag=0
-                if flag == 1:
-                    flag2 = 0
-                    break
-                else:
-                    continue
-        if flag2==0:
-            continue
+                        return beta
+        #                 flag=1
+        #                 break
+        #             else:
+        #                 flag=0
+        #         if flag == 1:
+        #             flag2 = 0
+        #             break
+        #         else:
+        #             continue
+        # if flag2==0:
+        #     continue
         else:
             drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                            candidate1[k][3], candidate1[k][4])
@@ -1596,22 +1611,23 @@ def recyclingmaxaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
                     remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                     remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                     alpha = max(alpha, value)
-                    if value >= beta:
+                    if alpha >= beta:
                         global cut_count
                         cut_count += 1
                         drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                                        candidate1[k][3], candidate1[k][4])
-                        flag = 1
-                        break
-                    else:
-                        flag = 0
-                if flag == 1:
-                    flag2 = 0
-                    break
-                else:
-                    continue
-        if flag2==0:
-            continue
+                        return alpha
+        #                 flag = 1
+        #                 break
+        #             else:
+        #                 flag = 0
+        #         if flag == 1:
+        #             flag2 = 0
+        #             break
+        #         else:
+        #             continue
+        # if flag2==0:
+        #     continue
         else:
             drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                            candidate1[k][3], candidate1[k][4])
@@ -1722,7 +1738,6 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
         global en_count
         global orpurning
         if turn==0:
-
             if aiorhuman=='AI':
                 orpurning=0
                 print("It’s the turn of AI")
