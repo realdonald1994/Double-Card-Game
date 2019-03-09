@@ -6,6 +6,9 @@ DEPTH = 2
 search_count=0
 cut_count = 0
 en_count =0
+REGUALR_GAME = 24
+RECYCLING_GAME=60
+
 def create_board():
     board = [['□□' for _ in range(ROW_COUNT)] for _ in range(COL_COUNT)]
     return board
@@ -873,6 +876,290 @@ def SwitchPlayer2(player):
     else:
         nextplayer = 'AI'
     return nextplayer
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+def lastminmax(board,board2,depth,dotscolor,list1):
+    values = []
+    maxvalues = []
+    coordinate = []
+    value = -1000000000
+    global search_count
+    if dotscolor=='colors':
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            piece = which_card(i)
+            candidate = blanklist(board, piece)
+            for j in range(len(candidate)):
+                search_count += 1
+                recycling_list = []
+                recycling_list.append('0')
+                recycling_list.append(return_card(candidate[j][2]))
+                recycling_list.append(returnindex(candidate[j][1]))
+                recycling_list.append(str(12 - candidate[j][0]).strip())
+                transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                list1.append(transfermove)
+                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                level2value = lastminfunction(board, board2, depth - 1, dotscolor,list1)
+                value=max(value,level2value)
+                maxvalues.append(level2value)
+                values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
+                del list1[-1]
+                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+        largestvalue = max(maxvalues)
+        for i in range(len(values)):
+            if largestvalue == values[i][0]:
+                coordinate.append(values[i][1])
+                coordinate.append(values[i][2])
+                coordinate.append(values[i][3])
+                coordinate.append(values[i][0])
+            else:
+                continue
+
+    elif dotscolor=='dots':
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            piece = which_card(i)
+            candidate = blanklist(board, piece)
+            for j in range(len(candidate)):
+                search_count += 1
+                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                level2value = lastminfunction(board, board2, depth - 1, dotscolor,list1)
+                value=max(value,level2value)
+                maxvalues.append(level2value)
+                values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
+                del list1[-1]
+                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+        largestvalue = max(maxvalues)
+        for i in range(len(values)):
+            if largestvalue == values[i][0]:
+                coordinate.append(values[i][1])
+                coordinate.append(values[i][2])
+                coordinate.append(values[i][3])
+                coordinate.append(values[i][0])
+            else:
+                continue
+    return coordinate[0], coordinate[1], coordinate[2], coordinate[3],maxvalues
+def lastminfunction(board,board2,depth,player,list1):
+    opponent = SwitchPlayer(player)
+    value = 1000000000
+    if (depth == 0):
+        return evaluation(board, board2, board3, opponent)
+    candidate1 = remove_recyclingpiece(board3)
+    for k in range(len(candidate1)):
+        real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                           candidate1[k][3])
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            piece = which_card(i)
+            candidate = blanklist(board, piece)
+            for j in range(len(candidate)):
+                global search_count
+                search_count += 1
+                minmaxmove = []
+                cardnu = ''
+                minmaxmove.append(returnindex(candidate1[k][1]))
+                minmaxmove.append(str(12 - candidate1[k][0]).strip())
+                minmaxmove.append(returnindex(candidate1[k][3]))
+                minmaxmove.append(str(12 - candidate1[k][2]).strip())
+                minmaxmove.append(return_card(candidate[j][2]))
+                minmaxmove.append(returnindex(candidate[j][1]))
+                minmaxmove.append(str(12 - candidate[j][0]).strip())
+                cardid = samecard(minmaxmove, candidate1[k][1], candidate1[k][3], list1, cardnu)
+                if cardid == return_card(candidate[j][2]):
+                    continue
+                elif cardid == 'notpass':
+                    continue
+                elif cardid == '':
+                    continue
+                elif cardid == "colerror":
+                    continue
+                recycling_list = []
+                recycling_list.append('0')
+                recycling_list.append(return_card(candidate[j][2]))
+                recycling_list.append(returnindex(candidate[j][1]))
+                recycling_list.append(str(12 - candidate[j][0]).strip())
+                transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                list1.append(transfermove)
+                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                bestvalue = maxfunction(board, board2, depth - 1, opponent)
+                del list1[-1]
+                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                if bestvalue < value:
+                    value = bestvalue
+        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],
+                       candidate1[k][4])
+    return value
+
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+def lastaphabeta(board,board2,depth,alpha,beta,dotscolor,list1):
+    values = []
+    maxvalues = []
+    coordinate = []
+    value = -1000000000
+    global search_count
+    if dotscolor=='colors':
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            piece = which_card(i)
+            candidate = blanklist(board, piece)
+            for j in range(len(candidate)):
+                search_count += 1
+                recycling_list = []
+                recycling_list.append('0')
+                recycling_list.append(return_card(candidate[j][2]))
+                recycling_list.append(returnindex(candidate[j][1]))
+                recycling_list.append(str(12 - candidate[j][0]).strip())
+                transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0],
+                                               candidate[j][2])
+                list1.append(transfermove)
+                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                level2value = lastminaphabeta(board, board2, depth - 1, alpha, beta, dotscolor,list1)
+                value=max(value,level2value)
+                maxvalues.append(level2value)
+                alpha = max(alpha, value)
+                values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
+                del list1[-1]
+                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+        largestvalue = max(maxvalues)
+        for i in range(len(values)):
+            if largestvalue == values[i][0]:
+                coordinate.append(values[i][1])
+                coordinate.append(values[i][2])
+                coordinate.append(values[i][3])
+                coordinate.append(values[i][0])
+
+            else:
+                continue
+
+    elif dotscolor=='dots':
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            piece = which_card(i)
+            candidate = blanklist(board, piece)
+            for j in range(len(candidate)):
+                search_count += 1
+                recycling_list = []
+                recycling_list.append('0')
+                recycling_list.append(return_card(candidate[j][2]))
+                recycling_list.append(returnindex(candidate[j][1]))
+                recycling_list.append(str(12 - candidate[j][0]).strip())
+                transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0],
+                                               candidate[j][2])
+                list1.append(transfermove)
+                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                level2value = lastminaphabeta(board, board2, depth - 1, alpha, beta, dotscolor,list1)
+                value = max(value, level2value)
+                maxvalues.append(level2value)
+                alpha = max(alpha, value)
+                values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
+                del list1[-1]
+                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+        largestvalue = max(maxvalues)
+        for i in range(len(values)):
+            if largestvalue == values[i][0]:
+                coordinate.append(values[i][1])
+                coordinate.append(values[i][2])
+                coordinate.append(values[i][3])
+                coordinate.append(values[i][0])
+
+            else:
+                continue
+    return coordinate[0], coordinate[1], coordinate[2],coordinate[3],maxvalues
+def lastminaphabeta(board,board2,depth,alpha,beta,player,list1):
+    opponent = SwitchPlayer(player)
+    value = 1000000000
+    if (depth == 0):
+        return evaluation(board, board2,board3,opponent)
+    candidate1 = remove_recyclingpiece(board3)
+    for k in range(len(candidate1)):
+        global flag2
+        flag2=1
+        real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            global flag
+            flag=0
+            piece = which_card(i)
+            candidate = blanklist(board, piece)
+            for j in range(len(candidate)):
+                global search_count
+                search_count += 1
+                minmaxmove = []
+                cardnu = ''
+                minmaxmove.append(returnindex(candidate1[k][1]))
+                minmaxmove.append(str(12-candidate1[k][0]).strip())
+                minmaxmove.append(returnindex(candidate1[k][3]))
+                minmaxmove.append(str(12-candidate1[k][2]).strip())
+                minmaxmove.append(return_card(candidate[j][2]))
+                minmaxmove.append(returnindex(candidate[j][1]))
+                minmaxmove.append(str(12-candidate[j][0]).strip())
+                cardid = samecard(minmaxmove, candidate1[k][1], candidate1[k][3], list1, cardnu)
+                if cardid == return_card(candidate[j][2]):
+                    continue
+                elif cardid == 'notpass':
+                    continue
+                elif cardid == '':
+                    continue
+                elif cardid == "colerror":
+                    continue
+                else:
+                    recycling_list = []
+                    recycling_list.append('0')
+                    recycling_list.append(return_card(candidate[j][2]))
+                    recycling_list.append(returnindex(candidate[j][1]))
+                    recycling_list.append(str(12-candidate[j][0]).strip())
+                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                    list1.append(transfermove)
+                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    value = min(value,recyclingmaxaplhabetapurning(board, board2, depth - 1,alpha,beta,opponent,list1))
+                    del list1[-1]
+                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    beta = min(beta, value)
+                    if beta <= alpha:
+                        global cut_count
+                        cut_count += 1
+                        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                                       candidate1[k][3], candidate1[k][4])
+                        return beta
+        #                 flag=1
+        #                 break
+        #             else:
+        #                 flag=0
+        #         if flag == 1:
+        #             flag2 = 0
+        #             break
+        #         else:
+        #             continue
+        # if flag2==0:
+        #     continue
+        else:
+            drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                           candidate1[k][3], candidate1[k][4])
+    return value
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 def minimax(board,board2,depth,dotscolor):
     values = []
     maxvalues = []
@@ -1020,7 +1307,6 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 continue
 
     elif dotscolor=='dots':
-        alphabetapruningmaxfunction(board, board2, depth, alpha, beta, dotscolor)
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
         for i in list:
             piece = which_card(i)
@@ -1744,11 +2030,19 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
                 en_count=0
                 usercmd= input('Does AI activate alpha-beta? (y/n) : ')
                 if usercmd.lower().startswith('y'):
-                    coordinate = alphabetapruning(board,board2, DEPTH, -99999999, 99999999,dotscolor)
-                    orpurning =1
+                    if len(firstuser)==REGUALR_GAME-1:
+                        coordinate = lastaphabeta(board,board2, DEPTH, -99999999, 99999999,dotscolor,firstuser)
+                        orpurning =1
+                    else:
+                        coordinate = alphabetapruning(board,board2, DEPTH, -99999999, 99999999,dotscolor)
+                        orpurning =1
                 else:
-                    coordinate = minimax(board,board2,DEPTH,dotscolor)
-                    orpurning=2
+                    if len(firstuser)==REGUALR_GAME-1:
+                        coordinate = lastminmax(board,board2,DEPTH,dotscolor,firstuser)
+                        orpurning=2
+                    else:
+                        coordinate = minimax(board,board2,DEPTH,dotscolor)
+                        orpurning=2
                 if orpurning==1:
                     print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
                     for i in range(0,len(coordinate[4])):
@@ -1870,11 +2164,19 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
                 en_count=0
                 usercmd= input('Does AI activate alpha-beta? (y/n) : ')
                 if usercmd.lower().startswith('y'):
-                    coordinate = alphabetapruning(board,board2,DEPTH, -99999999, 99999999,dotscolor)
-                    orpurning = 1
+                    if len(firstuser)==REGUALR_GAME-1:
+                        coordinate = lastaphabeta(board,board2,DEPTH, -99999999, 99999999,dotscolor,firstuser)
+                        orpurning = 1
+                    else:
+                        coordinate = alphabetapruning(board,board2,DEPTH, -99999999, 99999999,dotscolor)
+                        orpurning = 1
                 else:
-                    coordinate = minimax(board,board2,DEPTH,dotscolor)
-                    orpurning = 2
+                    if len(firstuser)==REGUALR_GAME-1:
+                        coordinate = lastminmax(board,board2,DEPTH,dotscolor,firstuser)
+                        orpurning=2
+                    else:
+                        coordinate = minimax(board,board2,DEPTH,dotscolor)
+                        orpurning=2
                 if orpurning==1:
                     print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
                     for i in range(0,len(coordinate[4])):
@@ -1998,7 +2300,7 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
         dotscolor =SwitchPlayer(dotscolor)
         print("Overall steps: ",end="")
         print(len(firstuser))
-        if(len(firstuser)==24):
+        if(len(firstuser)==REGUALR_GAME):
             print("In regular game, game ends in a draw. They need go head to next section")
             sum = len(firstuser)
             recycling(firstuser,game_over,user1,user2,turn,sum,aiorhuman,dotscolor)
@@ -2039,6 +2341,7 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                 real_removerecycle(board,board2,board3,coordinate[0],coordinate[1],coordinate[2],coordinate[3])
                 drop = drop_piece(board, coordinate[4], coordinate[5], coordinate[6])
                 if drop:
+                    sum+=1
                     colindex = returnindex(coordinate[5])
                     recyclinglist = []
                     recyclinglist.append('0')
@@ -2203,6 +2506,7 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                 real_removerecycle(board, board2, board3, coordinate[0], coordinate[1], coordinate[2], coordinate[3])
                 drop = drop_piece(board, coordinate[4], coordinate[5], coordinate[6])
                 if drop:
+                    sum+=1
                     colindex = returnindex(coordinate[5])
                     recyclinglist = []
                     recyclinglist.append('0')
@@ -2349,7 +2653,7 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
         dotscolor =SwitchPlayer(dotscolor)
         print("Overall steps: ",end="")
         print(sum)
-        if sum==36:
+        if sum==RECYCLING_GAME:
             print("After regualr and recycling game, game ends in a draw")
             break
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
