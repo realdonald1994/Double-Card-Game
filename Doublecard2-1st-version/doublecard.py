@@ -6,7 +6,7 @@ DEPTH = 2
 search_count=0
 cut_count = 0
 en_count =0
-REGUALR_GAME = 24
+REGUALR_GAME = 4
 RECYCLING_GAME=60
 
 def create_board():
@@ -2044,15 +2044,19 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
                         coordinate = minimax(board,board2,DEPTH,dotscolor)
                         orpurning=2
                 if orpurning==1:
-                    print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
-                    for i in range(0,len(coordinate[4])):
-                        print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
-                    print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                    outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
+                    if outputcmd.lower().startswith('y'):
+                        print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                        for i in range(0,len(coordinate[4])):
+                            print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                        print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
                 else:
-                    print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
-                    for i in range(0,len(coordinate[4])):
-                        print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
-                    print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+                    outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
+                    if outputcmd.lower().startswith('y'):
+                        print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                        for i in range(0,len(coordinate[4])):
+                            print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
+                        print('\n'.strip(),file=open("output_minmax.txt", 'a'))
                 drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
                 if drop:
                     colindex = returnindex(coordinate[1])
@@ -2178,15 +2182,19 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
                         coordinate = minimax(board,board2,DEPTH,dotscolor)
                         orpurning=2
                 if orpurning==1:
-                    print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
-                    for i in range(0,len(coordinate[4])):
-                        print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
-                    print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                    outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
+                    if outputcmd.lower().startswith('y'):
+                        print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                        for i in range(0,len(coordinate[4])):
+                            print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                        print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
                 else:
-                    print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
-                    for i in range(0,len(coordinate[4])):
-                        print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
-                    print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+                    outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
+                    if outputcmd.lower().startswith('y'):
+                        print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                        for i in range(0,len(coordinate[4])):
+                            print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
+                        print('\n'.strip(),file=open("output_minmax.txt", 'a'))
                 drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
                 if drop:
                     colindex = returnindex(coordinate[1])
@@ -2323,21 +2331,45 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                 en_count=0
                 usercmd= input('Does AI activate alpha-beta? (y/n) : ')
                 if usercmd.lower().startswith('y'):
-                    coordinate = alphabetapurningrecycling(board,board2, DEPTH, -99999999, 99999999,dotscolor,recyclelist)
-                    orpurning=1
+                    if sum==59:
+                        DEPTH=1
+                        coordinate = alphabetapurningrecycling(board,board2, DEPTH, -99999999, 99999999,dotscolor,recyclelist)
+                        orpurning=1
+                    else:
+                        coordinate = alphabetapurningrecycling(board,board2, DEPTH, -99999999, 99999999,dotscolor,recyclelist)
+                        orpurning=1
                 else:
-                    coordinate = minmaxrecycliing(board,board2,DEPTH,dotscolor,recyclelist)
-                    orpurning=2
+                    if sum==59:
+                        DEPTH=1
+                        coordinate = minmaxrecycliing(board, board2, DEPTH, dotscolor, recyclelist)
+                        orpurning = 2
+                    else:
+                        coordinate = minmaxrecycliing(board,board2,DEPTH,dotscolor,recyclelist)
+                        orpurning=2
                 if orpurning==1:
-                    print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
-                    for i in range(0,len(coordinate[8])):
-                        print(str(coordinate[8][i]).strip(),file=open("output_alphabeta.txt", 'a'))
-                    print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                    outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
+                    if outputcmd.lower().startswith('y'):
+                        if sum==59:
+                            print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
+                                  file=open("output_alphabeta.txt", 'a'))
+                            print(str(coordinate[7]).strip() + '\n',file=open("output_alphabeta.txt", 'a'))
+                        else:
+                            print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                            for i in range(0,len(coordinate[8])):
+                                print(str(coordinate[8][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                            print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
                 else:
-                    print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_minmax.txt", 'a'))
-                    for i in range(0,len(coordinate[8])):
-                        print(str(coordinate[8][i]).strip(),file=open("output_minmax.txt", 'a'))
-                    print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+                    outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
+                    if outputcmd.lower().startswith('y'):
+                        if sum==59:
+                            print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
+                                  file=open("output_minmax.txt", 'a'))
+                            print(str(coordinate[7]).strip() + '\n',file=open("output_minmax.txt", 'a'))
+                        else:
+                            print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                            for i in range(0,len(coordinate[8])):
+                                print(str(coordinate[8][i]).strip(),file=open("output_minmax.txt", 'a'))
+                            print('\n'.strip(),file=open("output_minmax.txt", 'a'))
                 real_removerecycle(board,board2,board3,coordinate[0],coordinate[1],coordinate[2],coordinate[3])
                 drop = drop_piece(board, coordinate[4], coordinate[5], coordinate[6])
                 if drop:
@@ -2488,21 +2520,49 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                 en_count=0
                 usercmd= input('Does AI activate alpha-beta? (y/n) : ')
                 if usercmd.lower().startswith('y'):
-                    coordinate = alphabetapurningrecycling(board,board2,DEPTH, -99999999, 99999999,dotscolor,recyclelist)
-                    orpurning=1
+                    if sum == 59:
+                        DEPTH = 1
+                        coordinate = alphabetapurningrecycling(board, board2, DEPTH, -99999999, 99999999, dotscolor,
+                                                               recyclelist)
+                        orpurning = 1
+                    else:
+                        coordinate = alphabetapurningrecycling(board, board2, DEPTH, -99999999, 99999999, dotscolor,
+                                                               recyclelist)
+                        orpurning = 1
                 else:
-                    coordinate = minmaxrecycliing(board,board2,DEPTH,dotscolor,recyclelist)
-                    orpurning=2
-                if orpurning==1:
-                    print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
-                    for i in range(0,len(coordinate[8])):
-                        print(str(coordinate[8][i]).strip(),file=open("output_alphabeta.txt", 'a'))
-                    print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                    if sum == 59:
+                        DEPTH = 1
+                        coordinate = minmaxrecycliing(board, board2, DEPTH, dotscolor, recyclelist)
+                        orpurning = 2
+                    else:
+                        coordinate = minmaxrecycliing(board, board2, DEPTH, dotscolor, recyclelist)
+                        orpurning = 2
+                if orpurning == 1:
+                    outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
+                    if outputcmd.lower().startswith('y'):
+                        if sum == 59:
+                            print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
+                                  file=open("output_alphabeta.txt", 'a'))
+                            print(str(coordinate[7]).strip() + '\n', file=open("output_alphabeta.txt", 'a'))
+                        else:
+                            print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
+                                  file=open("output_alphabeta.txt", 'a'))
+                            for i in range(0, len(coordinate[8])):
+                                print(str(coordinate[8][i]).strip(), file=open("output_alphabeta.txt", 'a'))
+                            print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
                 else:
-                    print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_minmax.txt", 'a'))
-                    for i in range(0,len(coordinate[8])):
-                        print(str(coordinate[8][i]).strip(),file=open("output_minmax.txt", 'a'))
-                    print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+                    outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
+                    if outputcmd.lower().startswith('y'):
+                        if sum == 59:
+                            print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
+                                  file=open("output_minmax.txt", 'a'))
+                            print(str(coordinate[7]).strip() + '\n', file=open("output_minmax.txt", 'a'))
+                        else:
+                            print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
+                                  file=open("output_minmax.txt", 'a'))
+                            for i in range(0, len(coordinate[8])):
+                                print(str(coordinate[8][i]).strip(), file=open("output_minmax.txt", 'a'))
+                            print('\n'.strip(), file=open("output_minmax.txt", 'a'))
                 real_removerecycle(board, board2, board3, coordinate[0], coordinate[1], coordinate[2], coordinate[3])
                 drop = drop_piece(board, coordinate[4], coordinate[5], coordinate[6])
                 if drop:
