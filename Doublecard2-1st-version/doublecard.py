@@ -6,7 +6,7 @@ DEPTH = 2
 search_count=0
 cut_count = 0
 en_count =0
-REGUALR_GAME = 4
+REGUALR_GAME = 24
 RECYCLING_GAME=60
 
 def create_board():
@@ -925,6 +925,13 @@ def lastminmax(board,board2,depth,dotscolor,list1):
             candidate = blanklist(board, piece)
             for j in range(len(candidate)):
                 search_count += 1
+                recycling_list = []
+                recycling_list.append('0')
+                recycling_list.append(return_card(candidate[j][2]))
+                recycling_list.append(returnindex(candidate[j][1]))
+                recycling_list.append(str(12 - candidate[j][0]).strip())
+                transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
@@ -952,7 +959,11 @@ def lastminfunction(board,board2,depth,player,list1):
     if (depth == 0):
         return evaluation(board, board2, board3, opponent)
     candidate1 = remove_recyclingpiece(board3)
-    for k in range(len(candidate1)):
+    for k in range(0,len(candidate1)):
+        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
+        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
+        #             list1[len(list1) - 1][3]):
+        #         continue
         real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                            candidate1[k][3])
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
@@ -963,7 +974,6 @@ def lastminfunction(board,board2,depth,player,list1):
                 global search_count
                 search_count += 1
                 minmaxmove = []
-                cardnu = ''
                 minmaxmove.append(returnindex(candidate1[k][1]))
                 minmaxmove.append(str(12 - candidate1[k][0]).strip())
                 minmaxmove.append(returnindex(candidate1[k][3]))
@@ -971,8 +981,8 @@ def lastminfunction(board,board2,depth,player,list1):
                 minmaxmove.append(return_card(candidate[j][2]))
                 minmaxmove.append(returnindex(candidate[j][1]))
                 minmaxmove.append(str(12 - candidate[j][0]).strip())
-                cardid = samecard(minmaxmove, candidate1[k][1], candidate1[k][3], list1, cardnu)
-                if cardid == return_card(candidate[j][2]):
+                cardid = samecard(minmaxmove, candidate1[k][1], candidate1[k][3], list1, '')
+                if cardid == minmaxmove[4]:
                     continue
                 elif cardid == 'notpass':
                     continue
@@ -980,6 +990,7 @@ def lastminfunction(board,board2,depth,player,list1):
                     continue
                 elif cardid == "colerror":
                     continue
+
                 recycling_list = []
                 recycling_list.append('0')
                 recycling_list.append(return_card(candidate[j][2]))
@@ -1093,6 +1104,10 @@ def lastminaphabeta(board,board2,depth,alpha,beta,player,list1):
     for k in range(len(candidate1)):
         global flag2
         flag2=1
+        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
+        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
+        #             list1[len(list1) - 1][3]):
+        #         continue
         real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
         for i in list:
@@ -1104,7 +1119,6 @@ def lastminaphabeta(board,board2,depth,alpha,beta,player,list1):
                 global search_count
                 search_count += 1
                 minmaxmove = []
-                cardnu = ''
                 minmaxmove.append(returnindex(candidate1[k][1]))
                 minmaxmove.append(str(12-candidate1[k][0]).strip())
                 minmaxmove.append(returnindex(candidate1[k][3]))
@@ -1112,8 +1126,8 @@ def lastminaphabeta(board,board2,depth,alpha,beta,player,list1):
                 minmaxmove.append(return_card(candidate[j][2]))
                 minmaxmove.append(returnindex(candidate[j][1]))
                 minmaxmove.append(str(12-candidate[j][0]).strip())
-                cardid = samecard(minmaxmove, candidate1[k][1], candidate1[k][3], list1, cardnu)
-                if cardid == return_card(candidate[j][2]):
+                cardid = samecard(minmaxmove, candidate1[k][1], candidate1[k][3], list1, '')
+                if cardid == minmaxmove[4]:
                     continue
                 elif cardid == 'notpass':
                     continue
@@ -1121,29 +1135,29 @@ def lastminaphabeta(board,board2,depth,alpha,beta,player,list1):
                     continue
                 elif cardid == "colerror":
                     continue
-                else:
-                    recycling_list = []
-                    recycling_list.append('0')
-                    recycling_list.append(return_card(candidate[j][2]))
-                    recycling_list.append(returnindex(candidate[j][1]))
-                    recycling_list.append(str(12-candidate[j][0]).strip())
-                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
-                    list1.append(transfermove)
-                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                    value = min(value,recyclingmaxaplhabetapurning(board, board2, depth - 1,alpha,beta,opponent,list1))
-                    del list1[-1]
-                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                    beta = min(beta, value)
-                    if beta <= alpha:
-                        global cut_count
-                        cut_count += 1
-                        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
-                                       candidate1[k][3], candidate1[k][4])
-                        return beta
+
+                recycling_list = []
+                recycling_list.append('0')
+                recycling_list.append(return_card(candidate[j][2]))
+                recycling_list.append(returnindex(candidate[j][1]))
+                recycling_list.append(str(12-candidate[j][0]).strip())
+                transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                list1.append(transfermove)
+                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                value = min(value,recyclingmaxaplhabetapurning(board, board2, depth - 1,alpha,beta,opponent,list1))
+                del list1[-1]
+                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                beta = min(beta, value)
+                if beta <= alpha:
+                    global cut_count
+                    cut_count += 1
+                    drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                                   candidate1[k][3], candidate1[k][4])
+                    return beta
         #                 flag=1
         #                 break
         #             else:
@@ -1155,9 +1169,9 @@ def lastminaphabeta(board,board2,depth,alpha,beta,player,list1):
         #             continue
         # if flag2==0:
         #     continue
-        else:
-            drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
-                           candidate1[k][3], candidate1[k][4])
+
+        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                       candidate1[k][3], candidate1[k][4])
     return value
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 def minimax(board,board2,depth,dotscolor):
@@ -1397,7 +1411,12 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
     if dotscolor == 'colors':
         candidate1 = remove_recyclingpiece(board3)
         for k in range(len(candidate1)):
+        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
+        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
+        #             list1[len(list1) - 1][3]):
+        #         continue
             real_removerecycle(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3])
+
             list = ['1', '2', '3', '4', '5', '6', '7', '8']
             for i in list:
                 piece = which_card(i)
@@ -1422,25 +1441,25 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
                         continue
                     elif cardid == "colerror":
                         continue
-                    else:
-                        recycling_list = []
-                        recycling_list.append('0')
-                        recycling_list.append(return_card(candidate[j][2]))
-                        recycling_list.append(returnindex(candidate[j][1]))
-                        recycling_list.append(str(12-candidate[j][0]).strip())
-                        transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
-                        list1.append(transfermove)
-                        drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                        drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                        drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                        level2value =  minrecycling(board, board2, depth - 1, dotscolor,list1)
-                        value = max(value,level2value)
-                        maxvalues.append(level2value)
-                        values.append([value, candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate[j][0], candidate[j][1], candidate[j][2]])
-                        del list1[-1]
-                        remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                        remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                        remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+
+                    recycling_list = []
+                    recycling_list.append('0')
+                    recycling_list.append(return_card(candidate[j][2]))
+                    recycling_list.append(returnindex(candidate[j][1]))
+                    recycling_list.append(str(12-candidate[j][0]).strip())
+                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                    list1.append(transfermove)
+                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    level2value =  minrecycling(board, board2, depth - 1, dotscolor,list1)
+                    value = max(value,level2value)
+                    maxvalues.append(level2value)
+                    values.append([value, candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate[j][0], candidate[j][1], candidate[j][2]])
+                    del list1[-1]
+                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             drop_recycling(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate1[k][4])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
@@ -1459,7 +1478,12 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
     elif dotscolor == 'dots':
         candidate1 = remove_recyclingpiece(board3)
         for k in range(len(candidate1)):
+            # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
+            #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
+            #             list1[len(list1) - 1][3]):
+            #         continue
             real_removerecycle(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3])
+
             list = ['1', '2', '3', '4', '5', '6', '7', '8']
             for i in list:
                 piece = which_card(i)
@@ -1484,25 +1508,24 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
                         continue
                     elif cardid == "colerror":
                         continue
-                    else:
-                        recycling_list = []
-                        recycling_list.append('0')
-                        recycling_list.append(return_card(candidate[j][2]))
-                        recycling_list.append(returnindex(candidate[j][1]))
-                        recycling_list.append(str(12-candidate[j][0]).strip())
-                        transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
-                        list1.append(transfermove)
-                        drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                        drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                        drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                        level2value = minrecycling(board, board2, depth - 1, dotscolor, list1)
-                        value = max(value, level2value)
-                        maxvalues.append(level2value)
-                        values.append([value, candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate[j][0], candidate[j][1], candidate[j][2]])
-                        del list1[-1]
-                        remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                        remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                        remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    recycling_list = []
+                    recycling_list.append('0')
+                    recycling_list.append(return_card(candidate[j][2]))
+                    recycling_list.append(returnindex(candidate[j][1]))
+                    recycling_list.append(str(12-candidate[j][0]).strip())
+                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                    list1.append(transfermove)
+                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    level2value = minrecycling(board, board2, depth - 1, dotscolor, list1)
+                    value = max(value, level2value)
+                    maxvalues.append(level2value)
+                    values.append([value, candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate[j][0], candidate[j][1], candidate[j][2]])
+                    del list1[-1]
+                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             drop_recycling(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate1[k][4])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
@@ -1525,7 +1548,12 @@ def maxrecycling(board,board2,depth,player,list1):
         return evaluation(board,board2,board3,opponent)
     candidate1 = remove_recyclingpiece(board3)
     for k in range(len(candidate1)):
+        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
+        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
+        #             list1[len(list1) - 1][3]):
+        #         continue
         real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
+
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
         for i in list:
             piece = which_card(i)
@@ -1551,24 +1579,24 @@ def maxrecycling(board,board2,depth,player,list1):
                     continue
                 elif cardid == "colerror":
                     continue
-                else:
-                    recycling_list = []
-                    recycling_list.append('0')
-                    recycling_list.append(return_card(candidate[j][2]))
-                    recycling_list.append(returnindex(candidate[j][1]))
-                    recycling_list.append(str(12-candidate[j][0]).strip())
-                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
-                    list1.append(transfermove)
-                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                    bestvalue= minrecycling(board, board2, depth - 1, dotscolor,list1)
-                    del list1[-1]
-                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                    if bestvalue > value:
-                        value = bestvalue
+
+                recycling_list = []
+                recycling_list.append('0')
+                recycling_list.append(return_card(candidate[j][2]))
+                recycling_list.append(returnindex(candidate[j][1]))
+                recycling_list.append(str(12-candidate[j][0]).strip())
+                transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                list1.append(transfermove)
+                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                bestvalue= minrecycling(board, board2, depth - 1, dotscolor,list1)
+                del list1[-1]
+                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                if bestvalue > value:
+                    value = bestvalue
         drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],candidate1[k][4])
     return value
 
@@ -1579,7 +1607,12 @@ def minrecycling(board,board2,depth,player,list1):
         return evaluation(board, board2,board3,opponent)
     candidate1 = remove_recyclingpiece(board3)
     for k in range(len(candidate1)):
+        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
+        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
+        #             list1[len(list1) - 1][3]):
+        #         continue
         real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
+
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
         for i in list:
             piece = which_card(i)
@@ -1605,24 +1638,24 @@ def minrecycling(board,board2,depth,player,list1):
                     continue
                 elif cardid == "colerror":
                     continue
-                else:
-                    recycling_list = []
-                    recycling_list.append('0')
-                    recycling_list.append(return_card(candidate[j][2]))
-                    recycling_list.append(returnindex(candidate[j][1]))
-                    recycling_list.append(str(12-candidate[j][0]).strip())
-                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
-                    list1.append(transfermove)
-                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                    bestvalue = maxrecycling(board, board2, depth - 1, opponent,list1)
-                    del list1[-1]
-                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                    if bestvalue < value:
-                        value = bestvalue
+
+                recycling_list = []
+                recycling_list.append('0')
+                recycling_list.append(return_card(candidate[j][2]))
+                recycling_list.append(returnindex(candidate[j][1]))
+                recycling_list.append(str(12-candidate[j][0]).strip())
+                transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                list1.append(transfermove)
+                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                bestvalue = maxrecycling(board, board2, depth - 1, opponent,list1)
+                del list1[-1]
+                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                if bestvalue < value:
+                    value = bestvalue
         drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],candidate1[k][4])
     return value
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -1635,8 +1668,14 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
     if dotscolor == 'colors':
         candidate1 = remove_recyclingpiece(board3)
         for k in range(len(candidate1)):
+            # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
+            #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
+            #             list1[len(list1) - 1][3]):
+            #         continue
             real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                                candidate1[k][3])
+
+
             list = ['1', '2', '3', '4', '5', '6', '7', '8']
             for i in list:
                 piece = which_card(i)
@@ -1661,28 +1700,27 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
                         continue
                     elif cardid == "colerror":
                         continue
-                    else:
-                        recycling_list = []
-                        recycling_list.append('0')
-                        recycling_list.append(return_card(candidate[j][2]))
-                        recycling_list.append(returnindex(candidate[j][1]))
-                        recycling_list.append(str(12 - candidate[j][0]).strip())
-                        transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0],
-                                                       candidate[j][2])
-                        list1.append(transfermove)
-                        drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                        drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                        drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                        level2value= recyclingminaplhabetapurning(board, board2, depth - 1, alpha,beta,dotscolor, list1)
-                        value = max(value, level2value)
-                        maxvalues.append(level2value)
-                        alpha = max(alpha, value)
-                        values.append([value, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],
-                                       candidate[j][0], candidate[j][1], candidate[j][2]])
-                        del list1[-1]
-                        remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                        remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                        remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    recycling_list = []
+                    recycling_list.append('0')
+                    recycling_list.append(return_card(candidate[j][2]))
+                    recycling_list.append(returnindex(candidate[j][1]))
+                    recycling_list.append(str(12 - candidate[j][0]).strip())
+                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0],
+                                                   candidate[j][2])
+                    list1.append(transfermove)
+                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    level2value= recyclingminaplhabetapurning(board, board2, depth - 1, alpha,beta,dotscolor, list1)
+                    value = max(value, level2value)
+                    maxvalues.append(level2value)
+                    alpha = max(alpha, value)
+                    values.append([value, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],
+                                   candidate[j][0], candidate[j][1], candidate[j][2]])
+                    del list1[-1]
+                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                            candidate1[k][3], candidate1[k][4])
         largestvalue = max(maxvalues)
@@ -1702,8 +1740,13 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
     elif dotscolor == 'dots':
         candidate1 = remove_recyclingpiece(board3)
         for k in range(len(candidate1)):
+            # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
+            #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
+            #             list1[len(list1) - 1][3]):
+            #         continue
             real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                                candidate1[k][3])
+
             list = ['1', '2', '3', '4', '5', '6', '7', '8']
             for i in list:
                 piece = which_card(i)
@@ -1728,29 +1771,29 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
                         continue
                     elif cardid == "colerror":
                         continue
-                    else:
-                        recycling_list = []
-                        recycling_list.append('0')
-                        recycling_list.append(return_card(candidate[j][2]))
-                        recycling_list.append(returnindex(candidate[j][1]))
-                        recycling_list.append(str(12 - candidate[j][0]).strip())
-                        transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0],
-                                                       candidate[j][2])
-                        list1.append(transfermove)
-                        drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                        drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                        drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                        level2value = recyclingminaplhabetapurning(board, board2, depth - 1, alpha, beta, dotscolor,
-                                                                   list1)
-                        value = max(value, level2value)
-                        maxvalues.append(level2value)
-                        alpha = max(alpha, value)
-                        values.append([value, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],
-                                       candidate[j][0], candidate[j][1], candidate[j][2]])
-                        del list1[-1]
-                        remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                        remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                        remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+
+                    recycling_list = []
+                    recycling_list.append('0')
+                    recycling_list.append(return_card(candidate[j][2]))
+                    recycling_list.append(returnindex(candidate[j][1]))
+                    recycling_list.append(str(12 - candidate[j][0]).strip())
+                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0],
+                                                   candidate[j][2])
+                    list1.append(transfermove)
+                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                    level2value = recyclingminaplhabetapurning(board, board2, depth - 1, alpha, beta, dotscolor,
+                                                               list1)
+                    value = max(value, level2value)
+                    maxvalues.append(level2value)
+                    alpha = max(alpha, value)
+                    values.append([value, candidate1[k][0], candidate1[k][1], candidate1[k][2], candidate1[k][3],
+                                   candidate[j][0], candidate[j][1], candidate[j][2]])
+                    del list1[-1]
+                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                            candidate1[k][3], candidate1[k][4])
         largestvalue = max(maxvalues)
@@ -1776,7 +1819,12 @@ def recyclingminaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
     for k in range(len(candidate1)):
         global flag2
         flag2=1
+        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
+        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
+        #             list1[len(list1) - 1][3]):
+        #         continue
         real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
+
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
         for i in list:
             global flag
@@ -1804,29 +1852,28 @@ def recyclingminaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
                     continue
                 elif cardid == "colerror":
                     continue
-                else:
-                    recycling_list = []
-                    recycling_list.append('0')
-                    recycling_list.append(return_card(candidate[j][2]))
-                    recycling_list.append(returnindex(candidate[j][1]))
-                    recycling_list.append(str(12-candidate[j][0]).strip())
-                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
-                    list1.append(transfermove)
-                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                    value = min(value,recyclingmaxaplhabetapurning(board, board2, depth - 1,alpha,beta,opponent,list1))
-                    del list1[-1]
-                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                    beta = min(beta, value)
-                    if beta <= alpha:
-                        global cut_count
-                        cut_count += 1
-                        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
-                                       candidate1[k][3], candidate1[k][4])
-                        return beta
+                recycling_list = []
+                recycling_list.append('0')
+                recycling_list.append(return_card(candidate[j][2]))
+                recycling_list.append(returnindex(candidate[j][1]))
+                recycling_list.append(str(12-candidate[j][0]).strip())
+                transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                list1.append(transfermove)
+                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                value = min(value,recyclingmaxaplhabetapurning(board, board2, depth - 1,alpha,beta,opponent,list1))
+                del list1[-1]
+                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                beta = min(beta, value)
+                if beta <= alpha:
+                    global cut_count
+                    cut_count += 1
+                    drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                                   candidate1[k][3], candidate1[k][4])
+                    return beta
         #                 flag=1
         #                 break
         #             else:
@@ -1838,9 +1885,9 @@ def recyclingminaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
         #             continue
         # if flag2==0:
         #     continue
-        else:
-            drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
-                           candidate1[k][3], candidate1[k][4])
+
+        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                       candidate1[k][3], candidate1[k][4])
     return value
 def recyclingmaxaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
 
@@ -1852,7 +1899,12 @@ def recyclingmaxaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
     for k in range(len(candidate1)):
         global flag2
         flag2=1
+        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
+        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
+        #             list1[len(list1) - 1][3]):
+        #         continue
         real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
+
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
         for i in list:
             global flag
@@ -1880,29 +1932,28 @@ def recyclingmaxaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
                     continue
                 elif cardid == "colerror":
                     continue
-                else:
-                    recycling_list = []
-                    recycling_list.append('0')
-                    recycling_list.append(return_card(candidate[j][2]))
-                    recycling_list.append(returnindex(candidate[j][1]))
-                    recycling_list.append(str(12-candidate[j][0]).strip())
-                    transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
-                    list1.append(transfermove)
-                    drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                    value = max(value,recyclingminaplhabetapurning(board, board2,depth - 1,alpha,beta,opponent,list1))
-                    del list1[-1]
-                    remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                    alpha = max(alpha, value)
-                    if alpha >= beta:
-                        global cut_count
-                        cut_count += 1
-                        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
-                                       candidate1[k][3], candidate1[k][4])
-                        return alpha
+                recycling_list = []
+                recycling_list.append('0')
+                recycling_list.append(return_card(candidate[j][2]))
+                recycling_list.append(returnindex(candidate[j][1]))
+                recycling_list.append(str(12-candidate[j][0]).strip())
+                transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
+                list1.append(transfermove)
+                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                value = max(value,recyclingminaplhabetapurning(board, board2,depth - 1,alpha,beta,opponent,list1))
+                del list1[-1]
+                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
+                alpha = max(alpha, value)
+                if alpha >= beta:
+                    global cut_count
+                    cut_count += 1
+                    drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                                   candidate1[k][3], candidate1[k][4])
+                    return alpha
         #                 flag = 1
         #                 break
         #             else:
@@ -1914,9 +1965,9 @@ def recyclingmaxaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
         #             continue
         # if flag2==0:
         #     continue
-        else:
-            drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
-                           candidate1[k][3], candidate1[k][4])
+
+        drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
+                       candidate1[k][3], candidate1[k][4])
 
     return value
 
@@ -1953,8 +2004,8 @@ def samecard(move,cindex1,cindex2,recyclelist,card_id):
                                     return card_id
                         else:
                             continue
-                    elif int(recyclelist[recyclelist.index(j)][3]) == int(move[1]) - 1:
-                        if 12 - recyclelist[recyclelist.index(j)][5] == int(move[3]) + 1:
+                    elif recyclelist[recyclelist.index(j)][3] == move[3]:
+                        if 12 - recyclelist[recyclelist.index(j)][5] == int(move[1]):
                             if recyclelist.index(j) < len(recyclelist) - 1:
                                 if move[5] == move[0] == move[2] == recyclelist[recyclelist.index(j)][2] and move[6] == move[3] == \
                                         recyclelist[recyclelist.index(j)][3]:
@@ -1965,7 +2016,7 @@ def samecard(move,cindex1,cindex2,recyclelist,card_id):
                                     continue
 
                             else:
-                                if move[2] == recyclelist[recyclelist.index(j)][2] and move[3] == recyclelist[recyclelist.index(j)][3]:
+                                if move[0] == recyclelist[recyclelist.index(j)][2] and move[3] == recyclelist[recyclelist.index(j)][3]:
                                     card_id = 'notpass'
                                     return card_id
                         else:
@@ -1990,7 +2041,7 @@ def samecard(move,cindex1,cindex2,recyclelist,card_id):
                                     continue
 
                             else:
-                                if move[1] == recyclelist[recyclelist.index(j)][3]:
+                                if move[1] == recyclelist[recyclelist.index(j)][3] and move[0]==recyclelist[recyclelist.index(j)][2]:
                                     card_id = 'notpass'
                                     return card_id
                         else:
@@ -2008,7 +2059,7 @@ def samecard(move,cindex1,cindex2,recyclelist,card_id):
                                     continue
 
                             else:
-                                if move[3] == recyclelist[recyclelist.index(j)][3]:
+                                if move[1] == recyclelist[recyclelist.index(j)][3] and move[2]==recyclelist[recyclelist.index(j)][2]:
                                     card_id = 'notpass'
                                     return card_id
 
