@@ -1,0 +1,2 @@
+class Infor:
+    inforlist=()
