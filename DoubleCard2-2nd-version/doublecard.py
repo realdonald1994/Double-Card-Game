@@ -845,10 +845,6 @@ def evaluation(board,board2,board3,player):
     en_count+=1
     SCOREAI =0
     SCOREHUMAN =0
-    AliveTwo= 100
-    AliveOne = 10
-    DeadThree = 100
-    DeadTwo =10
     DoubleAilveThree = 1000
     OneThreeOneTwo = 1000
     doubleTwo = 500
@@ -929,75 +925,653 @@ def evaluation(board,board2,board3,player):
     scoreai, scorehuman = hurestic_overallfunction3(list_negadiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    #EVLUATION: DEADTHREE
-    for i in range(len(listx)):
-        for j in range(1, len(listx[i]) - 2):
-            pass
 
+    #EVLUATION: DEADTHREE
+    scoreai,scorehuman = hurestic_overallfunctionDead3(listx,player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3(listy, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3(list_posdiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3(list_negadiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai,scorehuman = hurestic_overallfunctionDead3second(listx,player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3second(listy, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3second(list_posdiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3second(list_negadiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai,scorehuman = hurestic_overallfunctionDead3third(listx,player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3third(listy, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3third(list_posdiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3third(list_negadiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai,scorehuman = hurestic_overallfunctionDead3third(listx,player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3third(listy, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3third(list_posdiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead3third(list_negadiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+
+    #EVLUATION: TWO
+    scoreai,scorehuman = hurestic_overallfunction2(listx,player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunction2(listy, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunction2(list_posdiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunction2(list_negadiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai,scorehuman = hurestic_overallfunction2second(listx,player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunction2second(listy, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunction2second(list_posdiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunction2second(list_negadiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai,scorehuman = hurestic_overallfunction2third(listx,player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunction2third(listy, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunction2third(list_posdiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunction2third(list_negadiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+
+    #EVLUATION: DEAD TWO
+    scoreai,scorehuman = hurestic_overallfunctionDead2(listx,player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2(listy, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2(list_posdiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2(list_negadiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai,scorehuman = hurestic_overallfunctionDead2second(listx,player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2second(listy, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2second(list_posdiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2second(list_negadiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai,scorehuman = hurestic_overallfunctionDead2third(listx,player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2third(listy, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2third(list_posdiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2third(list_negadiag, player)
+    SCOREAI+=scoreai
+    SCOREHUMAN+=scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2fourth(listx, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2fourth(listy, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2fourth(list_posdiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_overallfunctionDead2fourth(list_negadiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    #EVLUATION: EMPTY
+    scoreai, scorehuman = hurestic_functionEmptyfunction(listx, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_functionEmptyfunction(listy, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_functionEmptyfunction(list_posdiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_functionEmptyfunction(list_negadiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
     return SCOREAI - SCOREHUMAN
 def hurestic_function4(list_elem1,list_elem2,list_elem3,list_elem4,player):
     if player == 'colors':
-        if list_elem1 == 'W' and list_elem2 == 'W' and list_elem3 == 'W' and \
-                list_elem4 == 'W':
+        if list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and \
+                list_elem4[0] == 'W':
             return 'AI'
-        elif list_elem1 == 'R' and list_elem2 == 'R' and list_elem3 == 'R' and \
-                list_elem4 == 'R':
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and \
+                list_elem4[0] == 'R':
             return 'AI'
-        elif list_elem1 == 'O' and list_elem2 == 'O' and list_elem3 == 'O' and \
-                list_elem4 == 'O':
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and \
+                list_elem4[1] == 'O':
             return 'Human'
-        elif list_elem1 == 'X' and list_elem2 == 'X' and list_elem3 == 'X' and \
-                list_elem4 == 'X':
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and \
+                list_elem4[1] == 'X':
             return 'Human'
     else:
-        if list_elem1 == 'O' and list_elem2 == 'O' and list_elem3 == 'O' and \
-                list_elem4 == 'O':
+        if list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and \
+                list_elem4[1] == 'O':
             return 'AI'
-        elif list_elem1 == 'X' and list_elem2 == 'X' and list_elem3 == 'X' and \
-                list_elem4 == 'X':
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and \
+                list_elem4[1] == 'X':
             return 'AI'
-        elif list_elem1 == 'W' and list_elem2 == 'W' and list_elem3 == 'W' and \
-                list_elem4 == 'W':
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and \
+                list_elem4[0] == 'W':
             return 'Human'
-        elif list_elem1 == 'R' and list_elem2 == 'R' and list_elem3 == 'R' and \
-                list_elem4 == 'R':
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and \
+                list_elem4[0] == 'R':
             return 'Human'
-def hurestic_function3(list_elem1,list_elem2,list_elem3,player):
+    return 'no'
+def hurestic_function3(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
     if player == 'colors':
-        if list_elem1 == 'W' and list_elem2 == 'W' and list_elem3 == 'W':
+        if list_elem1=='□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5=='□□':
             return 'AI'
-        elif list_elem1 == 'R' and list_elem2 == 'R' and list_elem3 == 'R':
+        elif list_elem1=='□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R'and list_elem5=='□□':
             return 'AI'
-        elif list_elem1 == 'O' and list_elem2 == 'O' and list_elem3 == 'O':
+        elif list_elem1=='□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1] == 'O'and list_elem5=='□□':
             return 'Human'
-        elif list_elem1 == 'X' and list_elem2 == 'X' and list_elem3 == 'X':
+        elif list_elem1=='□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1] == 'X'and list_elem5=='□□':
             return 'Human'
     else:
-        if list_elem1 == 'O' and list_elem2 == 'O' and list_elem3 == 'O':
+        if list_elem1=='□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1] == 'O'and list_elem5=='□□':
             return 'AI'
-        elif list_elem1 == 'X' and list_elem2 == 'X' and list_elem3 == 'X':
+        elif list_elem1=='□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1] == 'X'and list_elem5=='□□':
             return 'AI'
-        elif list_elem1 == 'W' and list_elem2 == 'W' and list_elem3 == 'W':
+        elif list_elem1=='□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W'and list_elem5=='□□':
             return 'Human'
-        elif list_elem1 == 'R' and list_elem2 == 'R' and list_elem3 == 'R':
+        elif list_elem1=='□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R'and list_elem5=='□□':
             return 'Human'
+    return 'no'
+def hurestic_functionDeadThree(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
+    if player == 'colors':
+        if list_elem1[0]=='R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1=='□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5[0]=='R':
+            return 'AI'
+        elif list_elem1[0]=='W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1=='□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5[0]=='W':
+            return 'AI'
+        elif list_elem1=='□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5[1]=='X':
+            return 'Human'
+        elif list_elem1[1]=='X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5=='□□':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5[1]=='O':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5=='□□':
+            return 'Human'
+    else:
+        if list_elem1=='□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5[1]=='X':
+            return 'AI'
+        elif list_elem1[1]=='X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5[1]=='O':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
+            return 'Human'
+    return 'no'
+def hurestic_functionDeadThree2(list_elem1,list_elem2,list_elem3,list_elem4,player):
+    if player == 'colors':
+        if list_elem1[0]=='W' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W':
+            return 'AI'
+        elif list_elem1[0]=='W' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0] == 'W':
+            return 'AI'
+        elif list_elem1[0]=='R' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R':
+            return 'AI'
+        elif list_elem1[0]=='R' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0] == 'R':
+            return 'AI'
+        elif list_elem1[1]=='O' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1] == 'O':
+            return 'Human'
+        elif list_elem1[1]=='O' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1] == 'O':
+            return 'Human'
+        elif list_elem1[1]=='X' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1] == 'X':
+            return 'Human'
+        elif list_elem1[1]=='X' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1] == 'X':
+            return 'Human'
+    else:
+        if list_elem1[1]=='O' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1] == 'O':
+            return 'AI'
+        elif list_elem1[1]=='O' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1] == 'O':
+            return 'AI'
+        elif list_elem1[1]=='X' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1] == 'X':
+            return 'AI'
+        elif list_elem1[1]=='X' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1] == 'X':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0] == 'W':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0] == 'R':
+            return 'Human'
+    return 'no'
+def hurestic_functionDeadThree3(list_elem1,list_elem2,list_elem3,list_elem4,player):
+    if player == 'colors':
+        if  list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'R'and list_elem4=='□□':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4=='□□':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4=='□□':
+            return 'Human'
+    else:
+        if list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4=='□□':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4 == '□□':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4 == '□□':
+            return 'Human'
+    return 'no'
+def hurestic_functionDeadThree4(list_elem1,list_elem2,list_elem3,list_elem4,player):
+    if player == 'colors':
+        if  list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0]=='W':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R'and list_elem4[0]=='R':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4[1]=='O':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4[1]=='X':
+            return 'Human'
+    else:
+        if list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4[1]=='O':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4[1]=='X':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R':
+            return 'Human'
+    return 'no'
+def hurestic_function2(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
+    if player == 'colors':
+        if  list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0]=='W' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0]=='R' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1]=='O'and list_elem5=='□□':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1]=='X'and list_elem5=='□□':
+            return 'Human'
+    else:
+        if list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1]=='O'and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1]=='X'and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5 == '□□':
+            return 'Human'
+    return 'no'
+def hurestic_function2second(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
+    if player == 'colors':
+        if  list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4=='□□' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4=='□□' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4=='□□' and list_elem5=='□□':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4=='□□' and list_elem5=='□□':
+            return 'Human'
+    else:
+        if list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4=='□□' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4=='□□' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5 == '□□':
+            return 'Human'
+    return 'no'
+def hurestic_function2thrid(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
+    if player == 'colors':
+        if  list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0]=='W' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0]=='R' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1]=='O'and list_elem5=='□□':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1]=='X'and list_elem5=='□□':
+            return 'Human'
+    else:
+        if list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1]=='O' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1]=='X' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5 == '□□':
+            return 'Human'
+    return 'no'
+def hurestic_functionDeadTwo(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
+    if player == 'colors':
+        if  list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4=='□□' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0]=='W' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4=='□□' and list_elem5[0]=='W':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0]=='W' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4== '□□' and list_elem5[0]=='W':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0]== 'W' and list_elem5[0]=='W':
+            return 'AI'
+        elif  list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4=='□□' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0]=='R' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4=='□□' and list_elem5[0]=='R':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0]=='R' and list_elem5=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4== '□□' and list_elem5[0]=='R':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0]== 'R' and list_elem5[0]=='R':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'O':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'O':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'O':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'X':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'X':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'X':
+            return 'Human'
+    else:
+        if list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5 == '□□':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5 == '□□':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'O':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5 == '□□':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'O':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'O':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5 == '□□':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5 == '□□':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'X':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5 == '□□':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'X':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'X':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'W':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5[0] == 'W':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5[0] == 'W':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5 == '□□':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5[0] == 'R':
+            return 'Human'
+    return 'no'
+def hurestic_functionDeadTwo1(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
+    if player == 'colors':
+        if list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5[0] == 'R':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5[0] == 'R':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'R':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5[0] == 'W':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5[0] == 'W':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'W':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'X':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'X':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'X':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'O':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'O':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'O':
+            return 'Human'
+    else:
+        if list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'X':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'X':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'X':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'O':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'O':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'O':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'R':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5[0] == 'W':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5[0] == 'W':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'W':
+            return 'Human'
+    return 'no'
+def hurestic_functionDeadTwo2(list_elem1,list_elem2,list_elem3,list_elem4,player):
+    if player == 'colors':
+        if  list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4=='□□':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4=='□□':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4=='□□':
+            return 'Human'
+    else:
+        if list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4=='□□':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4=='□□':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4 == '□□':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4 == '□□':
+            return 'Human'
+    return 'no'
+def hurestic_functionDeadTwo3(list_elem1,list_elem2,list_elem3,list_elem4,player):
+    if player == 'colors':
+        if  list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0]=='W':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R'and list_elem4[0]=='R':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'O'and list_elem4[1]=='O':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'X'and list_elem4[1]=='X':
+            return 'Human'
+    else:
+        if list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'O'and list_elem4[1]=='O':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'X'and list_elem4[1]=='X':
+            return 'AI'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W':
+            return 'Human'
+        elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R':
+            return 'Human'
+    return 'no'
+def hurestic_functionEmptyfunction(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    Empty = 10
+    for i in range(len(list)):
+        sum=0
+        for j in range(0,len(list[i])):
+                if list[i][j]=='□□':
+                    continue
+                else:
+                    sum+=1
+        if sum==1:
+            SCOREAI += Empty
+            SCOREHUMAN += Empty
+        else:
+            continue
+    return SCOREAI,SCOREHUMAN
+
 def hurestic_overallfunction4(list,player):
     SCOREHUMAN =0
     SCOREAI=0
     WinFour=10000
     for i in range(len(list)):
-        for j in range(0,len(list[i])-3):
+        for j in range(1,len(list[i])-3):
             if player =='colors':
-                output = hurestic_function4(list[i][j][0],list[i][j+1][0],list[i][j+2][0],list[i][j+3][0],player)
+                output = hurestic_function4(list[i][j],list[i][j+1],list[i][j+2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += WinFour
-                else:
+                elif output == 'Human':
                     SCOREHUMAN += WinFour
             else:
-                output = hurestic_function4(list[i][j][0],list[i][j+1][0],list[i][j+2][0],list[i][j+3][0],player)
+                output = hurestic_function4(list[i][j],list[i][j+1],list[i][j+2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += WinFour
-                else:
+                elif output == 'Human':
                     SCOREHUMAN += WinFour
     return SCOREAI,SCOREHUMAN
 def hurestic_overallfunction3(list,player):
@@ -1005,19 +1579,224 @@ def hurestic_overallfunction3(list,player):
     SCOREAI=0
     AliveThree=1000
     for i in range(len(list)):
-        for j in range(0,len(list[i])-2):
+        for j in range(1,len(list[i])-3):
             if player =='colors':
-                output = hurestic_function3(list[i][j][0], list[i][j + 1][0], list[i][j + 2][0],player)
+                output = hurestic_function3(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += AliveThree
-                else:
+                elif output == 'Human':
                     SCOREHUMAN += AliveThree
             else:
-                output = hurestic_function3(list[i][j][0], list[i][j + 1][0], list[i][j + 2][0],player)
+                output = hurestic_function3(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += AliveThree
-                else:
+                elif output == 'Human':
                     SCOREHUMAN += AliveThree
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunctionDead3(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    DeadThree = 100
+    for i in range(len(list)):
+        for j in range(1,len(list[i])-3):
+            if player =='colors':
+                output = hurestic_functionDeadThree(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI += DeadThree
+                elif output == 'Human':
+                    SCOREHUMAN += DeadThree
+            else:
+                output = hurestic_functionDeadThree(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI += DeadThree
+                elif output == 'Human':
+                    SCOREHUMAN += DeadThree
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunctionDead3second(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    DeadThree = 100
+    for i in range(len(list)):
+        for j in range(0,len(list[i])-3):
+            if player =='colors':
+                output = hurestic_functionDeadThree2(list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI += DeadThree
+                elif output == 'Human':
+                    SCOREHUMAN += DeadThree
+            else:
+                output = hurestic_functionDeadThree2(list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI += DeadThree
+                elif output == 'Human':
+                    SCOREHUMAN += DeadThree
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunctionDead3third(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    DeadThree = 100
+    for i in range(len(list)):
+            if player =='colors':
+                output = hurestic_functionDeadThree3(list[i][0], list[i][1], list[i][2],list[i][3],player)
+                if output == 'AI':
+                    SCOREAI += DeadThree
+                elif output == 'Human':
+                    SCOREHUMAN += DeadThree
+            else:
+                output = hurestic_functionDeadThree3(list[i][0], list[i][1], list[i][2],list[i][3],player)
+                if output == 'AI':
+                    SCOREAI += DeadThree
+                elif output == 'Human':
+                    SCOREHUMAN += DeadThree
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunctionDead3fourth(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    DeadThree = 100
+    for i in range(len(list)):
+            if player =='colors':
+                output = hurestic_functionDeadThree4(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
+                if output == 'AI':
+                    SCOREAI += DeadThree
+                elif output == 'Human':
+                    SCOREHUMAN += DeadThree
+            else:
+                output = hurestic_functionDeadThree4(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
+                if output == 'AI':
+                    SCOREAI += DeadThree
+                elif output == 'Human':
+                    SCOREHUMAN += DeadThree
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunction2(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    AliveTwo = 100
+    for i in range(len(list)):
+        for j in range(1,len(list[i])-3):
+            if player =='colors':
+                output = hurestic_function2(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI += AliveTwo
+                elif output == 'Human':
+                    SCOREHUMAN += AliveTwo
+            else:
+                output = hurestic_function2(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI += AliveTwo
+                elif output == 'Human':
+                    SCOREHUMAN += AliveTwo
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunction2second(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    AliveTwo = 100
+    for i in range(len(list)):
+        for j in range(1,len(list[i])-3):
+            if player =='colors':
+                output = hurestic_function2second(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI += AliveTwo
+                elif output == 'Human':
+                    SCOREHUMAN += AliveTwo
+            else:
+                output = hurestic_function2second(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI += AliveTwo
+                elif output == 'Human':
+                    SCOREHUMAN += AliveTwo
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunction2third(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    AliveTwo = 100
+    for i in range(len(list)):
+        for j in range(2,len(list[i])-2):
+            if player =='colors':
+                output = hurestic_function2(list[i][j-2],list[i][j-1], list[i][j], list[i][j + 1],list[i][j+2],player)
+                if output == 'AI':
+                    SCOREAI += AliveTwo
+                elif output == 'Human':
+                    SCOREHUMAN += AliveTwo
+            else:
+                output = hurestic_function2(list[i][j-2],list[i][j-1], list[i][j], list[i][j + 1],list[i][j+2],player)
+                if output == 'AI':
+                    SCOREAI += AliveTwo
+                elif output == 'Human':
+                    SCOREHUMAN += AliveTwo
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunctionDead2(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    DeadTwo = 10
+    for i in range(len(list)):
+        for j in range(1,len(list[i])-3):
+            if player =='colors':
+                output = hurestic_functionDeadTwo(list[i][j-1],list[i][j], list[i][j+1], list[i][j + 2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI += DeadTwo
+                elif output == 'Human':
+                    SCOREHUMAN += DeadTwo
+            else:
+                output = hurestic_functionDeadTwo(list[i][j-1],list[i][j], list[i][j+1], list[i][j + 2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI += DeadTwo
+                elif output == 'Human':
+                    SCOREHUMAN += DeadTwo
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunctionDead2second(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    DeadTwo = 10
+    for i in range(len(list)):
+        for j in range(2,len(list[i])-2):
+            if player =='colors':
+                output = hurestic_functionDeadTwo1(list[i][j-2],list[i][j-1], list[i][j], list[i][j + 1],list[i][j+2],player)
+                if output == 'AI':
+                    SCOREAI += DeadTwo
+                elif output == 'Human':
+                    SCOREHUMAN += DeadTwo
+            else:
+                output = hurestic_functionDeadTwo1(list[i][j-2],list[i][j-1], list[i][j], list[i][j + 1],list[i][j+2],player)
+                if output == 'AI':
+                    SCOREAI += DeadTwo
+                elif output == 'Human':
+                    SCOREHUMAN += DeadTwo
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunctionDead2third(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    DeadTwo = 10
+    for i in range(len(list)):
+            if player =='colors':
+                output = hurestic_functionDeadTwo2(list[i][0], list[i][1], list[i][2],list[i][3],player)
+                if output == 'AI':
+                    SCOREAI += DeadTwo
+                elif output == 'Human':
+                    SCOREHUMAN += DeadTwo
+            else:
+                output = hurestic_functionDeadTwo2(list[i][0], list[i][1], list[i][2],list[i][3],player)
+                if output == 'AI':
+                    SCOREAI += DeadTwo
+                elif output == 'Human':
+                    SCOREHUMAN += DeadTwo
+    return SCOREAI,SCOREHUMAN
+def hurestic_overallfunctionDead2fourth(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    DeadTwo = 100
+    for i in range(len(list)):
+            if player =='colors':
+                output = hurestic_functionDeadTwo3(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
+                if output == 'AI':
+                    SCOREAI += DeadTwo
+                elif output == 'Human':
+                    SCOREHUMAN += DeadTwo
+            else:
+                output = hurestic_functionDeadTwo3(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
+                if output == 'AI':
+                    SCOREAI += DeadTwo
+                elif output == 'Human':
+                    SCOREHUMAN += DeadTwo
     return SCOREAI,SCOREHUMAN
 def SwitchPlayer(player):
     if player == 'dots':
