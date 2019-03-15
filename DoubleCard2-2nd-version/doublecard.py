@@ -8,7 +8,7 @@ search_count=0
 cut_count = 0
 en_count =0
 REGUALR_GAME = 24
-RECYCLING_GAME=60
+RECYCLING_GAME=40
 
 def create_board():
     board = [['□□' for _ in range(ROW_COUNT)] for _ in range(COL_COUNT)]
@@ -142,32 +142,32 @@ def returnindex(colindex):
         str = 'H'
     return str
 
-def dropindex(cindex,rindex,card):
-    if (card is Card.card1):
-        nextcindex = cindex+1
-        nextrindex = rindex
-    elif(card is Card.card2):
-        nextcindex = cindex
-        nextrindex = rindex-1
-    elif(card is Card.card3):
-        nextcindex = cindex+1
-        nextrindex = rindex
-    elif(card is Card.card4):
-        nextcindex = cindex
-        nextrindex = rindex-1
-    elif(card is Card.card5):
-        nextcindex = cindex+1
-        nextrindex = rindex
-    elif(card is Card.card6):
-        nextcindex = cindex
-        nextrindex = rindex-1
-    elif(card is Card.card7):
-        nextcindex = cindex+1
-        nextrindex = rindex
-    elif(card is Card.card8):
-        nextcindex = cindex
-        nextrindex = rindex-1
-    return nextcindex,nextrindex
+# def dropindex(cindex,rindex,card):
+#     if (card is Card.card1):
+#         nextcindex = cindex+1
+#         nextrindex = rindex
+#     elif(card is Card.card2):
+#         nextcindex = cindex
+#         nextrindex = rindex-1
+#     elif(card is Card.card3):
+#         nextcindex = cindex+1
+#         nextrindex = rindex
+#     elif(card is Card.card4):
+#         nextcindex = cindex
+#         nextrindex = rindex-1
+#     elif(card is Card.card5):
+#         nextcindex = cindex+1
+#         nextrindex = rindex
+#     elif(card is Card.card6):
+#         nextcindex = cindex
+#         nextrindex = rindex-1
+#     elif(card is Card.card7):
+#         nextcindex = cindex+1
+#         nextrindex = rindex
+#     elif(card is Card.card8):
+#         nextcindex = cindex
+#         nextrindex = rindex-1
+#     return nextcindex,nextrindex
 def cardinformation(move,cindex,rindex,card):
     if (card is Card.card1):
         nextcindex = cindex+1
@@ -419,39 +419,39 @@ def drop_piece(board,row,col,piece):
                 print("already fill up")
                 return False
 
-def drop_piece2(board2,row,col,piece):
-    if (piece is Card.card1):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 1
-        board2[xindex2][yindex2][0] = 1
-    elif(piece is Card.card2):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 1
-        board2[xindex2][yindex2][0] = 1
-    elif(piece is Card.card3):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 1
-        board2[xindex2][yindex2][0] = 1
-    elif(piece is Card.card4):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 1
-        board2[xindex2][yindex2][0] = 1
-    elif(piece is Card.card5):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 1
-        board2[xindex2][yindex2][0] = 1
-    elif(piece is Card.card6):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 1
-        board2[xindex2][yindex2][0] = 1
-    elif(piece is Card.card7):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 1
-        board2[xindex2][yindex2][0] = 1
-    elif(piece is Card.card8):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 1
-        board2[xindex2][yindex2][0] = 1
+# def drop_piece2(board2,row,col,piece):
+#     if (piece is Card.card1):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 1
+#         board2[xindex2][yindex2][0] = 1
+#     elif(piece is Card.card2):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 1
+#         board2[xindex2][yindex2][0] = 1
+#     elif(piece is Card.card3):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 1
+#         board2[xindex2][yindex2][0] = 1
+#     elif(piece is Card.card4):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 1
+#         board2[xindex2][yindex2][0] = 1
+#     elif(piece is Card.card5):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 1
+#         board2[xindex2][yindex2][0] = 1
+#     elif(piece is Card.card6):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 1
+#         board2[xindex2][yindex2][0] = 1
+#     elif(piece is Card.card7):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 1
+#         board2[xindex2][yindex2][0] = 1
+#     elif(piece is Card.card8):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 1
+#         board2[xindex2][yindex2][0] = 1
 
 
 
@@ -470,15 +470,15 @@ def drop_recycling(board,board2,board3,row,col,row2,col2,piece):
         board3[row2][col2] = piece.right
         board[row][col] = piece.left[0]
         board[row2][col2] = piece.right[0]
-        board2[row][col][0] = 1
-        board2[row2][col2][0] = 1
+        # board2[row][col][0] = 1
+        # board2[row2][col2][0] = 1
     else:
         board3[row][col] = piece.top
         board3[row2][col2] = piece.below
         board[row][col] = piece.top[0]
         board[row2][col2] = piece.below[0]
-        board2[row][col][0] = 1
-        board2[row2][col2][0] = 1
+        # board2[row][col][0] = 1
+        # board2[row2][col2][0] = 1
 
 
 def blanklist(board, piece):
@@ -645,39 +645,39 @@ def remove_piece3(board3,row,col,piece):
         board3[row][col]='□□'
         board3[row][col+1]='□□'
 
-def remove_piece2(board2,row,col,piece):
-    if (piece is Card.card1):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 0
-        board2[xindex2][yindex2][0] = 0
-    elif(piece is Card.card2):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 0
-        board2[xindex2][yindex2][0] = 0
-    elif(piece is Card.card3):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 0
-        board2[xindex2][yindex2][0] = 0
-    elif(piece is Card.card4):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 0
-        board2[xindex2][yindex2][0] = 0
-    elif(piece is Card.card5):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 0
-        board2[xindex2][yindex2][0] = 0
-    elif(piece is Card.card6):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 0
-        board2[xindex2][yindex2][0] = 0
-    elif(piece is Card.card7):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 0
-        board2[xindex2][yindex2][0] = 0
-    elif(piece is Card.card8):
-        yindex2, xindex2 = dropindex(col, row, piece)
-        board2[row][col][0] = 0
-        board2[xindex2][yindex2][0] = 0
+# def remove_piece2(board2,row,col,piece):
+#     if (piece is Card.card1):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 0
+#         board2[xindex2][yindex2][0] = 0
+#     elif(piece is Card.card2):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 0
+#         board2[xindex2][yindex2][0] = 0
+#     elif(piece is Card.card3):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 0
+#         board2[xindex2][yindex2][0] = 0
+#     elif(piece is Card.card4):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 0
+#         board2[xindex2][yindex2][0] = 0
+#     elif(piece is Card.card5):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 0
+#         board2[xindex2][yindex2][0] = 0
+#     elif(piece is Card.card6):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 0
+#         board2[xindex2][yindex2][0] = 0
+#     elif(piece is Card.card7):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 0
+#         board2[xindex2][yindex2][0] = 0
+#     elif(piece is Card.card8):
+#         yindex2, xindex2 = dropindex(col, row, piece)
+#         board2[row][col][0] = 0
+#         board2[xindex2][yindex2][0] = 0
 
 def remove(board,board2,board3,raw1,col1,raw2,col2):
     if col1==col2:
@@ -695,8 +695,8 @@ def remove(board,board2,board3,raw1,col1,raw2,col2):
             board[raw2][col2] = '□□'
             board3[raw1][col1] = '□□'
             board3[raw2][col2] = '□□'
-            board2[raw1][col1][0]=0
-            board2[raw2][col2][0] = 0
+            # board2[raw1][col1][0]=0
+            # board2[raw2][col2][0] = 0
         else:
 
             if board[raw-2][col]=='□□':
@@ -704,8 +704,8 @@ def remove(board,board2,board3,raw1,col1,raw2,col2):
                 board[raw2][col2] = '□□'
                 board3[raw1][col1] = '□□'
                 board3[raw2][col2] = '□□'
-                board2[raw1][col1][0] = 0
-                board2[raw2][col2][0] = 0
+                # board2[raw1][col1][0] = 0
+                # board2[raw2][col2][0] = 0
                 return True
             else:
                 return False
@@ -715,8 +715,8 @@ def remove(board,board2,board3,raw1,col1,raw2,col2):
             board[raw2][col2] = '□□'
             board3[raw1][col1] = '□□'
             board3[raw2][col2] = '□□'
-            board2[raw1][col1][0]=0
-            board2[raw2][col2][0] = 0
+            # board2[raw1][col1][0]=0
+            # board2[raw2][col2][0] = 0
         else:
 
             if board[raw-1][col]=='□□' and board[raw-1][col+1]=='□□':
@@ -724,8 +724,8 @@ def remove(board,board2,board3,raw1,col1,raw2,col2):
                 board[raw2][col2] = '□□'
                 board3[raw1][col1] = '□□'
                 board3[raw2][col2] = '□□'
-                board2[raw1][col1][0] = 0
-                board2[raw2][col2][0] = 0
+                # board2[raw1][col1][0] = 0
+                # board2[raw2][col2][0] = 0
                 return True
             else:
                 return False
@@ -778,8 +778,8 @@ def real_removerecycle(board,board2,board3,row,col,row2,col2):
     board3[row2][col2] = '□□'
     board[row][col] = '□□'
     board[row2][col2] = '□□'
-    board2[row][col][0] = 0
-    board2[row2][col2][0] = 0
+    # board2[row][col][0] = 0
+    # board2[row2][col2][0] = 0
 
 
 
@@ -845,174 +845,329 @@ def evaluation(board,board2,board3,player):
     en_count+=1
     SCOREAI =0
     SCOREHUMAN =0
-    DoubleAilveThree = 1000
-    OneThreeOneTwo = 1000
-    doubleTwo = 500
+    DoubleDeadThree = 10000
+    OneThreeOneTwo = 10000
+    doubleTwo = 10000
     # X coordinate
     listx =[]
     listy=[]
     list_posdiag=[]
     list_negadiag=[]
     for r in range(COL_COUNT):
+        list=[]
         for c in range(ROW_COUNT):
-            listx.append(board[r][c])
+            list.append(board[r][c])
+            listx.append(list)
     # y coordinate
     for c in range(ROW_COUNT):
+        list=[]
         for r in range (COL_COUNT):
-            listy.append(board[r][c])
+            list.append(board[r][c])
+            listy.append(list)
 
     # above_half postitive diagonal coordinate
     for r in range(3,12):
+        list = []
         if r<=7:
             c=0
             for i in range(r,-1,-1):
-                list_posdiag.append(board[i][c])
+                list.append(board[i][c])
+                list_posdiag.append(list)
                 c+=1
     # below_half postitive diagonal coordinate
         else:
             i=r
             for c in range(0,8,1):
-                list_posdiag.append(board[i][c])
+                list.append(board[i][c])
+                list_posdiag.append(list)
                 i-=1
     for c in range(1,ROW_COUNT-3):
         r = 11
+        list=[]
         for j in range(c,8,1):
-            list_posdiag.append(board[r][j])
+            list.append(board[r][j])
+            list_posdiag.append(list)
             r-=1
 
     # below_half diagonal coordinate
         for r in range(COL_COUNT-3):
+            list=[]
             if r<=4:
                 i=r
                 for c in range(0,8,1):
-                    list_negadiag.append(board[i][c])
+                    list.append(board[i][c])
+                    list_negadiag.append(list)
                     i+=1
             else:
                 c=0
                 for i in range(r,12,1):
-                    list_negadiag.append(board[i][c])
+                    list.append(board[i][c])
+                    list_negadiag.append(list)
                     c+=1
     # above_half postitive diagonal coordinate
         for c in range(1,ROW_COUNT-3):
+            list=[]
             r=0
             for j in range(c,8,1):
-                list_negadiag.append(board[r][j])
+                list.append(board[r][j])
+                list_negadiag.append(list)
                 r+=1
     #EVLUATION: FOUR
-    scoreai,scorehuman = hurestic_overallfunction4(listx,player)
+    oraifour=[]
+    orhumanfour=[]
+    scoreai,scorehuman,aifour1,humanfour1 = hurestic_overallfunction4(listx,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction4(listy, player)
+    oraifour.append(aifour1)
+    orhumanfour.append(humanfour1)
+    scoreai, scorehuman,aifour2,humanfour2 = hurestic_overallfunction4(listy, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction4(list_posdiag, player)
+    oraifour.append(aifour2)
+    orhumanfour.append(humanfour2)
+    scoreai, scorehuman,aifour3,humanfour3 = hurestic_overallfunction4(list_posdiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction4(list_negadiag, player)
+    oraifour.append(aifour3)
+    orhumanfour.append(humanfour3)
+    scoreai, scorehuman,aifour4,humanfour4 = hurestic_overallfunction4(list_negadiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
+    oraifour.append(aifour4)
+    orhumanfour.append(humanfour4)
+
+    sumfour=0
+    sumfour2=0
+    for i in oraifour:
+        if i>0:
+            sumfour+=1
+    for i in orhumanfour:
+        if i>0:
+            sumfour2+=1
+    if sumfour>0:
+        return SCOREAI - SCOREHUMAN
+    if sumfour2>0:
+        return SCOREAI - SCOREHUMAN
 
     #EVLUATION: THREE
-    scoreai,scorehuman = hurestic_overallfunction3(listx,player)
+    oraithree=[]
+    orhumanthree=[]
+    scoreai,scorehuman,aithree1,humanthree1 = hurestic_overallfunction3(listx,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction3(listy, player)
+    oraithree.append(aithree1)
+    orhumanthree.append(humanthree1)
+    scoreai, scorehuman,aithree2,humanthree2 = hurestic_overallfunction3(listy, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction3(list_posdiag, player)
+    oraithree.append(aithree2)
+    orhumanthree.append(humanthree2)
+    scoreai, scorehuman,aithree3,humanthree3 = hurestic_overallfunction3(list_posdiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction3(list_negadiag, player)
+    oraithree.append(aithree3)
+    orhumanthree.append(humanthree3)
+    scoreai, scorehuman,aithree4,humanthree4 = hurestic_overallfunction3(list_negadiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
+    oraithree.append(aithree4)
+    orhumanthree.append(humanthree4)
+
+    sumalivethree=0
+    sumalivethree2=0
+    for i in oraithree:
+        if i>0:
+            sumalivethree+=1
+    for i in orhumanthree:
+        if i>0:
+            sumalivethree2+=1
+    if sumalivethree>0:
+        return SCOREAI - SCOREHUMAN
+    if sumalivethree2>0:
+        return SCOREAI - SCOREHUMAN
 
     #EVLUATION: DEADTHREE
-    scoreai,scorehuman = hurestic_overallfunctionDead3(listx,player)
+    oraidoublethree = []
+    orhuamndoublethree = []
+    scoreai,scorehuman,sumai1,sumhuman1 = hurestic_overallfunctionDead3(listx,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3(listy, player)
+    oraidoublethree.append(sumai1)
+    orhuamndoublethree.append(sumhuman1)
+    scoreai, scorehuman,sumai2,sumhuman2 = hurestic_overallfunctionDead3(listy, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3(list_posdiag, player)
+    oraidoublethree.append(sumai2)
+    orhuamndoublethree.append(sumhuman2)
+    scoreai, scorehuman,sumai3,sumhuman3 = hurestic_overallfunctionDead3(list_posdiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3(list_negadiag, player)
+    oraidoublethree.append(sumai3)
+    orhuamndoublethree.append(sumhuman3)
+    scoreai, scorehuman,sumai4,sumhuman4 = hurestic_overallfunctionDead3(list_negadiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai,scorehuman = hurestic_overallfunctionDead3second(listx,player)
+    oraidoublethree.append(sumai4)
+    orhuamndoublethree.append(sumhuman4)
+    scoreai,scorehuman,sumai5,sumhuman5 = hurestic_overallfunctionDead3second(listx,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3second(listy, player)
+    oraidoublethree.append(sumai5)
+    orhuamndoublethree.append(sumhuman5)
+    scoreai, scorehuman,sumai6,sumhuman6 = hurestic_overallfunctionDead3second(listy, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3second(list_posdiag, player)
+    oraidoublethree.append(sumai6)
+    orhuamndoublethree.append(sumhuman6)
+    scoreai, scorehuman,sumai7,sumhuman7 = hurestic_overallfunctionDead3second(list_posdiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3second(list_negadiag, player)
+    oraidoublethree.append(sumai7)
+    orhuamndoublethree.append(sumhuman7)
+    scoreai, scorehuman,sumai8,sumhuman8 = hurestic_overallfunctionDead3second(list_negadiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai,scorehuman = hurestic_overallfunctionDead3third(listx,player)
+    oraidoublethree.append(sumai8)
+    orhuamndoublethree.append(sumhuman8)
+    scoreai,scorehuman,sumai9,sumhuman9 = hurestic_overallfunctionDead3third(listx,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3third(listy, player)
+    oraidoublethree.append(sumai9)
+    orhuamndoublethree.append(sumhuman9)
+    scoreai, scorehuman,sumai10,sumhuman10 = hurestic_overallfunctionDead3third(listy, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3third(list_posdiag, player)
+    oraidoublethree.append(sumai10)
+    orhuamndoublethree.append(sumhuman10)
+    scoreai, scorehuman,sumai11,sumhuman11 = hurestic_overallfunctionDead3third(list_posdiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3third(list_negadiag, player)
+    oraidoublethree.append(sumai11)
+    orhuamndoublethree.append(sumhuman11)
+    scoreai, scorehuman,sumai12,sumhuman12 = hurestic_overallfunctionDead3third(list_negadiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai,scorehuman = hurestic_overallfunctionDead3third(listx,player)
+    oraidoublethree.append(sumai12)
+    orhuamndoublethree.append(sumhuman12)
+    scoreai,scorehuman,sumai13,sumhuman13= hurestic_overallfunctionDead3third(listx,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3third(listy, player)
+    oraidoublethree.append(sumai13)
+    orhuamndoublethree.append(sumhuman13)
+    scoreai, scorehuman,sumai14,sumhuman14 = hurestic_overallfunctionDead3third(listy, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3third(list_posdiag, player)
+    oraidoublethree.append(sumai14)
+    orhuamndoublethree.append(sumhuman14)
+    scoreai, scorehuman,sumai15,sumhuman15 = hurestic_overallfunctionDead3third(list_posdiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunctionDead3third(list_negadiag, player)
+    oraidoublethree.append(sumai15)
+    orhuamndoublethree.append(sumhuman15)
+    scoreai, scorehuman,sumai16,sumhuman16 = hurestic_overallfunctionDead3third(list_negadiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
+    oraidoublethree.append(sumai16)
+    orhuamndoublethree.append(sumhuman16)
+
+    sumthree =0
+    sumthree2 =0
+    for i in oraidoublethree:
+        if i >0:
+            sumthree+=1
+    if sumthree>2:
+        SCOREAI+=DoubleDeadThree
+        return SCOREAI-SCOREHUMAN
+    for i in orhuamndoublethree:
+        if i >0:
+            sumthree2+=1
+    if sumthree2>2:
+        SCOREHUMAN+=DoubleDeadThree
+        return SCOREAI - SCOREHUMAN
 
     #EVLUATION: TWO
-    scoreai,scorehuman = hurestic_overallfunction2(listx,player)
+    oraidoubletwo = []
+    orhuamndoubletwo = []
+    scoreai,scorehuman,sumai17,sumhuman17 = hurestic_overallfunction2(listx,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction2(listy, player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai, scorehuman,sumai18,sumhuman18 = hurestic_overallfunction2(listy, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction2(list_posdiag, player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai, scorehuman,sumai19,sumhuman19 = hurestic_overallfunction2(list_posdiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction2(list_negadiag, player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai, scorehuman,sumai20,sumhuman20 = hurestic_overallfunction2(list_negadiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai,scorehuman = hurestic_overallfunction2second(listx,player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai,scorehuman,sumai21,sumhuman21 = hurestic_overallfunction2second(listx,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction2second(listy, player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai, scorehuman,sumai22,sumhuman22 = hurestic_overallfunction2second(listy, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction2second(list_posdiag, player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai, scorehuman,sumai23,sumhuman23 = hurestic_overallfunction2second(list_posdiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction2second(list_negadiag, player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai, scorehuman,sumai24,sumhuman24 = hurestic_overallfunction2second(list_negadiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai,scorehuman = hurestic_overallfunction2third(listx,player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai,scorehuman,sumai25,sumhuman25 = hurestic_overallfunction2third(listx,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction2third(listy, player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai, scorehuman,sumai26,sumhuman26 = hurestic_overallfunction2third(listy, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction2third(list_posdiag, player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai, scorehuman,sumai27,sumhuman27 = hurestic_overallfunction2third(list_posdiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    scoreai, scorehuman = hurestic_overallfunction2third(list_negadiag, player)
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+    scoreai, scorehuman,sumai28,sumhuman28 = hurestic_overallfunction2third(list_negadiag, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
+    oraidoubletwo.append(sumai17)
+    orhuamndoubletwo.append(sumhuman17)
+
+    sumtwo =0
+    sumtwo2 =0
+    for i in oraidoubletwo:
+        if i >0:
+            sumtwo+=1
+    for i in orhuamndoubletwo:
+        if i >0:
+            sumtwo2+=1
+    if sumtwo>2:
+        SCOREAI+=doubleTwo
+    if sumtwo2>2:
+        SCOREHUMAN+=doubleTwo
+        return SCOREAI - SCOREHUMAN
+    if sumthree>=1 and sumtwo>=1:
+        SCOREAI+=OneThreeOneTwo
+        return SCOREAI - SCOREHUMAN
+    if sumthree2>=1 and sumtwo2>=1:
+        SCOREHUMAN+=OneThreeOneTwo
+        return SCOREAI - SCOREHUMAN
 
     #EVLUATION: DEAD TWO
     scoreai,scorehuman = hurestic_overallfunctionDead2(listx,player)
@@ -1063,20 +1218,97 @@ def evaluation(board,board2,board3,player):
     scoreai, scorehuman = hurestic_overallfunctionDead2fourth(list_negadiag, player)
     SCOREAI += scoreai
     SCOREHUMAN += scorehuman
+
     #EVLUATION: EMPTY
-    scoreai, scorehuman = hurestic_functionEmptyfunction(listx, player)
+    # scoreai, scorehuman = hurestic_functionEmptyfunction(listx)
+    # SCOREAI += scoreai
+    # SCOREHUMAN += scorehuman
+    # scoreai, scorehuman = hurestic_functionEmptyfunction(listy)
+    # SCOREAI += scoreai
+    # SCOREHUMAN += scorehuman
+    # scoreai, scorehuman = hurestic_functionEmptyfunction(list_posdiag)
+    # SCOREAI += scoreai
+    # SCOREHUMAN += scorehuman
+    # scoreai, scorehuman = hurestic_functionEmptyfunction(list_negadiag)
+    # SCOREAI += scoreai
+    # SCOREHUMAN += scorehuman
+
+    # EVLUATION: MINUS SCORE
+    scoreai, scorehuman = hurestic_noway3(listx, player)
     SCOREAI += scoreai
     SCOREHUMAN += scorehuman
-    scoreai, scorehuman = hurestic_functionEmptyfunction(listy, player)
+    scoreai, scorehuman = hurestic_noway3(listy, player)
     SCOREAI += scoreai
     SCOREHUMAN += scorehuman
-    scoreai, scorehuman = hurestic_functionEmptyfunction(list_posdiag, player)
+    scoreai, scorehuman = hurestic_noway3(list_posdiag, player)
     SCOREAI += scoreai
     SCOREHUMAN += scorehuman
-    scoreai, scorehuman = hurestic_functionEmptyfunction(list_negadiag, player)
+    scoreai, scorehuman = hurestic_noway3(list_negadiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway3second(listx, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway3second(listy, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway3second(list_posdiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway3second(list_negadiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway3thrid(listx, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway3thrid(listy, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway3thrid(list_posdiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway3thrid(list_negadiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+
+    scoreai, scorehuman = hurestic_noway2(listx, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2(listy, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2(list_posdiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2(list_negadiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2second(listx, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2second(listy, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2second(list_posdiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2second(list_negadiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2thrid(listx, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2thrid(listy, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2thrid(list_posdiag, player)
+    SCOREAI += scoreai
+    SCOREHUMAN += scorehuman
+    scoreai, scorehuman = hurestic_noway2thrid(list_negadiag, player)
     SCOREAI += scoreai
     SCOREHUMAN += scorehuman
     return SCOREAI - SCOREHUMAN
+
 def hurestic_function4(list_elem1,list_elem2,list_elem3,list_elem4,player):
     if player == 'colors':
         if list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and \
@@ -1537,197 +1769,480 @@ def hurestic_functionDeadTwo3(list_elem1,list_elem2,list_elem3,list_elem4,player
         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R':
             return 'Human'
     return 'no'
-def hurestic_functionEmptyfunction(list,player):
+def hurestic_nopossible3(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
+    if player == 'colors':
+        if  list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0]=='W' and list_elem5[0]=='R':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0]=='R' and list_elem5[0]=='W':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1]=='O'and list_elem5[1]=='X':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1]=='X'and list_elem5[1]=='O':
+            return 'Human'
+    else:
+        if list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1]=='O'and list_elem5[1]=='X':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1]=='X'and list_elem5[1]=='O':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
+            return 'Human'
+    return 'no'
+def hurestic_nopossible3second(list_elem1,list_elem2,list_elem3,list_elem4,player):
+    if player == 'colors':
+        if  list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0]=='R':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'R'and list_elem4[0]=='R':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4[1]=='X':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4[1]=='O':
+            return 'Human'
+    else:
+        if list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4[1]=='R':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4[1]=='O':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'W':
+            return 'Human'
+    return 'no'
+def hurestic_nopossible3thrid(list_elem1,list_elem2,list_elem3,list_elem4,player):
+    if player == 'colors':
+        if  list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0]=='W':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R'and list_elem4[0]=='R':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4[1]=='O':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4[1]=='X':
+            return 'Human'
+    else:
+        if list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4[1]=='O':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4[1]=='X':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R':
+            return 'Human'
+    return 'no'
+def hurestic_nopossible2(list_elem1,list_elem2,list_elem3,list_elem4,player):
+    if player == 'colors':
+        if list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'R':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'W':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1] == 'X':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1] == 'O':
+            return 'Human'
+    else:
+        if list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1] == 'X':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1] == 'O':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'W':
+            return 'Human'
+    return 'no'
+def hurestic_nopossible2second(list_elem1,list_elem2,list_elem3,player):
+    if player == 'colors':
+        if  list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'R':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'W':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'X':
+            return 'Human'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'O':
+            return 'Human'
+    else:
+        if list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'R':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'O':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'R':
+            return 'Human'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'W':
+            return 'Human'
+    return 'no'
+def hurestic_nopossible2thrid(list_elem1,list_elem2,list_elem3,player):
+    if player == 'colors':
+        if  list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W':
+            return 'AI'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R':
+            return 'AI'
+        elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O':
+            return 'Human'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X':
+            return 'Human'
+    else:
+        if list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O':
+            return 'AI'
+        elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X':
+            return 'AI'
+        elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W':
+            return 'Human'
+        elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R':
+            return 'Human'
+    return 'no'
+# def hurestic_functionEmptyfunction(list):
+#     SCOREHUMAN =0
+#     SCOREAI=0
+#     Empty = 50
+#     for i in range(len(list)):
+#         sum=0
+#         for j in range(0,len(list[i])):
+#                 if list[i][j]=='□□':
+#                     continue
+#                 else:
+#                     sum+=1
+#         if sum==0:
+#             SCOREAI += Empty
+#             SCOREHUMAN += Empty
+#         else:
+#             continue
+#     return SCOREAI,SCOREHUMAN
+def hurestic_noway3(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    Empty = 10
+    no3=10
     for i in range(len(list)):
-        sum=0
-        for j in range(0,len(list[i])):
-                if list[i][j]=='□□':
-                    continue
-                else:
-                    sum+=1
-        if sum==1:
-            SCOREAI += Empty
-            SCOREHUMAN += Empty
-        else:
-            continue
+        for j in range(1,len(list[i])-3):
+            if player =='colors':
+                output = hurestic_nopossible3(list[i][j-1],list[i][j],list[i][j+1],list[i][j+2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI -= no3
+                elif output == 'Human':
+                    SCOREHUMAN -= no3
+            else:
+                output = hurestic_nopossible3(list[i][j-1],list[i][j],list[i][j+1],list[i][j+2],list[i][j+3],player)
+                if output == 'AI':
+                    SCOREAI -= no3
+                elif output == 'Human':
+                    SCOREHUMAN -= no3
     return SCOREAI,SCOREHUMAN
-
+def hurestic_noway3second(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    no3=10
+    for i in range(len(list)):
+            if player =='colors':
+                output = hurestic_nopossible3second(list[i][0], list[i][1], list[i][2],list[i][3],player)
+                if output == 'AI':
+                    SCOREAI -= no3
+                elif output == 'Human':
+                    SCOREHUMAN -= no3
+            else:
+                output = hurestic_nopossible3second(list[i][0], list[i][1], list[i][2],list[i][3],player)
+                if output == 'AI':
+                    SCOREAI -= no3
+                elif output == 'Human':
+                    SCOREHUMAN -= no3
+    return SCOREAI,SCOREHUMAN
+def hurestic_noway3thrid(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    no3=10
+    for i in range(len(list)):
+            if player =='colors':
+                output = hurestic_nopossible3thrid(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
+                if output == 'AI':
+                    SCOREAI -= no3
+                elif output == 'Human':
+                    SCOREHUMAN -= no3
+            else:
+                output = hurestic_nopossible3thrid(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
+                if output == 'AI':
+                    SCOREAI -= no3
+                elif output == 'Human':
+                    SCOREHUMAN -= no3
+    return SCOREAI,SCOREHUMAN
+def hurestic_noway2(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    no2=10
+    for i in range(len(list)):
+        for j in range(1,len(list[i])-2):
+            if player =='colors':
+                output = hurestic_nopossible2(list[i][j-1],list[i][j],list[i][j+1],list[i][j+2],player)
+                if output == 'AI':
+                    SCOREAI -= no2
+                elif output == 'Human':
+                    SCOREHUMAN -= no2
+            else:
+                output = hurestic_nopossible2(list[i][j-1],list[i][j],list[i][j+1],list[i][j+2],player)
+                if output == 'AI':
+                    SCOREAI -= no2
+                elif output == 'Human':
+                    SCOREHUMAN -= no2
+    return SCOREAI,SCOREHUMAN
+def hurestic_noway2second(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    no2=10
+    for i in range(len(list)):
+            if player =='colors':
+                output = hurestic_nopossible2second(list[i][0], list[i][1], list[i][2],player)
+                if output == 'AI':
+                    SCOREAI -= no2
+                elif output == 'Human':
+                    SCOREHUMAN -= no2
+            else:
+                output = hurestic_nopossible2second(list[i][0], list[i][1], list[i][2],player)
+                if output == 'AI':
+                    SCOREAI -= no2
+                elif output == 'Human':
+                    SCOREHUMAN -= no2
+    return SCOREAI,SCOREHUMAN
+def hurestic_noway2thrid(list,player):
+    SCOREHUMAN =0
+    SCOREAI=0
+    no2=10
+    for i in range(len(list)):
+            if player =='colors':
+                output = hurestic_nopossible2thrid(list[i][-3], list[i][-2],list[i][-1],player)
+                if output == 'AI':
+                    SCOREAI -= no2
+                elif output == 'Human':
+                    SCOREHUMAN -= no2
+            else:
+                output = hurestic_nopossible2thrid(list[i][-3], list[i][-2],list[i][-1],player)
+                if output == 'AI':
+                    SCOREAI -= no2
+                elif output == 'Human':
+                    SCOREHUMAN -= no2
+    return SCOREAI,SCOREHUMAN
 def hurestic_overallfunction4(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    WinFour=10000
+    WinFour=100000
+    sumAI = 0
+    sumHuman = 0
     for i in range(len(list)):
         for j in range(1,len(list[i])-3):
             if player =='colors':
                 output = hurestic_function4(list[i][j],list[i][j+1],list[i][j+2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += WinFour
+                    sumAI+=1
                 elif output == 'Human':
                     SCOREHUMAN += WinFour
+                    sumHuman+=1
             else:
                 output = hurestic_function4(list[i][j],list[i][j+1],list[i][j+2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += WinFour
+                    sumAI+=1
                 elif output == 'Human':
                     SCOREHUMAN += WinFour
-    return SCOREAI,SCOREHUMAN
+                    sumHuman+=1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
 def hurestic_overallfunction3(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    AliveThree=1000
+    AliveThree=10000
+    sumAI = 0
+    sumHuman = 0
     for i in range(len(list)):
         for j in range(1,len(list[i])-3):
             if player =='colors':
                 output = hurestic_function3(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += AliveThree
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += AliveThree
+                    sumHuman += 1
             else:
                 output = hurestic_function3(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += AliveThree
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += AliveThree
-    return SCOREAI,SCOREHUMAN
+                    sumHuman += 1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
 def hurestic_overallfunctionDead3(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    DeadThree = 100
+    DeadThree = 500
+    sumAI=0
+    sumHuman=0
     for i in range(len(list)):
         for j in range(1,len(list[i])-3):
             if player =='colors':
                 output = hurestic_functionDeadThree(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
+                    sumAI+=1
                     SCOREAI += DeadThree
                 elif output == 'Human':
+                    sumHuman+=1
                     SCOREHUMAN += DeadThree
             else:
                 output = hurestic_functionDeadThree(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
+                    sumAI += 1
                     SCOREAI += DeadThree
                 elif output == 'Human':
+                    sumHuman += 1
                     SCOREHUMAN += DeadThree
-    return SCOREAI,SCOREHUMAN
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
 def hurestic_overallfunctionDead3second(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    DeadThree = 100
+    DeadThree = 500
+    sumAI = 0
+    sumHuman = 0
     for i in range(len(list)):
         for j in range(0,len(list[i])-3):
             if player =='colors':
                 output = hurestic_functionDeadThree2(list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += DeadThree
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += DeadThree
+                    sumHuman += 1
             else:
                 output = hurestic_functionDeadThree2(list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += DeadThree
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += DeadThree
-    return SCOREAI,SCOREHUMAN
+                    sumHuman += 1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
 def hurestic_overallfunctionDead3third(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    DeadThree = 100
+    DeadThree = 500
+    sumAI = 0
+    sumHuman = 0
     for i in range(len(list)):
             if player =='colors':
                 output = hurestic_functionDeadThree3(list[i][0], list[i][1], list[i][2],list[i][3],player)
                 if output == 'AI':
                     SCOREAI += DeadThree
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += DeadThree
+                    sumHuman += 1
             else:
                 output = hurestic_functionDeadThree3(list[i][0], list[i][1], list[i][2],list[i][3],player)
                 if output == 'AI':
                     SCOREAI += DeadThree
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += DeadThree
-    return SCOREAI,SCOREHUMAN
+                    sumHuman += 1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
 def hurestic_overallfunctionDead3fourth(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    DeadThree = 100
+    DeadThree = 500
+    sumAI = 0
+    sumHuman = 0
     for i in range(len(list)):
             if player =='colors':
                 output = hurestic_functionDeadThree4(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
                 if output == 'AI':
                     SCOREAI += DeadThree
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += DeadThree
+                    sumHuman += 1
             else:
                 output = hurestic_functionDeadThree4(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
                 if output == 'AI':
                     SCOREAI += DeadThree
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += DeadThree
-    return SCOREAI,SCOREHUMAN
+                    sumHuman += 1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
 def hurestic_overallfunction2(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    AliveTwo = 100
+    AliveTwo = 200
+    sumAI = 0
+    sumHuman = 0
     for i in range(len(list)):
         for j in range(1,len(list[i])-3):
             if player =='colors':
                 output = hurestic_function2(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += AliveTwo
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += AliveTwo
+                    sumHuman+=1
             else:
                 output = hurestic_function2(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += AliveTwo
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += AliveTwo
-    return SCOREAI,SCOREHUMAN
+                    sumHuman += 1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
 def hurestic_overallfunction2second(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    AliveTwo = 100
+    AliveTwo = 200
+    sumAI = 0
+    sumHuman = 0
     for i in range(len(list)):
         for j in range(1,len(list[i])-3):
             if player =='colors':
                 output = hurestic_function2second(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += AliveTwo
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += AliveTwo
+                    sumHuman += 1
             else:
                 output = hurestic_function2second(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     SCOREAI += AliveTwo
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += AliveTwo
-    return SCOREAI,SCOREHUMAN
+                    sumHuman += 1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
 def hurestic_overallfunction2third(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    AliveTwo = 100
+    AliveTwo = 200
+    sumAI = 0
+    sumHuman = 0
     for i in range(len(list)):
         for j in range(2,len(list[i])-2):
             if player =='colors':
                 output = hurestic_function2(list[i][j-2],list[i][j-1], list[i][j], list[i][j + 1],list[i][j+2],player)
                 if output == 'AI':
                     SCOREAI += AliveTwo
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += AliveTwo
+                    sumHuman += 1
             else:
                 output = hurestic_function2(list[i][j-2],list[i][j-1], list[i][j], list[i][j + 1],list[i][j+2],player)
                 if output == 'AI':
                     SCOREAI += AliveTwo
+                    sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += AliveTwo
-    return SCOREAI,SCOREHUMAN
+                    sumHuman += 1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
 def hurestic_overallfunctionDead2(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    DeadTwo = 10
+    DeadTwo = 50
     for i in range(len(list)):
         for j in range(1,len(list[i])-3):
             if player =='colors':
@@ -1746,7 +2261,7 @@ def hurestic_overallfunctionDead2(list,player):
 def hurestic_overallfunctionDead2second(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    DeadTwo = 10
+    DeadTwo = 50
     for i in range(len(list)):
         for j in range(2,len(list[i])-2):
             if player =='colors':
@@ -1765,7 +2280,7 @@ def hurestic_overallfunctionDead2second(list,player):
 def hurestic_overallfunctionDead2third(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    DeadTwo = 10
+    DeadTwo = 50
     for i in range(len(list)):
             if player =='colors':
                 output = hurestic_functionDeadTwo2(list[i][0], list[i][1], list[i][2],list[i][3],player)
@@ -1783,7 +2298,7 @@ def hurestic_overallfunctionDead2third(list,player):
 def hurestic_overallfunctionDead2fourth(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    DeadTwo = 100
+    DeadTwo = 50
     for i in range(len(list)):
             if player =='colors':
                 output = hurestic_functionDeadTwo3(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
@@ -1832,7 +2347,7 @@ def lastminmax(board,board2,depth,dotscolor,list1):
                 transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
                 list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 level2value = lastminfunction(board, board2, depth - 1, dotscolor,list1)
                 value=max(value,level2value)
@@ -1840,7 +2355,7 @@ def lastminmax(board,board2,depth,dotscolor,list1):
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
                 del list1[-1]
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
@@ -1867,7 +2382,7 @@ def lastminmax(board,board2,depth,dotscolor,list1):
                 transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
                 list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 level2value = lastminfunction(board, board2, depth - 1, dotscolor,list1)
                 value=max(value,level2value)
@@ -1875,7 +2390,7 @@ def lastminmax(board,board2,depth,dotscolor,list1):
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
                 del list1[-1]
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
@@ -1934,12 +2449,12 @@ def lastminfunction(board,board2,depth,player,list1):
                 transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
                 list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 bestvalue = maxfunction(board, board2, depth - 1, opponent)
                 del list1[-1]
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 if bestvalue < value:
                     value = bestvalue
@@ -1970,7 +2485,7 @@ def lastaphabeta(board,board2,depth,alpha,beta,dotscolor,list1):
                                                candidate[j][2])
                 list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 level2value = lastminaphabeta(board, board2, depth - 1, alpha, beta, dotscolor,list1)
                 value=max(value,level2value)
@@ -1979,7 +2494,7 @@ def lastaphabeta(board,board2,depth,alpha,beta,dotscolor,list1):
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
                 del list1[-1]
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
@@ -2008,7 +2523,7 @@ def lastaphabeta(board,board2,depth,alpha,beta,dotscolor,list1):
                                                candidate[j][2])
                 list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 level2value = lastminaphabeta(board, board2, depth - 1, alpha, beta, dotscolor,list1)
                 value = max(value, level2value)
@@ -2017,7 +2532,7 @@ def lastaphabeta(board,board2,depth,alpha,beta,dotscolor,list1):
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
                 del list1[-1]
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
@@ -2079,12 +2594,12 @@ def lastminaphabeta(board,board2,depth,alpha,beta,player,list1):
                 transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
                 list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 value = min(value,recyclingmaxaplhabetapurning(board, board2, depth - 1,alpha,beta,opponent,list1))
                 del list1[-1]
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 beta = min(beta, value)
                 if beta <= alpha:
@@ -2123,14 +2638,14 @@ def minimax(board,board2,depth,dotscolor):
             for j in range(len(candidate)):
                 search_count += 1
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 level2value = minfunction(board, board2, depth - 1, dotscolor)
                 value=max(value,level2value)
                 maxvalues.append(level2value)
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
@@ -2151,14 +2666,14 @@ def minimax(board,board2,depth,dotscolor):
             for j in range(len(candidate)):
                 search_count += 1
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 level2value = minfunction(board, board2, depth - 1, dotscolor)
                 value=max(value,level2value)
                 maxvalues.append(level2value)
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
@@ -2185,11 +2700,11 @@ def maxfunction(board,board2,depth,player) :
             global search_count
             search_count += 1
             drop_piece(board,candidate[j][0],candidate[j][1],candidate[j][2])
-            drop_piece2(board2,candidate[j][0],candidate[j][1],candidate[j][2])
+            # drop_piece2(board2,candidate[j][0],candidate[j][1],candidate[j][2])
             drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             bestvalue = minfunction(board, board2,depth - 1,opponent)
             remove_piece(board,candidate[j][0],candidate[j][1],candidate[j][2])
-            remove_piece2(board2,candidate[j][0],candidate[j][1],candidate[j][2])
+            # remove_piece2(board2,candidate[j][0],candidate[j][1],candidate[j][2])
             remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             if bestvalue>value:
                 value = bestvalue
@@ -2207,11 +2722,11 @@ def minfunction(board,board2,depth,player):
             global search_count
             search_count += 1
             drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-            drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+            # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
             drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             bestvalue = maxfunction(board, board2, depth - 1, opponent)
             remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-            remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+            # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
             remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             if bestvalue < value:
                 value = bestvalue
@@ -2234,7 +2749,7 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
             for j in range(len(candidate)):
                 search_count += 1
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 level2value = alphabetapruningminfunction(board, board2, depth - 1, alpha, beta, dotscolor)
                 value=max(value,level2value)
@@ -2242,7 +2757,7 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 alpha = max(alpha, value)
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
@@ -2263,7 +2778,7 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
             for j in range(len(candidate)):
                 search_count += 1
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 level2value = alphabetapruningminfunction(board, board2, depth - 1, alpha, beta, dotscolor)
                 value = max(value, level2value)
@@ -2271,7 +2786,7 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 alpha = max(alpha, value)
                 values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
@@ -2299,11 +2814,11 @@ def alphabetapruningmaxfunction(board,board2,depth,alpha,beta,player) :
             global search_count
             search_count += 1
             drop_piece(board,candidate[j][0],candidate[j][1],candidate[j][2])
-            drop_piece2(board2,candidate[j][0],candidate[j][1],candidate[j][2])
+            # drop_piece2(board2,candidate[j][0],candidate[j][1],candidate[j][2])
             drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             value = max(value,alphabetapruningminfunction(board, board2,depth - 1,alpha,beta,opponent))
             remove_piece(board,candidate[j][0],candidate[j][1],candidate[j][2])
-            remove_piece2(board2,candidate[j][0],candidate[j][1],candidate[j][2])
+            # remove_piece2(board2,candidate[j][0],candidate[j][1],candidate[j][2])
             remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             alpha = max(alpha, value)
             if alpha >= beta:
@@ -2324,11 +2839,11 @@ def alphabetapruningminfunction(board,board2,depth,alpha,beta,player):
             global search_count
             search_count += 1
             drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-            drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+            # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
             drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             value = min(value,alphabetapruningmaxfunction(board, board2, depth - 1,alpha,beta,opponent))
             remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-            remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+            # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
             remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             beta = min(beta, value)
             if beta <= alpha:
@@ -2385,7 +2900,7 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
                     transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
                     list1.append(transfermove)
                     drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                     drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                     level2value =  minrecycling(board, board2, depth - 1, dotscolor,list1)
                     value = max(value,level2value)
@@ -2393,7 +2908,7 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
                     values.append([value, candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate[j][0], candidate[j][1], candidate[j][2]])
                     del list1[-1]
                     remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                     remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             drop_recycling(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate1[k][4])
         largestvalue = max(maxvalues)
@@ -2451,7 +2966,7 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
                     transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
                     list1.append(transfermove)
                     drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                     drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                     level2value = minrecycling(board, board2, depth - 1, dotscolor, list1)
                     value = max(value, level2value)
@@ -2459,7 +2974,7 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
                     values.append([value, candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate[j][0], candidate[j][1], candidate[j][2]])
                     del list1[-1]
                     remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                     remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             drop_recycling(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3],candidate1[k][4])
         largestvalue = max(maxvalues)
@@ -2523,12 +3038,12 @@ def maxrecycling(board,board2,depth,player,list1):
                 transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
                 list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 bestvalue= minrecycling(board, board2, depth - 1, dotscolor,list1)
                 del list1[-1]
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 if bestvalue > value:
                     value = bestvalue
@@ -2573,7 +3088,6 @@ def minrecycling(board,board2,depth,player,list1):
                     continue
                 elif cardid == "colerror":
                     continue
-
                 recycling_list = []
                 recycling_list.append('0')
                 recycling_list.append(return_card(candidate[j][2]))
@@ -2582,12 +3096,12 @@ def minrecycling(board,board2,depth,player,list1):
                 transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
                 list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 bestvalue = maxrecycling(board, board2, depth - 1, opponent,list1)
                 del list1[-1]
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 if bestvalue < value:
                     value = bestvalue
@@ -2644,7 +3158,7 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
                                                    candidate[j][2])
                     list1.append(transfermove)
                     drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                     drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                     level2value= recyclingminaplhabetapurning(board, board2, depth - 1, alpha,beta,dotscolor, list1)
                     value = max(value, level2value)
@@ -2654,7 +3168,7 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
                                    candidate[j][0], candidate[j][1], candidate[j][2]])
                     del list1[-1]
                     remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                     remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                            candidate1[k][3], candidate1[k][4])
@@ -2716,7 +3230,7 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
                                                    candidate[j][2])
                     list1.append(transfermove)
                     drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                     drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                     level2value = recyclingminaplhabetapurning(board, board2, depth - 1, alpha, beta, dotscolor,
                                                                list1)
@@ -2727,7 +3241,7 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
                                    candidate[j][0], candidate[j][1], candidate[j][2]])
                     del list1[-1]
                     remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                    remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                     remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
             drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                            candidate1[k][3], candidate1[k][4])
@@ -2795,12 +3309,12 @@ def recyclingminaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
                 transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
                 list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 value = min(value,recyclingmaxaplhabetapurning(board, board2, depth - 1,alpha,beta,opponent,list1))
                 del list1[-1]
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 beta = min(beta, value)
                 if beta <= alpha:
@@ -2875,12 +3389,12 @@ def recyclingmaxaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
                 transfermove = cardinformation(recycling_list, candidate[j][1], candidate[j][0], candidate[j][2])
                 list1.append(transfermove)
                 drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 value = max(value,recyclingminaplhabetapurning(board, board2,depth - 1,alpha,beta,opponent,list1))
                 del list1[-1]
                 remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
                 remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
                 alpha = max(alpha, value)
                 if alpha >= beta:
@@ -3004,7 +3518,7 @@ def samecard(move,cindex1,cindex2,recyclelist,card_id):
                         continue
     return card_id
 # $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
+def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
     firstuser=[]
     while not game_over:
         global en_count
@@ -3014,83 +3528,103 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
                 orpurning=0
                 print("It’s the turn of AI")
                 en_count=0
-                usercmd= input('Does AI activate alpha-beta? (y/n) : ')
-                if usercmd.lower().startswith('y'):
-                    if len(firstuser)==REGUALR_GAME-1:
-                        coordinate = lastaphabeta(board,board2, DEPTH, -99999999, 99999999,dotscolor,firstuser)
-                        orpurning =1
-                    else:
-                        coordinate = alphabetapruning(board,board2, DEPTH, -99999999, 99999999,dotscolor)
-                        orpurning =1
-                else:
-                    if len(firstuser)==REGUALR_GAME-1:
-                        coordinate = lastminmax(board,board2,DEPTH,dotscolor,firstuser)
-                        orpurning=2
-                    else:
-                        coordinate = minimax(board,board2,DEPTH,dotscolor)
-                        orpurning=2
-                if orpurning==1:
-                    outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
-                    if outputcmd.lower().startswith('y'):
-                        print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
-                        for i in range(0,len(coordinate[4])):
-                            print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
-                        print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
-                else:
-                    outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
-                    if outputcmd.lower().startswith('y'):
-                        print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
-                        for i in range(0,len(coordinate[4])):
-                            print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
-                        print('\n'.strip(),file=open("output_minmax.txt", 'a'))
-                drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
-                if drop:
-                    colindex = returnindex(coordinate[1])
-                    move = []
-                    move.append('0')
-                    move.append(return_card(coordinate[2]))
-                    move.append(colindex)
-                    move.append(str(12-coordinate[0]).strip())
-                    for i in move:
-                        print(i.strip()+'')
-                    transfermove = cardinformation(move, coordinate[1], coordinate[0], coordinate[2])
-                    firstuser.append(transfermove)
+                if aifirst==True:
+                    drop = drop_piece(board, 11, 0, which_card('2'))
+                    aifirst=False
+                    if drop:
+                        move = []
+                        move.append('0')
+                        move.append('2')
+                        move.append('A')
+                        move.append(str(1).strip())
+                        for i in move:
+                            print(i.strip() + '')
+                        transfermove = cardinformation(move, 0, 11, which_card('2'))
+                        firstuser.append(transfermove)
 
-                    yindex2, xindex2 = dropindex(coordinate[1], coordinate[0], coordinate[2])
-                    board2[coordinate[0]][coordinate[1]][0] = 1
-                    board2[xindex2][yindex2][0] = 1
-                    drop_piece3(board3, coordinate[0], coordinate[1], coordinate[2])
-                    # print("purning：" + str(cut_count))
-                    # print("searching：")
-                    # print(search_count)
-                    # print("purning：")
-                    # print(cut_count)
-                    if user1 == 'dots':
-                        win1 = winning_move(board, user1, user2)
-                        win2 = winning_move(board, user2, user1)
-                        if win1 == 1:
-                            print(*board, sep='\n')
-                            print("{0} winning".format('AI'))
-                            print("*****GAME END*****")
-                            break
-                        elif win2 == 0:
-                            print(*board, sep='\n')
-                            print("{0} winning".format('human'))
-                            print("*****GAME END*****")
-                            break
-                    elif user1 == 'colors':
-                        win1 = winning_move(board, user2, user1)
-                        win2 = winning_move(board, user1, user2)
-                        if win1 == 1:
-                            print(*board, sep='\n')
-                            print("player {0} winning".format('AI'))
-                            print("*****GAME END*****")
-                            break
-                        elif win2 == 0:
-                            print(*board, sep='\n')
-                            print("{0} winning".format('human'))
-                            print("*****GAME END*****")
-                            break
+                        # yindex2, xindex2 = dropindex(0, 11, which_card('2'))
+                        # board2[11][0][0] = 1
+                        # board2[xindex2][yindex2][0] = 1
+                        drop_piece3(board3, 11, 0, which_card('2'))
+                else:
+
+                    usercmd= input('Does AI activate alpha-beta? (y/n) : ')
+                    if usercmd.lower().startswith('y'):
+                        if len(firstuser)==REGUALR_GAME-1:
+                            coordinate = lastaphabeta(board,board2, DEPTH, -99999999, 99999999,dotscolor,firstuser)
+                            orpurning =1
+                        else:
+                            coordinate = alphabetapruning(board,board2, DEPTH, -99999999, 99999999,dotscolor)
+                            orpurning =1
+                    else:
+                        if len(firstuser)==REGUALR_GAME-1:
+                            coordinate = lastminmax(board,board2,DEPTH,dotscolor,firstuser)
+                            orpurning=2
+                        else:
+                            coordinate = minimax(board,board2,DEPTH,dotscolor)
+                            orpurning=2
+                    if orpurning==1:
+                        outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
+                        if outputcmd.lower().startswith('y'):
+                            print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                            for i in range(0,len(coordinate[4])):
+                                print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                            print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                    else:
+                        outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
+                        if outputcmd.lower().startswith('y'):
+                            print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                            for i in range(0,len(coordinate[4])):
+                                print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
+                            print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+                    drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
+                    if drop:
+                        colindex = returnindex(coordinate[1])
+                        move = []
+                        move.append('0')
+                        move.append(return_card(coordinate[2]))
+                        move.append(colindex)
+                        move.append(str(12-coordinate[0]).strip())
+                        for i in move:
+                            print(i.strip()+'')
+                        transfermove = cardinformation(move, coordinate[1], coordinate[0], coordinate[2])
+                        firstuser.append(transfermove)
+
+                        # yindex2, xindex2 = dropindex(coordinate[1], coordinate[0], coordinate[2])
+                        # board2[coordinate[0]][coordinate[1]][0] = 1
+                        # board2[xindex2][yindex2][0] = 1
+                        drop_piece3(board3, coordinate[0], coordinate[1], coordinate[2])
+                        # print("purning：" + str(cut_count))
+                        # print("searching：")
+                        # print(search_count)
+                        # print("purning：")
+                        # print(cut_count)
+                        if user1 == 'dots':
+                            win1 = winning_move(board, user1, user2)
+                            win2 = winning_move(board, user2, user1)
+                            if win1 == 1:
+                                print(*board, sep='\n')
+                                print("{0} winning".format('AI'))
+                                print("*****GAME END*****")
+                                break
+                            elif win2 == 0:
+                                print(*board, sep='\n')
+                                print("{0} winning".format('human'))
+                                print("*****GAME END*****")
+                                break
+                        elif user1 == 'colors':
+                            win1 = winning_move(board, user2, user1)
+                            win2 = winning_move(board, user1, user2)
+                            if win1 == 1:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format('AI'))
+                                print("*****GAME END*****")
+                                break
+                            elif win2 == 0:
+                                print(*board, sep='\n')
+                                print("{0} winning".format('human'))
+                                print("*****GAME END*****")
+                                break
 
             else:
                 move = input("Input a slot player {0}: ".format(aiorhuman))
@@ -3116,9 +3650,9 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
                             transfermove = cardinformation(move,cindex,rindex,card)
                             firstuser.append(transfermove)
 
-                            yindex2,xindex2 = dropindex(cindex,rindex,card)
-                            board2[rindex][cindex][0]=1
-                            board2[xindex2][yindex2][0] = 1
+                            # yindex2,xindex2 = dropindex(cindex,rindex,card)
+                            # board2[rindex][cindex][0]=1
+                            # board2[xindex2][yindex2][0] = 1
                         if user1=='dots':
                             win1 = winning_move(board, user1,user2)
                             win2 = winning_move(board, user2,user1)
@@ -3158,83 +3692,101 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
                 orpurning=0
                 print("It’s the turn of AI")
                 en_count=0
-                usercmd= input('Does AI activate alpha-beta? (y/n) : ')
-                if usercmd.lower().startswith('y'):
-                    if len(firstuser)==REGUALR_GAME-1:
-                        coordinate = lastaphabeta(board,board2,DEPTH, -99999999, 99999999,dotscolor,firstuser)
-                        orpurning = 1
-                    else:
-                        coordinate = alphabetapruning(board,board2,DEPTH, -99999999, 99999999,dotscolor)
-                        orpurning = 1
+                if aifirst==True:
+                    drop = drop_piece(board,11,0, which_card('2'))
+                    aifirst = False
+                    if drop:
+                        move = []
+                        move.append('0')
+                        move.append('2')
+                        move.append('A')
+                        move.append(str(1).strip())
+                        for i in move:
+                            print(i.strip() + '')
+                        transfermove = cardinformation(move, 0, 11, which_card('2'))
+                        firstuser.append(transfermove)
+                        # yindex2, xindex2 = dropindex(0, 11, which_card('2'))
+                        # board2[11][0][0] = 1
+                        # board2[xindex2][yindex2][0] = 1
+                        drop_piece3(board3, 11, 0, which_card('2'))
                 else:
-                    if len(firstuser)==REGUALR_GAME-1:
-                        coordinate = lastminmax(board,board2,DEPTH,dotscolor,firstuser)
-                        orpurning=2
+                    usercmd= input('Does AI activate alpha-beta? (y/n) : ')
+                    if usercmd.lower().startswith('y'):
+                        if len(firstuser)==REGUALR_GAME-1:
+                            coordinate = lastaphabeta(board,board2,DEPTH, -99999999, 99999999,dotscolor,firstuser)
+                            orpurning = 1
+                        else:
+                            coordinate = alphabetapruning(board,board2,DEPTH, -99999999, 99999999,dotscolor)
+                            orpurning = 1
                     else:
-                        coordinate = minimax(board,board2,DEPTH,dotscolor)
-                        orpurning=2
-                if orpurning==1:
-                    outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
-                    if outputcmd.lower().startswith('y'):
-                        print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
-                        for i in range(0,len(coordinate[4])):
-                            print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
-                        print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
-                else:
-                    outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
-                    if outputcmd.lower().startswith('y'):
-                        print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
-                        for i in range(0,len(coordinate[4])):
-                            print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
-                        print('\n'.strip(),file=open("output_minmax.txt", 'a'))
-                drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
-                if drop:
-                    colindex = returnindex(coordinate[1])
-                    move = []
-                    move.append('0')
-                    move.append(return_card(coordinate[2]))
-                    move.append(colindex)
-                    move.append(str(12-coordinate[0]).strip())
-                    for i in move:
-                        print(i.strip()+'')
-                    transfermove = cardinformation(move, coordinate[1], coordinate[0], coordinate[2])
-                    firstuser.append(transfermove)
+                        if len(firstuser)==REGUALR_GAME-1:
+                            coordinate = lastminmax(board,board2,DEPTH,dotscolor,firstuser)
+                            orpurning=2
+                        else:
+                            coordinate = minimax(board,board2,DEPTH,dotscolor)
+                            orpurning=2
+                    if orpurning==1:
+                        outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
+                        if outputcmd.lower().startswith('y'):
+                            print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                            for i in range(0,len(coordinate[4])):
+                                print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                            print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                    else:
+                        outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
+                        if outputcmd.lower().startswith('y'):
+                            print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                            for i in range(0,len(coordinate[4])):
+                                print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
+                            print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+                    drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
+                    if drop:
+                        colindex = returnindex(coordinate[1])
+                        move = []
+                        move.append('0')
+                        move.append(return_card(coordinate[2]))
+                        move.append(colindex)
+                        move.append(str(12-coordinate[0]).strip())
+                        for i in move:
+                            print(i.strip()+'')
+                        transfermove = cardinformation(move, coordinate[1], coordinate[0], coordinate[2])
+                        firstuser.append(transfermove)
 
-                    yindex2, xindex2 = dropindex(coordinate[1], coordinate[0], coordinate[2])
-                    board2[coordinate[0]][coordinate[1]][0] = 1
-                    board2[xindex2][yindex2][0] = 1
-                    drop_piece3(board3, coordinate[0], coordinate[1], coordinate[2])
-                    # print("searching：", end='')
-                    # print(search_count)
-                    # print("purning：", end='')
-                    # print(cut_count)
-                    if user2 == 'dots':
-                        win1 = winning_move(board, user1, user2)
-                        win2 = winning_move(board, user2, user1)
-                        if win1 == 0:
-                            print(*board, sep='\n')
-                            print("{0} winning".format('AI'))
-                            print("*****GAME END*****")
-                            break
-                        elif win2 == 1:
-                            print(*board, sep='\n')
-                            print("{0} winning".format('human'))
-                            print("*****GAME END*****")
-                            break
-                    elif user2 == 'colors':
-                        win1 = winning_move(board, user2, user1)
-                        win2 = winning_move(board, user1, user2)
-                        if win1 == 0:
-                            print(*board, sep='\n')
-                            print("player {0} winning".format('AI'))
-                            print("*****GAME END*****")
-                            break
-                        elif win2 == 1:
-                            print(*board, sep='\n')
-                            print("player {0} winning".format('human'))
-                            print("*****GAME END*****")
-                            break
-                # print("purning：" + str(cut_count))
+                        # yindex2, xindex2 = dropindex(coordinate[1], coordinate[0], coordinate[2])
+                        # board2[coordinate[0]][coordinate[1]][0] = 1
+                        # board2[xindex2][yindex2][0] = 1
+                        drop_piece3(board3, coordinate[0], coordinate[1], coordinate[2])
+                        # print("searching：", end='')
+                        # print(search_count)
+                        # print("purning：", end='')
+                        # print(cut_count)
+                        if user2 == 'dots':
+                            win1 = winning_move(board, user1, user2)
+                            win2 = winning_move(board, user2, user1)
+                            if win1 == 0:
+                                print(*board, sep='\n')
+                                print("{0} winning".format('AI'))
+                                print("*****GAME END*****")
+                                break
+                            elif win2 == 1:
+                                print(*board, sep='\n')
+                                print("{0} winning".format('human'))
+                                print("*****GAME END*****")
+                                break
+                        elif user2 == 'colors':
+                            win1 = winning_move(board, user2, user1)
+                            win2 = winning_move(board, user1, user2)
+                            if win1 == 0:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format('AI'))
+                                print("*****GAME END*****")
+                                break
+                            elif win2 == 1:
+                                print(*board, sep='\n')
+                                print("player {0} winning".format('human'))
+                                print("*****GAME END*****")
+                                break
+                    # print("purning：" + str(cut_count))
 
             else:
                 move = input("Input a slot player {0}: ".format(aiorhuman))
@@ -3260,9 +3812,9 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor):
                                 print(i.strip()+'')
                             transfermove = cardinformation(move, cindex, rindex, card)
                             firstuser.append(transfermove)
-                            yindex2, xindex2 = dropindex(cindex, rindex, card)
-                            board2[rindex][cindex][0] = 1
-                            board2[xindex2][yindex2][0] = 1
+                            # yindex2, xindex2 = dropindex(cindex, rindex, card)
+                            # board2[rindex][cindex][0] = 1
+                            # board2[xindex2][yindex2][0] = 1
                         if user2=='dots':
                             win1 = winning_move(board, user1,user2)
                             win2 = winning_move(board, user2, user1)
@@ -3393,9 +3945,9 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                     recyclinglist.append(str(12-coordinate[4]).strip())
                     transfermove = cardinformation(recyclinglist, coordinate[5], coordinate[4], coordinate[6])
                     recyclelist.append(transfermove)
-                    yindex2, xindex2 = dropindex(coordinate[5], coordinate[4], coordinate[6])
-                    board2[coordinate[4]][coordinate[5]][0] = 1
-                    board2[xindex2][yindex2][0] = 1
+                    # yindex2, xindex2 = dropindex(coordinate[5], coordinate[4], coordinate[6])
+                    # board2[coordinate[4]][coordinate[5]][0] = 1
+                    # board2[xindex2][yindex2][0] = 1
                     drop_piece3(board3, coordinate[4], coordinate[5], coordinate[6])
                     # print("searching：")
                     # print(search_count)
@@ -3488,9 +4040,9 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                             transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
                             recyclelist.append(transfermove)
                             drop_piece3(board3, rindex, cindex3, card)
-                            yindex2, xindex2 = dropindex(cindex3, rindex, card)
-                            board2[rindex][cindex3][0] = 1
-                            board2[xindex2][yindex2][0] = 1
+                            # yindex2, xindex2 = dropindex(cindex3, rindex, card)
+                            # board2[rindex][cindex3][0] = 1
+                            # board2[xindex2][yindex2][0] = 1
 
                         if user1=='dots':
                             win1 = winning_move(board, user1, user2)
@@ -3602,9 +4154,9 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                     recyclinglist.append(str(12-coordinate[4]).strip())
                     transfermove = cardinformation(recyclinglist, coordinate[5], coordinate[4], coordinate[6])
                     recyclelist.append(transfermove)
-                    yindex2, xindex2 = dropindex(coordinate[5], coordinate[4], coordinate[6])
-                    board2[coordinate[4]][coordinate[5]][0] = 1
-                    board2[xindex2][yindex2][0] = 1
+                    # yindex2, xindex2 = dropindex(coordinate[5], coordinate[4], coordinate[6])
+                    # board2[coordinate[4]][coordinate[5]][0] = 1
+                    # board2[xindex2][yindex2][0] = 1
                     drop_piece3(board3, coordinate[4], coordinate[5], coordinate[6])
                     print("searching：", end='')
                     print(search_count)
@@ -3699,9 +4251,9 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                             transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
                             recyclelist.append(transfermove)
                             drop_piece3(board3, rindex, cindex3, card)
-                            yindex2, xindex2 = dropindex(cindex3, rindex, card)
-                            board2[rindex][cindex3][0] = 1
-                            board2[xindex2][yindex2][0] = 1
+                            # yindex2, xindex2 = dropindex(cindex3, rindex, card)
+                            # board2[rindex][cindex3][0] = 1
+                            # board2[xindex2][yindex2][0] = 1
                         if user2=='dots':
                             win1 = winning_move(board, user1,user2)
                             win2 = winning_move(board, user2, user1)
@@ -3780,12 +4332,14 @@ if __name__ == '__main__':
     AIORHUMAN = 'AI'
     if PlayerGoesFirst():
         user1,user2,turn,dotscolor = PlayerOption(AIORHUMAN)
+        AIFIRST=True
     else:
         AIORHUMAN = 'human'
         user1,user2,turn,dotscolor = PlayerOption(AIORHUMAN)
+        AIFIRST=False
     game_over = False
     board = create_board()
     board2 = create_board2()
     board3 = create_board()
     print(*board, sep='\n')
-    play(user1,user2,turn,game_over,AIORHUMAN,dotscolor)
+    play(user1,user2,turn,game_over,AIORHUMAN,dotscolor,AIFIRST)
