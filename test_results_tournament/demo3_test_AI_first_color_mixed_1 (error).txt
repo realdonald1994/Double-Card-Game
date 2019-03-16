@@ -54,10 +54,9 @@ Overall steps: 2
 It’s the turn of AI
 Does AI activate alpha-beta? (y/n) : n
 Traceback (most recent call last):
-  File "doublecard.py", line 4570, in <module>
+  File "doublecard.py", line 3296, in <module>
     play(user1,user2,turn,game_over,AIORHUMAN,dotscolor,AIFIRST)
-  File "doublecard.py", line 3958, in play
+  File "doublecard.py", line 2750, in play
     drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
 TypeError: 'NoneType' object is not subscriptable
-[pa] [/home/l/l_yixu/Downloads/comp6721-master/Tournament] > 
 
