@@ -144,32 +144,7 @@ def returnindex(colindex):
         str = 'H'
     return str
 
-# def dropindex(cindex,rindex,card):
-#     if (card is Card.card1):
-#         nextcindex = cindex+1
-#         nextrindex = rindex
-#     elif(card is Card.card2):
-#         nextcindex = cindex
-#         nextrindex = rindex-1
-#     elif(card is Card.card3):
-#         nextcindex = cindex+1
-#         nextrindex = rindex
-#     elif(card is Card.card4):
-#         nextcindex = cindex
-#         nextrindex = rindex-1
-#     elif(card is Card.card5):
-#         nextcindex = cindex+1
-#         nextrindex = rindex
-#     elif(card is Card.card6):
-#         nextcindex = cindex
-#         nextrindex = rindex-1
-#     elif(card is Card.card7):
-#         nextcindex = cindex+1
-#         nextrindex = rindex
-#     elif(card is Card.card8):
-#         nextcindex = cindex
-#         nextrindex = rindex-1
-#     return nextcindex,nextrindex
+
 def cardinformation(move,cindex,rindex,card):
     if (card is Card.card1):
         nextcindex = cindex+1
@@ -248,31 +223,31 @@ def is_valid2(move1,move2):
     return True
 
 
-# def isalone(board3,row,col,piece):
-#     drop_piece3(board3, row, col, piece)
-#     if row==11:
-#             if (piece is Card.card2 or piece is Card.card4 or piece is Card.card6 or piece is Card.card8):
-#                 if col==0:
-#                     if board3[row][col+1]=='□□':
-#                         return True
-#                 elif col==7:
-#                     if board3[row][col-1]=='□□':
-#                         return True
-#                 else:
-#                     if board3[row][col-1]=='□□' and board3[row][col+1]=='□□':
-#                         return True
-#             else:
-#                 if col==0:
-#                     if board3[row][col+2]=='□□':
-#                         return True
-#                 elif col==6:
-#                     if board3[row][col-1]=='□□':
-#                         return True
-#                 else:
-#                     if board3[row][col-1]=='□□' and board3[row][col+2]=='□□':
-#                         return True
-#     remove_piece3(board3, row, col, piece)
-#     return False
+def isalone(board3,row,col,piece):
+    drop_piece3(board3, row, col, piece)
+    if row==11:
+            if (piece is Card.card2 or piece is Card.card4 or piece is Card.card6 or piece is Card.card8):
+                if col==0:
+                    if board3[row][col+1]=='□□':
+                        return True
+                elif col==7:
+                    if board3[row][col-1]=='□□':
+                        return True
+                else:
+                    if board3[row][col-1]=='□□' and board3[row][col+1]=='□□':
+                        return True
+            else:
+                if col==0:
+                    if board3[row][col+2]=='□□':
+                        return True
+                elif col==6:
+                    if board3[row][col-1]=='□□':
+                        return True
+                else:
+                    if board3[row][col-1]=='□□' and board3[row][col+2]=='□□':
+                        return True
+    remove_piece3(board3, row, col, piece)
+    return False
 
 
 def drop_piece(board,row,col,piece):
@@ -449,39 +424,7 @@ def drop_piece(board,row,col,piece):
                 print("already fill up")
                 return False
 
-# def drop_piece2(board2,row,col,piece):
-#     if (piece is Card.card1):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 1
-#         board2[xindex2][yindex2][0] = 1
-#     elif(piece is Card.card2):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 1
-#         board2[xindex2][yindex2][0] = 1
-#     elif(piece is Card.card3):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 1
-#         board2[xindex2][yindex2][0] = 1
-#     elif(piece is Card.card4):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 1
-#         board2[xindex2][yindex2][0] = 1
-#     elif(piece is Card.card5):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 1
-#         board2[xindex2][yindex2][0] = 1
-#     elif(piece is Card.card6):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 1
-#         board2[xindex2][yindex2][0] = 1
-#     elif(piece is Card.card7):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 1
-#         board2[xindex2][yindex2][0] = 1
-#     elif(piece is Card.card8):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 1
-#         board2[xindex2][yindex2][0] = 1
+
 
 
 
@@ -675,39 +618,7 @@ def remove_piece3(board3,row,col,piece):
         board3[row][col]='□□'
         board3[row][col+1]='□□'
 
-# def remove_piece2(board2,row,col,piece):
-#     if (piece is Card.card1):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 0
-#         board2[xindex2][yindex2][0] = 0
-#     elif(piece is Card.card2):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 0
-#         board2[xindex2][yindex2][0] = 0
-#     elif(piece is Card.card3):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 0
-#         board2[xindex2][yindex2][0] = 0
-#     elif(piece is Card.card4):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 0
-#         board2[xindex2][yindex2][0] = 0
-#     elif(piece is Card.card5):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 0
-#         board2[xindex2][yindex2][0] = 0
-#     elif(piece is Card.card6):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 0
-#         board2[xindex2][yindex2][0] = 0
-#     elif(piece is Card.card7):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 0
-#         board2[xindex2][yindex2][0] = 0
-#     elif(piece is Card.card8):
-#         yindex2, xindex2 = dropindex(col, row, piece)
-#         board2[row][col][0] = 0
-#         board2[xindex2][yindex2][0] = 0
+
 
 def remove(board,board2,board3,raw1,col1,raw2,col2):
     if col1==col2:
@@ -875,9 +786,9 @@ def evaluation(board,board2,board3,player):
     en_count+=1
     SCOREAI =0
     SCOREHUMAN =0
-    DoubleDeadThree = 10000
-    OneThreeOneTwo = 10000
-    doubleTwo = 10000
+    DoubleDeadThree = 100000
+    OneThreeOneTwo = 100000
+    doubleTwo = 100000
     # X coordinate
     listx =[]
     listy=[]
@@ -943,179 +854,21 @@ def evaluation(board,board2,board3,player):
             list_negadiag.append(list)
             r+=1
     alllist=listx+listy+list_posdiag+list_negadiag
-    #EVLUATION: FOUR
-    oraifour=[]
-    orhumanfour=[]
-    # scoreai,scorehuman,aifour1,humanfour1 = hurestic_overallfunction4(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraifour.append(aifour1)
-    # orhumanfour.append(humanfour1)
-    # scoreai, scorehuman,aifour2,humanfour2 = hurestic_overallfunction4(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraifour.append(aifour2)
-    # orhumanfour.append(humanfour2)
-    # scoreai, scorehuman,aifour3,humanfour3 = hurestic_overallfunction4(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraifour.append(aifour3)
-    # orhumanfour.append(humanfour3)
-    # scoreai, scorehuman,aifour4,humanfour4 = hurestic_overallfunction4(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraifour.append(aifour4)
-    # orhumanfour.append(humanfour4)
+
     scoreai,scorehuman,aifour,humanfour = hurestic_overallfunction4(alllist,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
-    oraifour.append(aifour)
-    orhumanfour.append(humanfour)
 
-    sumfour=0
-    sumfour2=0
-    for i in oraifour:
-        if i>0:
-            sumfour+=1
-    for i in orhumanfour:
-        if i>0:
-            sumfour2+=1
-    if sumfour>0:
+    if aifour>0:
         return SCOREAI - SCOREHUMAN
-    if sumfour2>0:
+    if humanfour>0:
         return SCOREAI - SCOREHUMAN
 
-    #EVLUATION: THREE
-    # oraithree=[]
-    # orhumanthree=[]
-    # scoreai,scorehuman,aithree1,humanthree1 = hurestic_overallfunction3(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraithree.append(aithree1)
-    # orhumanthree.append(humanthree1)
-    # scoreai, scorehuman,aithree2,humanthree2 = hurestic_overallfunction3(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraithree.append(aithree2)
-    # orhumanthree.append(humanthree2)
-    # scoreai, scorehuman,aithree3,humanthree3 = hurestic_overallfunction3(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraithree.append(aithree3)
-    # orhumanthree.append(humanthree3)
-    # scoreai, scorehuman,aithree4,humanthree4 = hurestic_overallfunction3(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraithree.append(aithree4)
-    # orhumanthree.append(humanthree4)
 
-    oraithree=[]
-    orhumanthree=[]
-    scoreai, scorehuman,aithree,humanthree = hurestic_overallfunction3(alllist, player)
-    SCOREAI+=scoreai
-    SCOREHUMAN+=scorehuman
-    oraithree.append(aithree)
-    orhumanthree.append(humanthree)
-
-    sumalivethree=0
-    sumalivethree2=0
-    for i in oraithree:
-        if i>0:
-            sumalivethree+=1
-    for i in orhumanthree:
-        if i>0:
-            sumalivethree2+=1
-    if sumalivethree>0:
-        return SCOREAI - SCOREHUMAN
-    if sumalivethree2>0:
-        return SCOREAI - SCOREHUMAN
-
-    #EVLUATION: DEADTHREE
-    # oraidoublethree = []
-    # orhuamndoublethree = []
-    # scoreai,scorehuman,sumai1,sumhuman1 = hurestic_overallfunctionDead3(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai1)
-    # orhuamndoublethree.append(sumhuman1)
-    # scoreai, scorehuman,sumai2,sumhuman2 = hurestic_overallfunctionDead3(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai2)
-    # orhuamndoublethree.append(sumhuman2)
-    # scoreai, scorehuman,sumai3,sumhuman3 = hurestic_overallfunctionDead3(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai3)
-    # orhuamndoublethree.append(sumhuman3)
-    # scoreai, scorehuman,sumai4,sumhuman4 = hurestic_overallfunctionDead3(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai4)
-    # orhuamndoublethree.append(sumhuman4)
-    # scoreai,scorehuman,sumai5,sumhuman5 = hurestic_overallfunctionDead3second(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai5)
-    # orhuamndoublethree.append(sumhuman5)
-    # scoreai, scorehuman,sumai6,sumhuman6 = hurestic_overallfunctionDead3second(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai6)
-    # orhuamndoublethree.append(sumhuman6)
-    # scoreai, scorehuman,sumai7,sumhuman7 = hurestic_overallfunctionDead3second(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai7)
-    # orhuamndoublethree.append(sumhuman7)
-    # scoreai, scorehuman,sumai8,sumhuman8 = hurestic_overallfunctionDead3second(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai8)
-    # orhuamndoublethree.append(sumhuman8)
-    # scoreai,scorehuman,sumai9,sumhuman9 = hurestic_overallfunctionDead3third(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai9)
-    # orhuamndoublethree.append(sumhuman9)
-    # scoreai, scorehuman,sumai10,sumhuman10 = hurestic_overallfunctionDead3third(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai10)
-    # orhuamndoublethree.append(sumhuman10)
-    # scoreai, scorehuman,sumai11,sumhuman11 = hurestic_overallfunctionDead3third(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai11)
-    # orhuamndoublethree.append(sumhuman11)
-    # scoreai, scorehuman,sumai12,sumhuman12 = hurestic_overallfunctionDead3third(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai12)
-    # orhuamndoublethree.append(sumhuman12)
-    # scoreai,scorehuman,sumai13,sumhuman13= hurestic_overallfunctionDead3third(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai13)
-    # orhuamndoublethree.append(sumhuman13)
-    # scoreai, scorehuman,sumai14,sumhuman14 = hurestic_overallfunctionDead3third(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai14)
-    # orhuamndoublethree.append(sumhuman14)
-    # scoreai, scorehuman,sumai15,sumhuman15 = hurestic_overallfunctionDead3third(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai15)
-    # orhuamndoublethree.append(sumhuman15)
-    # scoreai, scorehuman,sumai16,sumhuman16 = hurestic_overallfunctionDead3third(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoublethree.append(sumai16)
-    # orhuamndoublethree.append(sumhuman16)
     oraidoublethree = []
     orhuamndoublethree = []
-    scoreai, scorehuman,sumai1,sumhuman1 = hurestic_overallfunctionDead3(alllist, player)
+
+    scoreai, scorehuman,sumai1,sumhuman1,aithree,humanthree = hurestic_overallfunctionDead3(alllist, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
     oraidoublethree.append(sumai1)
@@ -1125,111 +878,44 @@ def evaluation(board,board2,board3,player):
     SCOREHUMAN+=scorehuman
     oraidoublethree.append(sumai2)
     orhuamndoublethree.append(sumhuman2)
-    scoreai, scorehuman,sumai3,sumhuman3 = hurestic_overallfunctionDead3third(alllist, player)
+    scoreai, scorehuman,sumai3,sumhuman3,sumai4,sumhuman4 = hurestic_overallfunctionDead3third(alllist, player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
     oraidoublethree.append(sumai3)
     orhuamndoublethree.append(sumhuman3)
-
-    scoreai, scorehuman,sumai4,sumhuman4 = hurestic_overallfunctionDead3fourth(alllist, player)
-    SCOREAI+=scoreai
-    SCOREHUMAN+=scorehuman
     oraidoublethree.append(sumai4)
     orhuamndoublethree.append(sumhuman4)
+
+    if aithree>0:
+        return SCOREAI - SCOREHUMAN
+    if humanthree>0:
+        return SCOREAI - SCOREHUMAN
+
     sumthree =0
     sumthree2 =0
-    sumonethree=0
-    sumonethree2=0
     for i in oraidoublethree:
-        if i >1:
-            sumthree+=1
-        if i==1:
-            sumonethree+=1
-        return SCOREAI-SCOREHUMAN
-    for i in orhuamndoublethree:
-        if i >1:
-            sumthree2+=1
-        if i==1:
-            sumonethree2+=1
-    if sumthree>0:
+        sumthree+=i
+    if sumthree>1:
         SCOREAI+=DoubleDeadThree
-    if sumthree2>0:
+        return SCOREAI - SCOREHUMAN
+    for i in orhuamndoublethree:
+        sumthree2+=i
+    if sumthree2>1:
         SCOREHUMAN+=DoubleDeadThree
         return SCOREAI - SCOREHUMAN
 
-    #EVLUATION: TWO
+
     oraidoubletwo = []
     orhuamndoubletwo = []
-    # scoreai,scorehuman,sumai17,sumhuman17 = hurestic_overallfunction2(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai, scorehuman,sumai18,sumhuman18 = hurestic_overallfunction2(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai, scorehuman,sumai19,sumhuman19 = hurestic_overallfunction2(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai, scorehuman,sumai20,sumhuman20 = hurestic_overallfunction2(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai,scorehuman,sumai21,sumhuman21 = hurestic_overallfunction2second(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai, scorehuman,sumai22,sumhuman22 = hurestic_overallfunction2second(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai, scorehuman,sumai23,sumhuman23 = hurestic_overallfunction2second(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai, scorehuman,sumai24,sumhuman24 = hurestic_overallfunction2second(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai,scorehuman,sumai25,sumhuman25 = hurestic_overallfunction2third(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai, scorehuman,sumai26,sumhuman26 = hurestic_overallfunction2third(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai, scorehuman,sumai27,sumhuman27 = hurestic_overallfunction2third(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    # scoreai, scorehuman,sumai28,sumhuman28 = hurestic_overallfunction2third(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # oraidoubletwo.append(sumai17)
-    # orhuamndoubletwo.append(sumhuman17)
-    scoreai,scorehuman,sumai4,sumhuman4 = hurestic_overallfunction2(alllist,player)
+    scoreai,scorehuman,sumai4,sumhuman4,sumai5,sumhuman5 = hurestic_overallfunction2(alllist,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
     oraidoubletwo.append(sumai4)
     orhuamndoubletwo.append(sumhuman4)
-    scoreai,scorehuman,sumai5,sumhuman5 = hurestic_overallfunction2second(alllist,player)
-    SCOREAI+=scoreai
-    SCOREHUMAN+=scorehuman
     oraidoubletwo.append(sumai5)
     orhuamndoubletwo.append(sumhuman5)
+
+
     scoreai,scorehuman,sumai6,sumhuman6 = hurestic_overallfunction2third(alllist,player)
     SCOREAI+=scoreai
     SCOREHUMAN+=scorehuman
@@ -1238,202 +924,24 @@ def evaluation(board,board2,board3,player):
 
     sumtwo =0
     sumtwo2 =0
-    sumonetwo=0
-    sumonetwo2=0
+
     for i in oraidoubletwo:
-        if i >1:
-            sumtwo+=1
-        if i==1:
-            sumonetwo+=1
+        sumtwo+=i
+    if sumtwo>1:
+        SCOREAI += doubleTwo
+        return SCOREAI - SCOREHUMAN
     for i in orhuamndoubletwo:
-        if i >1:
-            sumtwo2+=1
-        if i==1:
-            sumonetwo2+=1
-    if sumtwo>0:
-        SCOREAI+=doubleTwo
-    if sumtwo2>0:
+        sumtwo2+=i
+    if sumtwo2>1:
         SCOREHUMAN+=doubleTwo
         return SCOREAI - SCOREHUMAN
-
-    if sumonethree>=1 and sumonetwo>=1:
+    if sumthree==1 and sumtwo==1:
         SCOREAI+=OneThreeOneTwo
         return SCOREAI - SCOREHUMAN
-    if sumonethree2>=1 and sumonetwo2>=1:
+    if sumthree2==1 and sumtwo2==1:
         SCOREHUMAN+=OneThreeOneTwo
         return SCOREAI - SCOREHUMAN
 
-    #EVLUATION: DEAD TWO
-    # scoreai,scorehuman = hurestic_overallfunctionDead2(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai,scorehuman = hurestic_overallfunctionDead2second(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2second(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2second(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2second(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai,scorehuman = hurestic_overallfunctionDead2third(listx,player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2third(listy, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2third(list_posdiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2third(list_negadiag, player)
-    # SCOREAI+=scoreai
-    # SCOREHUMAN+=scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2fourth(listx, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2fourth(listy, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2fourth(list_posdiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2fourth(list_negadiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    # scoreai, scorehuman = hurestic_overallfunctionDead2(alllist, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2second(alllist, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2third(alllist, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_overallfunctionDead2fourth(alllist, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    #
-    #EVLUATION: EMPTY
-    # scoreai, scorehuman = hurestic_functionEmptyfunction(listx)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_functionEmptyfunction(listy)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_functionEmptyfunction(list_posdiag)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_functionEmptyfunction(list_negadiag)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-
-    # EVLUATION: MINUS SCORE
-    # scoreai, scorehuman = hurestic_noway3(listx, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3(listy, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3(list_posdiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3(list_negadiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3second(listx, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3second(listy, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3second(list_posdiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3second(list_negadiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3thrid(listx, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3thrid(listy, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3thrid(list_posdiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3thrid(list_negadiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    # scoreai, scorehuman = hurestic_noway3(alllist, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3second(alllist, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway3thrid(alllist, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-
-    # scoreai, scorehuman = hurestic_noway2(listx, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2(listy, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2(list_posdiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2(list_negadiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2second(listx, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2second(listy, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2second(list_posdiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2second(list_negadiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2thrid(listx, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2thrid(listy, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2thrid(list_posdiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2thrid(list_negadiag, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    # scoreai, scorehuman = hurestic_noway2(alllist, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2second(alllist, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
-    # scoreai, scorehuman = hurestic_noway2thrid(alllist, player)
-    # SCOREAI += scoreai
-    # SCOREHUMAN += scorehuman
     return SCOREAI - SCOREHUMAN
 
 def hurestic_function4(list_elem1,list_elem2,list_elem3,list_elem4,player):
@@ -1656,493 +1164,7 @@ def hurestic_function2thrid(list_elem1,list_elem2,list_elem3,list_elem4,list_ele
         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5 == '□□':
             return 'Human'
     return 'no'
-# def hurestic_functionDeadTwo(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
-#     if player == 'colors':
-#         if  list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4=='□□' and list_elem5=='□□':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0]=='W' and list_elem5=='□□':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4=='□□' and list_elem5[0]=='W':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0]=='W' and list_elem5=='□□':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4== '□□' and list_elem5[0]=='W':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0]== 'W' and list_elem5[0]=='W':
-#             return 'AI'
-#         elif  list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4=='□□' and list_elem5=='□□':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0]=='R' and list_elem5=='□□':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4=='□□' and list_elem5[0]=='R':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0]=='R' and list_elem5=='□□':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4== '□□' and list_elem5[0]=='R':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0]== 'R' and list_elem5[0]=='R':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'O':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'O':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'O':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'X':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'X':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'X':
-#             return 'Human'
-#     else:
-#         if list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5 == '□□':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5 == '□□':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'O':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5 == '□□':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'O':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'O':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5 == '□□':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5 == '□□':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'X':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5 == '□□':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'X':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'X':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'W':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5[0] == 'W':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5[0] == 'W':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'R':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5 == '□□':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5[0] == 'R':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5[0] == 'R':
-#             return 'Human'
-#     return 'no'
-# def hurestic_functionDeadTwo1(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
-#     if player == 'colors':
-#         if list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5[0] == 'R':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5[0] == 'R':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'R':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5[0] == 'W':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5[0] == 'W':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'W':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'X':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'X':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'X':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'O':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'O':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'O':
-#             return 'Human'
-#     else:
-#         if list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'O' and list_elem5[1] == 'X':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'X':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2 == '□□' and list_elem3[1] == 'O' and list_elem4 == '□□' and list_elem5[1] == 'X':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'X':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[1] == 'X' and list_elem5[1] == 'O':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'O':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2 == '□□' and list_elem3[1] == 'X' and list_elem4 == '□□' and list_elem5[1] == 'O':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[1] == 'O':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5[0] == 'R':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4 == '□□' and list_elem5[0] == 'R':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'R':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3 == '□□' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5[0] == 'W':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4 == '□□' and list_elem5[0] == 'W':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4 == '□□' and list_elem5[0] == 'W':
-#             return 'Human'
-#     return 'no'
-# def hurestic_functionDeadTwo2(list_elem1,list_elem2,list_elem3,list_elem4,player):
-#     if player == 'colors':
-#         if  list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4=='□□':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4=='□□':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4=='□□':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4=='□□':
-#             return 'Human'
-#     else:
-#         if list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3 == '□□' and list_elem4=='□□':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3 == '□□' and list_elem4=='□□':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3 == '□□' and list_elem4 == '□□':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3 == '□□' and list_elem4 == '□□':
-#             return 'Human'
-#     return 'no'
-# def hurestic_functionDeadTwo3(list_elem1,list_elem2,list_elem3,list_elem4,player):
-#     if player == 'colors':
-#         if  list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0]=='W':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R'and list_elem4[0]=='R':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'O'and list_elem4[1]=='O':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'X'and list_elem4[1]=='X':
-#             return 'Human'
-#     else:
-#         if list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'O'and list_elem4[1]=='O':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[1] == 'X'and list_elem4[1]=='X':
-#             return 'AI'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'W' and list_elem4[0] == 'W':
-#             return 'Human'
-#         elif list_elem1 == '□□' and list_elem2 == '□□' and list_elem3[0] == 'R' and list_elem4[0] == 'R':
-#             return 'Human'
-#     return 'no'
-# def hurestic_nopossible3(list_elem1,list_elem2,list_elem3,list_elem4,list_elem5,player):
-#     if player == 'colors':
-#         if  list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0]=='W' and list_elem5[0]=='R':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0]=='R' and list_elem5[0]=='W':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1]=='O'and list_elem5[1]=='X':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1]=='X'and list_elem5[1]=='O':
-#             return 'Human'
-#     else:
-#         if list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1]=='O'and list_elem5[1]=='X':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1]=='X'and list_elem5[1]=='O':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W' and list_elem5[0] == 'R':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R' and list_elem5[0] == 'W':
-#             return 'Human'
-#     return 'no'
-# def hurestic_nopossible3second(list_elem1,list_elem2,list_elem3,list_elem4,player):
-#     if player == 'colors':
-#         if  list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0]=='R':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'R'and list_elem4[0]=='R':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4[1]=='X':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4[1]=='O':
-#             return 'Human'
-#     else:
-#         if list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4[1]=='R':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4[1]=='O':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'R':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'W':
-#             return 'Human'
-#     return 'no'
-# def hurestic_nopossible3thrid(list_elem1,list_elem2,list_elem3,list_elem4,player):
-#     if player == 'colors':
-#         if  list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0]=='W':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R'and list_elem4[0]=='R':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4[1]=='O':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4[1]=='X':
-#             return 'Human'
-#     else:
-#         if list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O'and list_elem4[1]=='O':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X'and list_elem4[1]=='X':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'W':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'R':
-#             return 'Human'
-#     return 'no'
-# def hurestic_nopossible2(list_elem1,list_elem2,list_elem3,list_elem4,player):
-#     if player == 'colors':
-#         if list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'R':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'W':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1] == 'X':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1] == 'O':
-#             return 'Human'
-#     else:
-#         if list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O' and list_elem4[1] == 'X':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X' and list_elem4[1] == 'O':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W' and list_elem4[0] == 'R':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R' and list_elem4[0] == 'W':
-#             return 'Human'
-#     return 'no'
-# def hurestic_nopossible2second(list_elem1,list_elem2,list_elem3,player):
-#     if player == 'colors':
-#         if  list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'R':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'W':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'X':
-#             return 'Human'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'O':
-#             return 'Human'
-#     else:
-#         if list_elem1[1] == 'O' and list_elem2[1] == 'O' and list_elem3[1] == 'R':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'X' and list_elem3[1] == 'O':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'W' and list_elem3[0] == 'R':
-#             return 'Human'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'R' and list_elem3[0] == 'W':
-#             return 'Human'
-#     return 'no'
-# def hurestic_nopossible2thrid(list_elem1,list_elem2,list_elem3,player):
-#     if player == 'colors':
-#         if  list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W':
-#             return 'AI'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R':
-#             return 'AI'
-#         elif list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O':
-#             return 'Human'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X':
-#             return 'Human'
-#     else:
-#         if list_elem1[1] == 'X' and list_elem2[1] == 'O' and list_elem3[1] == 'O':
-#             return 'AI'
-#         elif list_elem1[1] == 'O' and list_elem2[1] == 'X' and list_elem3[1] == 'X':
-#             return 'AI'
-#         elif list_elem1[0] == 'R' and list_elem2[0] == 'W' and list_elem3[0] == 'W':
-#             return 'Human'
-#         elif list_elem1[0] == 'W' and list_elem2[0] == 'R' and list_elem3[0] == 'R':
-#             return 'Human'
-#     return 'no'
-# def hurestic_functionEmptyfunction(list):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     Empty = 50
-#     for i in range(len(list)):
-#         sum=0
-#         for j in range(0,len(list[i])):
-#                 if list[i][j]=='□□':
-#                     continue
-#                 else:
-#                     sum+=1
-#         if sum==0:
-#             SCOREAI += Empty
-#             SCOREHUMAN += Empty
-#         else:
-#             continue
-#     return SCOREAI,SCOREHUMAN
-# def hurestic_noway3(list,player):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     no3=10
-#     for i in range(len(list)):
-#         for j in range(1,len(list[i])-3):
-#             if player =='colors':
-#                 output = hurestic_nopossible3(list[i][j-1],list[i][j],list[i][j+1],list[i][j+2],list[i][j+3],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no3
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no3
-#             else:
-#                 output = hurestic_nopossible3(list[i][j-1],list[i][j],list[i][j+1],list[i][j+2],list[i][j+3],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no3
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no3
-#     return SCOREAI,SCOREHUMAN
-# def hurestic_noway3second(list,player):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     no3=10
-#     for i in range(len(list)):
-#             if player =='colors':
-#                 output = hurestic_nopossible3second(list[i][0], list[i][1], list[i][2],list[i][3],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no3
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no3
-#             else:
-#                 output = hurestic_nopossible3second(list[i][0], list[i][1], list[i][2],list[i][3],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no3
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no3
-#     return SCOREAI,SCOREHUMAN
-# def hurestic_noway3thrid(list,player):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     no3=10
-#     for i in range(len(list)):
-#             if player =='colors':
-#                 output = hurestic_nopossible3thrid(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no3
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no3
-#             else:
-#                 output = hurestic_nopossible3thrid(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no3
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no3
-#     return SCOREAI,SCOREHUMAN
-# def hurestic_noway2(list,player):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     no2=10
-#     for i in range(len(list)):
-#         for j in range(1,len(list[i])-2):
-#             if player =='colors':
-#                 output = hurestic_nopossible2(list[i][j-1],list[i][j],list[i][j+1],list[i][j+2],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no2
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no2
-#             else:
-#                 output = hurestic_nopossible2(list[i][j-1],list[i][j],list[i][j+1],list[i][j+2],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no2
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no2
-#     return SCOREAI,SCOREHUMAN
-# def hurestic_noway2second(list,player):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     no2=10
-#     for i in range(len(list)):
-#             if player =='colors':
-#                 output = hurestic_nopossible2second(list[i][0], list[i][1], list[i][2],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no2
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no2
-#             else:
-#                 output = hurestic_nopossible2second(list[i][0], list[i][1], list[i][2],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no2
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no2
-#     return SCOREAI,SCOREHUMAN
-# def hurestic_noway2thrid(list,player):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     no2=10
-#     for i in range(len(list)):
-#             if player =='colors':
-#                 output = hurestic_nopossible2thrid(list[i][-3], list[i][-2],list[i][-1],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no2
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no2
-#             else:
-#                 output = hurestic_nopossible2thrid(list[i][-3], list[i][-2],list[i][-1],player)
-#                 if output == 'AI':
-#                     SCOREAI -= no2
-#                 elif output == 'Human':
-#                     SCOREHUMAN -= no2
-#     return SCOREAI,SCOREHUMAN
+
 def hurestic_overallfunction4(list,player):
     SCOREHUMAN =0
     SCOREAI=0
@@ -2168,56 +1190,49 @@ def hurestic_overallfunction4(list,player):
                     SCOREHUMAN += WinFour
                     sumHuman+=1
     return SCOREAI,SCOREHUMAN,sumAI,sumHuman
-def hurestic_overallfunction3(list,player):
-    SCOREHUMAN =0
-    SCOREAI=0
-    sumAI = 0
-    sumHuman = 0
-    AliveThree=10000
-    for i in range(len(list)):
-        for j in range(1,len(list[i])-3):
-            if player =='colors':
-                output = hurestic_function3(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
-                if output == 'AI':
-                    SCOREAI += AliveThree
-                    sumAI += 1
-                elif output == 'Human':
-                    SCOREHUMAN += AliveThree
-                    sumHuman += 1
-            else:
-                output = hurestic_function3(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
-                if output == 'AI':
-                    SCOREAI += AliveThree
-                    sumAI += 1
-                elif output == 'Human':
-                    SCOREHUMAN += AliveThree
-                    sumHuman += 1
-    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
+
 def hurestic_overallfunctionDead3(list,player):
     SCOREHUMAN =0
     SCOREAI=0
     DeadThree = 500
     sumAI=0
     sumHuman=0
+    sumAI2 = 0
+    sumHuman2 = 0
+    AliveThree=100000
     for i in range(len(list)):
         for j in range(1,len(list[i])-3):
             if player =='colors':
                 output = hurestic_functionDeadThree(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                output2 = hurestic_function3(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
                 if output == 'AI':
                     sumAI+=1
                     SCOREAI += DeadThree
                 elif output == 'Human':
                     sumHuman+=1
                     SCOREHUMAN += DeadThree
+                if output2== 'AI':
+                    SCOREAI += AliveThree
+                    sumAI2 += 1
+                elif output2 == 'Human':
+                    SCOREHUMAN += AliveThree
+                    sumHuman2 += 1
             else:
                 output = hurestic_functionDeadThree(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                output2 = hurestic_function3(list[i][j - 1], list[i][j], list[i][j + 1], list[i][j + 2], list[i][j + 3],player)
                 if output == 'AI':
                     sumAI += 1
                     SCOREAI += DeadThree
                 elif output == 'Human':
                     sumHuman += 1
                     SCOREHUMAN += DeadThree
-    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
+                if output2== 'AI':
+                    SCOREAI += AliveThree
+                    sumAI2 += 1
+                elif output2 == 'Human':
+                    SCOREHUMAN += AliveThree
+                    sumHuman2 += 1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman,sumAI,sumAI2
 def hurestic_overallfunctionDead3second(list,player):
     SCOREHUMAN =0
     SCOREAI=0
@@ -2249,102 +1264,87 @@ def hurestic_overallfunctionDead3third(list,player):
     DeadThree = 500
     sumAI = 0
     sumHuman = 0
+    sumAI2 = 0
+    sumHuman2 = 0
     for i in range(len(list)):
             if player =='colors':
                 output = hurestic_functionDeadThree3(list[i][0], list[i][1], list[i][2],list[i][3],player)
+                output2 = hurestic_functionDeadThree4(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
                 if output == 'AI':
                     SCOREAI += DeadThree
                     sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += DeadThree
                     sumHuman += 1
+                if output2 =='AI':
+                    SCOREAI += DeadThree
+                    sumAI2 += 1
+                elif output2 == 'Human':
+                    SCOREHUMAN += DeadThree
+                    sumHuman2 += 1
             else:
                 output = hurestic_functionDeadThree3(list[i][0], list[i][1], list[i][2],list[i][3],player)
+                output2 = hurestic_functionDeadThree4(list[i][-4], list[i][-3], list[i][-2], list[i][-1], player)
                 if output == 'AI':
                     SCOREAI += DeadThree
                     sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += DeadThree
                     sumHuman += 1
-    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
-def hurestic_overallfunctionDead3fourth(list,player):
-    SCOREHUMAN =0
-    SCOREAI=0
-    DeadThree = 500
-    sumAI = 0
-    sumHuman = 0
-    for i in range(len(list)):
-            if player =='colors':
-                output = hurestic_functionDeadThree4(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
-                if output == 'AI':
+                if output2 == 'AI':
                     SCOREAI += DeadThree
-                    sumAI += 1
-                elif output == 'Human':
+                    sumAI2 += 1
+                elif output2 == 'Human':
                     SCOREHUMAN += DeadThree
-                    sumHuman += 1
-            else:
-                output = hurestic_functionDeadThree4(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
-                if output == 'AI':
-                    SCOREAI += DeadThree
-                    sumAI += 1
-                elif output == 'Human':
-                    SCOREHUMAN += DeadThree
-                    sumHuman += 1
-    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
+                    sumHuman2 += 1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman,sumAI2,sumHuman2
+
 def hurestic_overallfunction2(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    AliveTwo = 250
+    AliveTwo = 500
     sumAI = 0
     sumHuman = 0
+    sumAI2 = 0
+    sumHuman2 = 0
     for i in range(len(list)):
         for j in range(1,len(list[i])-3):
             if player =='colors':
                 output = hurestic_function2(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                output2 = hurestic_function2second(list[i][j - 1], list[i][j], list[i][j + 1], list[i][j + 2],list[i][j + 3], player)
                 if output == 'AI':
                     SCOREAI += AliveTwo
                     sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += AliveTwo
                     sumHuman+=1
+                if output2=='AI':
+                    SCOREAI += AliveTwo
+                    sumAI2 += 1
+                elif output2 == 'Human':
+                    SCOREHUMAN += AliveTwo
+                    sumHuman2+=1
             else:
                 output = hurestic_function2(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
+                output2 = hurestic_function2second(list[i][j - 1], list[i][j], list[i][j + 1], list[i][j + 2],list[i][j + 3], player)
                 if output == 'AI':
                     SCOREAI += AliveTwo
                     sumAI += 1
                 elif output == 'Human':
                     SCOREHUMAN += AliveTwo
                     sumHuman += 1
-    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
-def hurestic_overallfunction2second(list,player):
-    SCOREHUMAN =0
-    SCOREAI=0
-    AliveTwo = 250
-    sumAI = 0
-    sumHuman = 0
-    for i in range(len(list)):
-        for j in range(1,len(list[i])-3):
-            if player =='colors':
-                output = hurestic_function2second(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
-                if output == 'AI':
+                if output2=='AI':
                     SCOREAI += AliveTwo
-                    sumAI += 1
-                elif output == 'Human':
+                    sumAI2 += 1
+                elif output2 == 'Human':
                     SCOREHUMAN += AliveTwo
-                    sumHuman += 1
-            else:
-                output = hurestic_function2second(list[i][j-1],list[i][j], list[i][j + 1], list[i][j + 2],list[i][j+3],player)
-                if output == 'AI':
-                    SCOREAI += AliveTwo
-                    sumAI += 1
-                elif output == 'Human':
-                    SCOREHUMAN += AliveTwo
-                    sumHuman += 1
-    return SCOREAI,SCOREHUMAN,sumAI,sumHuman
+                    sumHuman2+=1
+    return SCOREAI,SCOREHUMAN,sumAI,sumHuman,sumAI2,sumHuman2
+
 def hurestic_overallfunction2third(list,player):
     SCOREHUMAN =0
     SCOREAI=0
-    AliveTwo = 250
+    AliveTwo = 500
     sumAI = 0
     sumHuman = 0
     for i in range(len(list)):
@@ -2366,80 +1366,7 @@ def hurestic_overallfunction2third(list,player):
                     SCOREHUMAN += AliveTwo
                     sumHuman += 1
     return SCOREAI,SCOREHUMAN,sumAI,sumHuman
-# def hurestic_overallfunctionDead2(list,player):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     DeadTwo = 50
-#     for i in range(len(list)):
-#         for j in range(1,len(list[i])-3):
-#             if player =='colors':
-#                 output = hurestic_functionDeadTwo(list[i][j-1],list[i][j], list[i][j+1], list[i][j + 2],list[i][j+3],player)
-#                 if output == 'AI':
-#                     SCOREAI += DeadTwo
-#                 elif output == 'Human':
-#                     SCOREHUMAN += DeadTwo
-#             else:
-#                 output = hurestic_functionDeadTwo(list[i][j-1],list[i][j], list[i][j+1], list[i][j + 2],list[i][j+3],player)
-#                 if output == 'AI':
-#                     SCOREAI += DeadTwo
-#                 elif output == 'Human':
-#                     SCOREHUMAN += DeadTwo
-#     return SCOREAI,SCOREHUMAN
-# def hurestic_overallfunctionDead2second(list,player):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     DeadTwo = 50
-#     for i in range(len(list)):
-#         for j in range(2,len(list[i])-2):
-#             if player =='colors':
-#                 output = hurestic_functionDeadTwo1(list[i][j-2],list[i][j-1], list[i][j], list[i][j + 1],list[i][j+2],player)
-#                 if output == 'AI':
-#                     SCOREAI += DeadTwo
-#                 elif output == 'Human':
-#                     SCOREHUMAN += DeadTwo
-#             else:
-#                 output = hurestic_functionDeadTwo1(list[i][j-2],list[i][j-1], list[i][j], list[i][j + 1],list[i][j+2],player)
-#                 if output == 'AI':
-#                     SCOREAI += DeadTwo
-#                 elif output == 'Human':
-#                     SCOREHUMAN += DeadTwo
-#     return SCOREAI,SCOREHUMAN
-# def hurestic_overallfunctionDead2third(list,player):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     DeadTwo = 50
-#     for i in range(len(list)):
-#             if player =='colors':
-#                 output = hurestic_functionDeadTwo2(list[i][0], list[i][1], list[i][2],list[i][3],player)
-#                 if output == 'AI':
-#                     SCOREAI += DeadTwo
-#                 elif output == 'Human':
-#                     SCOREHUMAN += DeadTwo
-#             else:
-#                 output = hurestic_functionDeadTwo2(list[i][0], list[i][1], list[i][2],list[i][3],player)
-#                 if output == 'AI':
-#                     SCOREAI += DeadTwo
-#                 elif output == 'Human':
-#                     SCOREHUMAN += DeadTwo
-#     return SCOREAI,SCOREHUMAN
-# def hurestic_overallfunctionDead2fourth(list,player):
-#     SCOREHUMAN =0
-#     SCOREAI=0
-#     DeadTwo = 50
-#     for i in range(len(list)):
-#             if player =='colors':
-#                 output = hurestic_functionDeadTwo3(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
-#                 if output == 'AI':
-#                     SCOREAI += DeadTwo
-#                 elif output == 'Human':
-#                     SCOREHUMAN += DeadTwo
-#             else:
-#                 output = hurestic_functionDeadTwo3(list[i][-4], list[i][-3], list[i][-2],list[i][-1],player)
-#                 if output == 'AI':
-#                     SCOREAI += DeadTwo
-#                 elif output == 'Human':
-#                     SCOREHUMAN += DeadTwo
-#     return SCOREAI,SCOREHUMAN
+
 def SwitchPlayer(player):
     if player == 'dots':
         nextplayer = 'colors'
@@ -2674,7 +1601,7 @@ def lastaphabeta(board,board2,depth,alpha,beta,dotscolor,list1):
                 coordinate.append(fakelist)
             else:
                 continue
-        g = random.randint(0, len(coordinate) - 1)
+        # g = random.randint(0, len(coordinate) - 1)
         return coordinate[0][0], coordinate[0][1], coordinate[0][2], coordinate[0][3], maxvalues
 def lastminaphabeta(board,board2,depth,alpha,beta,player,list1):
     opponent = SwitchPlayer(player)
@@ -2685,10 +1612,7 @@ def lastminaphabeta(board,board2,depth,alpha,beta,player,list1):
     for k in range(len(candidate1)):
         global flag2
         flag2=1
-        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
-        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
-        #             list1[len(list1) - 1][3]):
-        #         continue
+
         real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
         for i in list:
@@ -2739,17 +1663,7 @@ def lastminaphabeta(board,board2,depth,alpha,beta,player,list1):
                     drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                                    candidate1[k][3], candidate1[k][4])
                     return beta
-        #                 flag=1
-        #                 break
-        #             else:
-        #                 flag=0
-        #         if flag == 1:
-        #             flag2 = 0
-        #             break
-        #         else:
-        #             continue
-        # if flag2==0:
-        #     continue
+
 
         drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                        candidate1[k][3], candidate1[k][4])
@@ -2879,98 +1793,30 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
     value = -1000000000
     global search_count
     if dotscolor=='colors':
+
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
         for i in list:
             piece = which_card(i)
-            candidate = blanklist(board, piece)
-        # list = ['1', '2', '3', '4', '5', '6', '7', '8']
-        # for i in list:
-        #     piece = which_card(i)
-        #     candidate_eachpiece = blanklist(board, piece)
-        #     candidate.append(candidate_eachpiece)
-        # for k in range(len(candidate)):
-        #     for j in range(len(candidate[k])):
-        #         neighbor = isalone(board3,candidate[k][j][0],candidate[k][j][1],candidate[k][j][2])
-        #         if neighbor:
-        #             continue
-        #         else:
-        #             search_count += 1
-        #             drop_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-        #             # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-        #             drop_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-        #             level2value = alphabetapruningminfunction(board, board2, depth - 1, alpha, beta, dotscolor)
-        #             value = max(value, level2value)
-        #             maxvalues.append(level2value)
-        #             alpha = max(alpha, value)
-        #             values.append([value, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2]])
-        #             remove_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-        #             # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-        #             remove_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-            for j in range(len(candidate)):
-                search_count += 1
-                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                level2value = alphabetapruningminfunction(board, board2, depth - 1, alpha, beta, dotscolor)
-                value=max(value,level2value)
-                maxvalues.append(level2value)
-                alpha = max(alpha, value)
-                values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
-                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-        largestvalue = max(maxvalues)
-        for i in range(len(values)):
-            if largestvalue == values[i][0]:
-                coordinate.append(values[i][1])
-                coordinate.append(values[i][2])
-                coordinate.append(values[i][3])
-                coordinate.append(values[i][0])
-
-            else:
-                continue
-
-    elif dotscolor=='dots':
-        list = ['1', '2', '3', '4', '5', '6', '7', '8']
-        for i in list:
-            piece = which_card(i)
-            candidate = blanklist(board, piece)
-            for j in range(len(candidate)):
-                search_count += 1
-                drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-                level2value = alphabetapruningminfunction(board, board2, depth - 1, alpha, beta, dotscolor)
-                value = max(value, level2value)
-                maxvalues.append(level2value)
-                alpha = max(alpha, value)
-                values.append([value, candidate[j][0], candidate[j][1], candidate[j][2]])
-                remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-                remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-        # list = ['1', '2', '3', '4', '5', '6', '7', '8']
-        # for i in list:
-        #     piece = which_card(i)
-        #     candidate_eachpiece = blanklist(board, piece)
-        #     candidate.append(candidate_eachpiece)
-        # for k in range(len(candidate)):
-        #     for j in range(len(candidate[k])):
-        #         neighbor = isalone(board3,candidate[k][j][0],candidate[k][j][1],candidate[k][j][2])
-        #         if neighbor:
-        #             continue
-        #         else:
-        #             search_count += 1
-        #             drop_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-        #             # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-        #             drop_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-        #             level2value = alphabetapruningminfunction(board, board2, depth - 1, alpha, beta, dotscolor)
-        #             value = max(value, level2value)
-        #             maxvalues.append(level2value)
-        #             alpha = max(alpha, value)
-        #             values.append([value, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2]])
-        #             remove_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-        #             # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-        #             remove_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+            candidate_eachpiece = blanklist(board, piece)
+            candidate.append(candidate_eachpiece)
+        for k in range(len(candidate)):
+            for j in range(len(candidate[k])):
+                neighbor = isalone(board3,candidate[k][j][0],candidate[k][j][1],candidate[k][j][2])
+                if neighbor==True:
+                    continue
+                else:
+                    search_count += 1
+                    drop_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+                    # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+                    level2value = alphabetapruningminfunction(board, board2, depth - 1, alpha, beta, dotscolor)
+                    value = max(value, level2value)
+                    maxvalues.append(level2value)
+                    alpha = max(alpha, value)
+                    values.append([value, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2]])
+                    remove_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+                    # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
         largestvalue = max(maxvalues)
         for i in range(len(values)):
             fakelist=[]
@@ -2982,7 +1828,44 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 coordinate.append(fakelist)
             else:
                 continue
-    g = random.randint(0,len(coordinate)-1)
+
+    elif dotscolor=='dots':
+
+        list = ['1', '2', '3', '4', '5', '6', '7', '8']
+        for i in list:
+            piece = which_card(i)
+            candidate_eachpiece = blanklist(board, piece)
+            candidate.append(candidate_eachpiece)
+        for k in range(len(candidate)):
+            for j in range(len(candidate[k])):
+                neighbor = isalone(board3,candidate[k][j][0],candidate[k][j][1],candidate[k][j][2])
+                if neighbor==True:
+                    continue
+                else:
+                    search_count += 1
+                    drop_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+                    # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    drop_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+                    level2value = alphabetapruningminfunction(board, board2, depth - 1, alpha, beta, dotscolor)
+                    value = max(value, level2value)
+                    maxvalues.append(level2value)
+                    alpha = max(alpha, value)
+                    values.append([value, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2]])
+                    remove_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+                    # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                    remove_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+        largestvalue = max(maxvalues)
+        for i in range(len(values)):
+            fakelist=[]
+            if largestvalue == values[i][0]:
+                fakelist.append(values[i][1])
+                fakelist.append(values[i][2])
+                fakelist.append(values[i][3])
+                fakelist.append(values[i][0])
+                coordinate.append(fakelist)
+            else:
+                continue
+    # g = random.randint(0,len(coordinate)-1)
     return coordinate[0][0], coordinate[0][1], coordinate[0][2],coordinate[0][3],maxvalues
 
 # $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -3017,50 +1900,32 @@ def alphabetapruningminfunction(board,board2,depth,alpha,beta,player):
     candidate = []
     if (depth == 0):
         return evaluation(board, board2,board3,opponent)
+
     list = ['1', '2', '3', '4', '5', '6', '7', '8']
     for i in list:
         piece = which_card(i)
-        candidate = blanklist(board, piece)
-        for j in range(len(candidate)):
-            global search_count
-            search_count += 1
-            drop_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-            # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-            drop_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-            value = min(value,alphabetapruningmaxfunction(board, board2, depth - 1,alpha,beta,opponent))
-            remove_piece(board, candidate[j][0], candidate[j][1], candidate[j][2])
-            # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-            remove_piece3(board3, candidate[j][0], candidate[j][1], candidate[j][2])
-            beta = min(beta, value)
-            if beta <= alpha:
-                global cut_count
-                cut_count+=1
-                return beta
-    # list = ['1', '2', '3', '4', '5', '6', '7', '8']
-    # for i in list:
-    #     piece = which_card(i)
-    #     candidate_eachpiece = blanklist(board, piece)
-    #     candidate.append(candidate_eachpiece)
-    # for k in range(len(candidate)):
-    #     for j in range(len(candidate[k])):
-    #         neighbor = isalone(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-    #         if neighbor:
-    #             continue
-    #         else:
-    #             global search_count
-    #             search_count += 1
-    #             drop_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-    #             # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-    #             drop_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-    #             value = min(value, alphabetapruningmaxfunction(board, board2, depth - 1, alpha, beta, opponent))
-    #             remove_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-    #             # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
-    #             remove_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
-    #             beta = min(beta, value)
-    #             if beta <= alpha:
-    #                 global cut_count
-    #                 cut_count += 1
-    #                 return beta
+        candidate_eachpiece = blanklist(board, piece)
+        candidate.append(candidate_eachpiece)
+    for k in range(len(candidate)):
+        for j in range(len(candidate[k])):
+            neighbor = isalone(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+            if neighbor==True:
+                continue
+            else:
+                global search_count
+                search_count += 1
+                drop_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+                # drop_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                drop_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+                value = min(value, alphabetapruningmaxfunction(board, board2, depth - 1, alpha, beta, opponent))
+                remove_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+                # remove_piece2(board2, candidate[j][0], candidate[j][1], candidate[j][2])
+                remove_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
+                beta = min(beta, value)
+                if beta <= alpha:
+                    global cut_count
+                    cut_count += 1
+                    return beta
     return value
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 def minmaxrecycliing(board,board2,depth,dotscolor,list1):
@@ -3072,10 +1937,7 @@ def minmaxrecycliing(board,board2,depth,dotscolor,list1):
     if dotscolor == 'colors':
         candidate1 = remove_recyclingpiece(board3)
         for k in range(len(candidate1)):
-        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
-        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
-        #             list1[len(list1) - 1][3]):
-        #         continue
+
             real_removerecycle(board,board2,board3,candidate1[k][0],candidate1[k][1],candidate1[k][2],candidate1[k][3])
 
             list = ['1', '2', '3', '4', '5', '6', '7', '8']
@@ -3209,10 +2071,7 @@ def maxrecycling(board,board2,depth,player,list1):
         return evaluation(board,board2,board3,opponent)
     candidate1 = remove_recyclingpiece(board3)
     for k in range(len(candidate1)):
-        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
-        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
-        #             list1[len(list1) - 1][3]):
-        #         continue
+
         real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
 
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
@@ -3268,10 +2127,7 @@ def minrecycling(board,board2,depth,player,list1):
         return evaluation(board, board2,board3,opponent)
     candidate1 = remove_recyclingpiece(board3)
     for k in range(len(candidate1)):
-        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
-        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
-        #             list1[len(list1) - 1][3]):
-        #         continue
+
         real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
 
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
@@ -3328,10 +2184,7 @@ def alphabetapurningrecycling(board,board2,depth,alpha,beta,dotscolor,list1):
     if dotscolor == 'colors':
         candidate1 = remove_recyclingpiece(board3)
         for k in range(len(candidate1)):
-            # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
-            #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
-            #             list1[len(list1) - 1][3]):
-            #         continue
+
             real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                                candidate1[k][3])
 
@@ -3534,17 +2387,7 @@ def recyclingminaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
                     drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                                    candidate1[k][3], candidate1[k][4])
                     return beta
-        #                 flag=1
-        #                 break
-        #             else:
-        #                 flag=0
-        #         if flag == 1:
-        #             flag2 = 0
-        #             break
-        #         else:
-        #             continue
-        # if flag2==0:
-        #     continue
+
 
         drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                        candidate1[k][3], candidate1[k][4])
@@ -3559,10 +2402,7 @@ def recyclingmaxaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
     for k in range(len(candidate1)):
         global flag2
         flag2=1
-        # if candidate1[k][2] == list1[len(list1) - 1][4] and candidate1[k][3] == list1[len(list1) - 1][5]:
-        #     if candidate1[k][0] == which_cindex(list1[len(list1) - 1][2]) and candidate1[k][1] == 12 - int(
-        #             list1[len(list1) - 1][3]):
-        #         continue
+
         real_removerecycle(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],candidate1[k][3])
 
         list = ['1', '2', '3', '4', '5', '6', '7', '8']
@@ -3614,17 +2454,7 @@ def recyclingmaxaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
                     drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                                    candidate1[k][3], candidate1[k][4])
                     return alpha
-        #                 flag = 1
-        #                 break
-        #             else:
-        #                 flag = 0
-        #         if flag == 1:
-        #             flag2 = 0
-        #             break
-        #         else:
-        #             continue
-        # if flag2==0:
-        #     continue
+
 
         drop_recycling(board, board2, board3, candidate1[k][0], candidate1[k][1], candidate1[k][2],
                        candidate1[k][3], candidate1[k][4])
@@ -3753,9 +2583,7 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
                         transfermove = cardinformation(move, 0, 11, which_card('2'))
                         firstuser.append(transfermove)
 
-                        # yindex2, xindex2 = dropindex(0, 11, which_card('2'))
-                        # board2[11][0][0] = 1
-                        # board2[xindex2][yindex2][0] = 1
+
                         drop_piece3(board3, 11, 0, which_card('2'))
                 else:
 
@@ -3775,20 +2603,7 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
                         else:
                             coordinate = minimax(board,board2,DEPTH,dotscolor)
                             orpurning=2
-                    # if orpurning==1:
-                    #     outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
-                    #     if outputcmd.lower().startswith('y'):
-                    #         print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
-                    #         for i in range(0,len(coordinate[4])):
-                    #             print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
-                    #         print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
-                    # else:
-                    #     outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
-                    #     if outputcmd.lower().startswith('y'):
-                    #         print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
-                    #         for i in range(0,len(coordinate[4])):
-                    #             print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
-                    #         print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+
                     drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
                     stop = timeit.default_timer()
                     print('Time: ', stop - start)
@@ -3804,15 +2619,9 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
                         transfermove = cardinformation(move, coordinate[1], coordinate[0], coordinate[2])
                         firstuser.append(transfermove)
 
-                        # yindex2, xindex2 = dropindex(coordinate[1], coordinate[0], coordinate[2])
-                        # board2[coordinate[0]][coordinate[1]][0] = 1
-                        # board2[xindex2][yindex2][0] = 1
+
                         drop_piece3(board3, coordinate[0], coordinate[1], coordinate[2])
-                        # print("purning：" + str(cut_count))
-                        # print("searching：")
-                        # print(search_count)
-                        # print("purning：")
-                        # print(cut_count)
+
                         if user1 == 'dots':
                             win1 = winning_move(board, user1, user2)
                             win2 = winning_move(board, user2, user1)
@@ -3864,9 +2673,7 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
                             transfermove = cardinformation(move,cindex,rindex,card)
                             firstuser.append(transfermove)
 
-                            # yindex2,xindex2 = dropindex(cindex,rindex,card)
-                            # board2[rindex][cindex][0]=1
-                            # board2[xindex2][yindex2][0] = 1
+
                         if user1=='dots':
                             win1 = winning_move(board, user1,user2)
                             win2 = winning_move(board, user2,user1)
@@ -3919,9 +2726,7 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
                             print(i.strip() + '')
                         transfermove = cardinformation(move, 0, 11, which_card('2'))
                         firstuser.append(transfermove)
-                        # yindex2, xindex2 = dropindex(0, 11, which_card('2'))
-                        # board2[11][0][0] = 1
-                        # board2[xindex2][yindex2][0] = 1
+
                         drop_piece3(board3, 11, 0, which_card('2'))
                 else:
 
@@ -3941,20 +2746,7 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
                         else:
                             coordinate = minimax(board,board2,DEPTH,dotscolor)
                             orpurning=2
-                    # if orpurning==1:
-                    #     outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
-                    #     if outputcmd.lower().startswith('y'):
-                    #         print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
-                    #         for i in range(0,len(coordinate[4])):
-                    #             print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
-                    #         print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
-                    # else:
-                    #     outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
-                    #     if outputcmd.lower().startswith('y'):
-                    #         print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
-                    #         for i in range(0,len(coordinate[4])):
-                    #             print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
-                    #         print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+
                     drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
                     stop = timeit.default_timer()
                     print('Time: ', stop - start)
@@ -3970,14 +2762,9 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
                         transfermove = cardinformation(move, coordinate[1], coordinate[0], coordinate[2])
                         firstuser.append(transfermove)
 
-                        # yindex2, xindex2 = dropindex(coordinate[1], coordinate[0], coordinate[2])
-                        # board2[coordinate[0]][coordinate[1]][0] = 1
-                        # board2[xindex2][yindex2][0] = 1
+
                         drop_piece3(board3, coordinate[0], coordinate[1], coordinate[2])
-                        # print("searching：", end='')
-                        # print(search_count)
-                        # print("purning：", end='')
-                        # print(cut_count)
+
                         if user2 == 'dots':
                             win1 = winning_move(board, user1, user2)
                             win2 = winning_move(board, user2, user1)
@@ -4030,9 +2817,7 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
                                 print(i.strip()+'')
                             transfermove = cardinformation(move, cindex, rindex, card)
                             firstuser.append(transfermove)
-                            # yindex2, xindex2 = dropindex(cindex, rindex, card)
-                            # board2[rindex][cindex][0] = 1
-                            # board2[xindex2][yindex2][0] = 1
+
                         if user2=='dots':
                             win1 = winning_move(board, user1,user2)
                             win2 = winning_move(board, user2, user1)
@@ -4118,30 +2903,7 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                         DEPTH=2
                         coordinate = minmaxrecycliing(board,board2,DEPTH,dotscolor,recyclelist)
                         orpurning=2
-                # if orpurning==1:
-                #     outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
-                #     if outputcmd.lower().startswith('y'):
-                #         if sum==59:
-                #             print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
-                #                   file=open("output_alphabeta.txt", 'a'))
-                #             print(str(coordinate[7]).strip() + '\n',file=open("output_alphabeta.txt", 'a'))
-                #         else:
-                #             print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
-                #             for i in range(0,len(coordinate[8])):
-                #                 print(str(coordinate[8][i]).strip(),file=open("output_alphabeta.txt", 'a'))
-                #             print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
-                # else:
-                #     outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
-                #     if outputcmd.lower().startswith('y'):
-                #         if sum==59:
-                #             print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
-                #                   file=open("output_minmax.txt", 'a'))
-                #             print(str(coordinate[7]).strip() + '\n',file=open("output_minmax.txt", 'a'))
-                #         else:
-                #             print(str(en_count).strip()+'\n'+str(coordinate[7]).strip()+'\n',file=open("output_minmax.txt", 'a'))
-                #             for i in range(0,len(coordinate[8])):
-                #                 print(str(coordinate[8][i]).strip(),file=open("output_minmax.txt", 'a'))
-                #             print('\n'.strip(),file=open("output_minmax.txt", 'a'))
+
                 real_removerecycle(board,board2,board3,coordinate[0],coordinate[1],coordinate[2],coordinate[3])
                 drop = drop_piece(board, coordinate[4], coordinate[5], coordinate[6])
                 stop = timeit.default_timer()
@@ -4166,14 +2928,9 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                     recyclinglist.append(str(12-coordinate[4]).strip())
                     transfermove = cardinformation(recyclinglist, coordinate[5], coordinate[4], coordinate[6])
                     recyclelist.append(transfermove)
-                    # yindex2, xindex2 = dropindex(coordinate[5], coordinate[4], coordinate[6])
-                    # board2[coordinate[4]][coordinate[5]][0] = 1
-                    # board2[xindex2][yindex2][0] = 1
+
                     drop_piece3(board3, coordinate[4], coordinate[5], coordinate[6])
-                    # print("searching：")
-                    # print(search_count)
-                    # print("purning：")
-                    # print(cut_count)
+
                     if user1 == 'dots':
                         win1 = winning_move(board, user1, user2)
                         win2 = winning_move(board, user2, user1)
@@ -4261,9 +3018,7 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                             transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
                             recyclelist.append(transfermove)
                             drop_piece3(board3, rindex, cindex3, card)
-                            # yindex2, xindex2 = dropindex(cindex3, rindex, card)
-                            # board2[rindex][cindex3][0] = 1
-                            # board2[xindex2][yindex2][0] = 1
+
 
                         if user1=='dots':
                             win1 = winning_move(board, user1, user2)
@@ -4329,32 +3084,7 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                         coordinate = minmaxrecycliing(board, board2, DEPTH, dotscolor, recyclelist)
                         orpurning = 2
 
-                # if orpurning == 1:
-                #     outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
-                #     if outputcmd.lower().startswith('y'):
-                #         if sum == 59:
-                #             print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
-                #                   file=open("output_alphabeta.txt", 'a'))
-                #             print(str(coordinate[7]).strip() + '\n', file=open("output_alphabeta.txt", 'a'))
-                #         else:
-                #             print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
-                #                   file=open("output_alphabeta.txt", 'a'))
-                #             for i in range(0, len(coordinate[8])):
-                #                 print(str(coordinate[8][i]).strip(), file=open("output_alphabeta.txt", 'a'))
-                #             print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
-                # else:
-                #     outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
-                #     if outputcmd.lower().startswith('y'):
-                #         if sum == 59:
-                #             print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
-                #                   file=open("output_minmax.txt", 'a'))
-                #             print(str(coordinate[7]).strip() + '\n', file=open("output_minmax.txt", 'a'))
-                #         else:
-                #             print(str(en_count).strip() + '\n' + str(coordinate[7]).strip() + '\n',
-                #                   file=open("output_minmax.txt", 'a'))
-                #             for i in range(0, len(coordinate[8])):
-                #                 print(str(coordinate[8][i]).strip(), file=open("output_minmax.txt", 'a'))
-                #             print('\n'.strip(), file=open("output_minmax.txt", 'a'))
+
                 real_removerecycle(board, board2, board3, coordinate[0], coordinate[1], coordinate[2], coordinate[3])
                 drop = drop_piece(board, coordinate[4], coordinate[5], coordinate[6])
                 stop = timeit.default_timer()
@@ -4379,9 +3109,7 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                     recyclinglist.append(str(12-coordinate[4]).strip())
                     transfermove = cardinformation(recyclinglist, coordinate[5], coordinate[4], coordinate[6])
                     recyclelist.append(transfermove)
-                    # yindex2, xindex2 = dropindex(coordinate[5], coordinate[4], coordinate[6])
-                    # board2[coordinate[4]][coordinate[5]][0] = 1
-                    # board2[xindex2][yindex2][0] = 1
+
                     drop_piece3(board3, coordinate[4], coordinate[5], coordinate[6])
                     print("searching：", end='')
                     print(search_count)
@@ -4476,9 +3204,7 @@ def recycling(recyclelist,game_over,user1,user2,turn,sum,aiorhuman,dotscolor):
                             transfermove = cardinformation(recyclinglist, cindex3, rindex, card)
                             recyclelist.append(transfermove)
                             drop_piece3(board3, rindex, cindex3, card)
-                            # yindex2, xindex2 = dropindex(cindex3, rindex, card)
-                            # board2[rindex][cindex3][0] = 1
-                            # board2[xindex2][yindex2][0] = 1
+
                         if user2=='dots':
                             win1 = winning_move(board, user1,user2)
                             win2 = winning_move(board, user2, user1)
