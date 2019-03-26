@@ -10,7 +10,7 @@ search_count=0
 cut_count = 0
 en_count =0
 REGUALR_GAME = 24
-RECYCLING_GAME=40
+RECYCLING_GAME=60
 
 def create_board():
     board = [['□□' for _ in range(ROW_COUNT)] for _ in range(COL_COUNT)]
