@@ -2056,7 +2056,7 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                     value = max(value, level2value)
                     maxvalues.append(level2value)
                     alpha = max(alpha, value)
-                    values.append([value, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2]])
+                    values.append([level2value, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2]])
                     remove_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
 
                     remove_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
@@ -2068,9 +2068,10 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 fakelist.append(values[i][2])
                 fakelist.append(values[i][3])
                 fakelist.append(values[i][0])
-                coordinate.append(fakelist)
+
             else:
                 continue
+            coordinate.append(fakelist)
 
     elif dotscolor=='dots':
 
@@ -2092,7 +2093,7 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                     value = max(value, level2value)
                     maxvalues.append(level2value)
                     alpha = max(alpha, value)
-                    values.append([value, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2]])
+                    values.append([level2value, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2]])
                     remove_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
                     remove_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
         largestvalue = max(maxvalues)
@@ -2107,7 +2108,9 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 continue
             coordinate.append(fakelist)
     g = random.randint(0,len(coordinate)-1)
-    return coordinate[0][0], coordinate[0][1], coordinate[0][2],coordinate[0][3],maxvalues
+    for i in range(len(values)):
+        values[i][3]= return_card(values[i][3])
+    return coordinate[0][0], coordinate[0][1], coordinate[0][2],coordinate[0][3],values
 
 # $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 def alphabetapruningmaxfunction(board,board2,depth,alpha,beta,player) :
@@ -2168,7 +2171,6 @@ def alphabetapruningminfunction(board,board2,depth,alpha,beta,player,historylist
                     drop_piece3(board3, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
                     newvalue = alphabetapruningmaxfunction(board, board2, depth - 1, alpha, beta, opponent)
                     value = min(value, newvalue)
-                    print(newvalue)
                     fakelist2=[]
                     for r in range(COL_COUNT):
                         for c in range(ROW_COUNT):
@@ -2864,6 +2866,20 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
                         else:
                             coordinate = minimax(board,board2,DEPTH,dotscolor)
                             orpurning=2
+                    if orpurning==1:
+                        outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
+                        if outputcmd.lower().startswith('y'):
+                            print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                            for i in range(0,len(coordinate[4])):
+                                print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                            print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                    else:
+                        outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
+                        if outputcmd.lower().startswith('y'):
+                            print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                            for i in range(0,len(coordinate[4])):
+                                print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
+                            print('\n'.strip(),file=open("output_minmax.txt", 'a'))
 
                     drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
                     stop = timeit.default_timer()
@@ -3007,6 +3023,20 @@ def play(user1,user2,turn,game_over,aiorhuman,dotscolor,aifirst):
                         else:
                             coordinate = minimax(board,board2,DEPTH,dotscolor)
                             orpurning=2
+                    if orpurning==1:
+                        outputcmd = input('Does AI generate trace of alpha-beta? (y/n) : ')
+                        if outputcmd.lower().startswith('y'):
+                            print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_alphabeta.txt", 'a'))
+                            for i in range(0,len(coordinate[4])):
+                                print(str(coordinate[4][i]).strip(),file=open("output_alphabeta.txt", 'a'))
+                            print('\n'.strip(), file=open("output_alphabeta.txt", 'a'))
+                    else:
+                        outputcmd = input('Does AI generate trace of mini-max? (y/n) : ')
+                        if outputcmd.lower().startswith('y'):
+                            print(str(en_count).strip()+'\n'+str(coordinate[3]).strip()+'\n',file=open("output_minmax.txt", 'a'))
+                            for i in range(0,len(coordinate[4])):
+                                print(str(coordinate[4][i]).strip(),file=open("output_minmax.txt", 'a'))
+                            print('\n'.strip(),file=open("output_minmax.txt", 'a'))
 
                     drop = drop_piece(board, coordinate[0], coordinate[1], coordinate[2])
                     stop = timeit.default_timer()
