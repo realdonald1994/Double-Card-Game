@@ -2193,16 +2193,12 @@ def alphabetapruning(board,board2,depth,alpha,beta,dotscolor):
                 coordinate.append(fakelist)
             else:
                 continue
-<<<<<<<HEAD
-    # g = random.randint(0,len(coordinate)-1)
-    return coordinate[0][0], coordinate[0][1], coordinate[0][2],coordinate[0][3],maxvalues
-=======
             coordinate.append(fakelist)
     g = random.randint(0,len(coordinate)-1)
     for i in range(len(values)):
         values[i][3]= return_card(values[i][3])
     return coordinate[0][0], coordinate[0][1], coordinate[0][2],coordinate[0][3],values
->>>>>>> origin/master
+
 
 # $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 def alphabetapruningmaxfunction(board,board2,depth,alpha,beta,player) :
@@ -2250,6 +2246,7 @@ def alphabetapruningminfunction(board,board2,depth,alpha,beta,player):
             if neighbor==True:
                 continue
             else:
+<<<<<<< HEAD
                 global search_count
                 search_count += 1
                 drop_piece(board, candidate[k][j][0], candidate[k][j][1], candidate[k][j][2])
@@ -2264,6 +2261,7 @@ def alphabetapruningminfunction(board,board2,depth,alpha,beta,player):
                     global cut_count
                     cut_count += 1
                     return beta
+=======
                 allsame,historyvalue = history_list(board,candidate[k][j][0], candidate[k][j][1], candidate[k][j][2],historylist)
                 if allsame==True:
                     value = min(value,historyvalue)
