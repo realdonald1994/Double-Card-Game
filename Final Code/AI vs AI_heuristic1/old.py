@@ -1689,7 +1689,8 @@ def maxfunction(board,board2,depth,player) :
     opponent = SwitchPlayer(player)
     value = -1000000000
     if (depth == 0):
-        return evaluation(board,board2,board3,opponent)
+        # return evaluation(board,board2,board3,opponent)
+        return evaluation_2(board,opponent)
     list = ['1', '2', '3', '4', '5', '6', '7', '8']
     for i in list:
         piece = which_card(i)
@@ -2038,7 +2039,8 @@ def maxrecycling(board,board2,depth,player,list1):
     opponent = SwitchPlayer(player)
     value = -1000000000
     if (depth == 0):
-        return evaluation(board,board2,board3,opponent)
+        # return evaluation(board,board2,board3,opponent)
+        return evaluation_2(board,opponent)
     candidate1 = remove_recyclingpiece(board3)
     for k in range(len(candidate1)):
 
@@ -2367,7 +2369,8 @@ def recyclingmaxaplhabetapurning(board,board2,depth,alpha,beta,player,list1):
     opponent = SwitchPlayer(player)
     value = -1000000000
     if (depth == 0):
-        return evaluation(board,board2,board3,opponent)
+        # return evaluation(board,board2,board3,opponent)
+        return evaluation_2(board,opponent)
     candidate1 = remove_recyclingpiece(board3)
     for k in range(len(candidate1)):
         global flag2
