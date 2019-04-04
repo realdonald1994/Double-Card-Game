@@ -17,9 +17,16 @@ STOP_WORD =  'Stop_word.txt'
 STORE_PATH1='model.txt'
 STORE_PATH2='stopword-model.txt'
 STORE_PATH3='wordlength-model.txt'
+STORE_PATH4 = "demo-model-exp4.txt"
+STORE_PATH5 = "demo-model-exp5.txt"
 OUTPUT_PATH1='baseline-result.txt'
 OUTPUT_PATH2='stopword-result.txt'
 OUTPUT_PATH3='wordlength-result.txt'
+OUTPUT_PATH4 = "demo-result-exp4.txt"
+OUTPUT_PATH5 = "demo-result-exp5.txt"
+
+
+
 SMOOTH=0.5
 MINI_LENGTH=2
 MAX_LENGTH=9
@@ -48,26 +55,50 @@ def test_file(path,path2,nchoose):
         else:
             right_or_not='wrong'
         print(str(count).strip() + '  ' + str(item).strip() + '  '+str(label).strip()+'  ' \
-              +str(overrall_ham).strip()+'  '+str(overrall_spam).strip()+'  '+str(file_type).strip()+'  '+str(right_or_not).strip()+'\n',
+              +str(overrall_ham).strip()+'  '+str(overrall_spam).strip()+'  '+str(file_type).strip()+'  '+str(right_or_not).strip(),
               file=open(path2, 'a'))
         count+=1
-def test_file2(path,nchoose):
+def test_file2(path,nchoose,path2):
     datasetList = listdir(path)
-    right_count=0
     wrong_count=0
+    test_ham_count= 0
+    test_spam_count=0
+    ham_right=0
+    spam_right=0
+    ham_count =0
+    spam_count=0
+    count=1
     for item in datasetList:
         file_type = item.split('-')[1]
+        if file_type=='ham':
+            ham_count+=1
+        else:
+            spam_count+=1
         overrall_ham,overrall_spam = testing(path+'/'+item,nchoose)
         if overrall_ham>overrall_spam:
             label='ham'
+            test_ham_count+=1
         else:
             label='spam'
-        if label==file_type:
-            right_count+=1
+            test_spam_count+=1
+        if label=='ham' and label==file_type:
+            right_or_not = 'right'
+            ham_right+=1
+        elif label=='spam' and label==file_type:
+            right_or_not = 'right'
+            spam_right+=1
         else:
+            right_or_not = 'wrong'
             wrong_count+=1
-    accuracy=right_count/(right_count+wrong_count)
-    return accuracy
+        # print(str(count).strip() + '  ' + str(item).strip() + '  '+str(label).strip()+'  ' \
+        #       +str(overrall_ham).strip()+'  '+str(overrall_spam).strip()+'  '+str(file_type).strip()+'  '+str(right_or_not).strip(),
+        #       file=open(path2, 'a'))
+        count += 1
+    accuracy=(ham_right+spam_right)/(spam_right+ham_right+wrong_count)
+    precision = (spam_right)/(test_spam_count)
+    recall = (spam_right)/(spam_count)
+    F_score = (2*precision*recall)/(precision+recall)
+    return accuracy,recall,precision,F_score
 def readfile(path):
     global  computing_pham
     global  computing_pspam
@@ -142,9 +173,8 @@ def training(vocabulary,dic_ham,dic_spam,smooth,path):
         over_dic[item].append(dic_spam.get(item,0)+smooth)
         over_dic[item].append((dic_spam.get(item,0)+smooth)/(count_spam+length))
     for key,value in over_dic.items():
-
         print(str(count).strip() + '  ' + str(key).strip() + '  '+str(value[0]).strip()+'  ' \
-              +str(value[1]).strip()+'  '+str(value[2]).strip()+'  '+str(value[3]).strip()+'\n',
+              +str(value[1]).strip()+'  '+str(value[2]).strip()+'  '+str(value[3]).strip(),
               file=open(path, 'a'))
         count+=1
 def training2(vocabulary,dic_ham,dic_spam,smooth):
@@ -155,6 +185,7 @@ def training2(vocabulary,dic_ham,dic_spam,smooth):
         count_ham+=value
     for value in dic_spam.values():
         count_spam+=value
+    count=1
     for item in sorted(vocabulary):
         over_dic[item]=[]
         over_dic[item].append(dic_ham.get(item,0)+smooth)
@@ -183,13 +214,13 @@ def math_compute(item):
     probility_spam=0.0
     if item in over_dic:
         if over_dic.get(item)[1]==0 and over_dic.get(item)[3]==0:
-            probility_ham=-9999999999999
-            probility_spam = -9999999999999
+            probility_ham=-float('inf')
+            probility_spam = -float('inf')
         elif over_dic.get(item)[1]==0 and over_dic.get(item)[3]!=0:
-            probility_ham = -9999999999999
+            probility_ham = -float('inf')
             probility_spam = math.log10(over_dic.get(item)[3])
         elif over_dic.get(item)[1]!=0 and over_dic.get(item)[3]==0:
-            probility_spam = -9999999999999
+            probility_spam = -float('inf')
             probility_ham = math.log10(over_dic.get(item)[1])
         else:
             probility_ham=math.log10(over_dic.get(item)[1])
@@ -233,11 +264,11 @@ def change_vocabulary(vocabulary,diction1,diction2,mode):
 def change_vocabulary2(vocabulary,diction1,diction2,mode):
     dictdata = set()
 
-    top1= math.ceil(0.05*len(fakevocabulary))
-    top2= math.ceil(0.1*len(fakevocabulary))
-    top3= math.ceil(0.15*len(fakevocabulary))
-    top4= math.ceil(0.2*len(fakevocabulary))
-    top5= math.ceil(0.25*len(fakevocabulary))
+    top1= math.ceil(0.05*len(vocabulary))
+    top2= math.ceil(0.1*len(vocabulary))
+    top3= math.ceil(0.15*len(vocabulary))
+    top4= math.ceil(0.2*len(vocabulary))
+    top5= math.ceil(0.25*len(vocabulary))
     if mode == 1:
         finaldition = {x: diction1.get(x, 0) + diction2.get(x, 0) for x in set(diction1).union(diction2)}
         new_diction = sorted(finaldition.items(), key=lambda e: e[1], reverse=True)[:top1]
@@ -287,54 +318,109 @@ def run(nChoose,store_path,output_path):
     training(fakevocabulary,dict_frequency_ham, dict_frequency_spam, SMOOTH,store_path)
     test_file(TEST_PATH, output_path, nChoose)
 
-def drop_item_run(nChoose):
+def drop_item_run(nChoose,path1,path2):
     accuracy_list=[]
     vocabulary=[]
+    recall_list=[]
+    precision_list=[]
+    fscore_list = []
     ham_file, spam_file = readfile(TRAIN_PATH)
     get_vocabulary(ham_file, spam_file, nChoose)
     for item in fakevocabulary:
         vocabulary.append(item)
-    new_dict_frequency_ham= dict_frequency_ham
-    new_dict_frequency_spam=dict_frequency_spam
     for i in range(1,6):
-        vocabulary,new_dict_frequency_ham,new_dict_frequency_spam = change_vocabulary(vocabulary,new_dict_frequency_ham,new_dict_frequency_spam,i)
-        training2(vocabulary,new_dict_frequency_ham, new_dict_frequency_spam, SMOOTH)
-        accuracy = test_file2(TEST_PATH, nChoose)
+        newvocabulary,new_dict_frequency_ham,new_dict_frequency_spam = change_vocabulary(vocabulary,dict_frequency_ham,dict_frequency_spam,i)
+        training2(newvocabulary,new_dict_frequency_ham, new_dict_frequency_spam, SMOOTH)
+        accuracy,recall,precision,f_score= test_file2(TEST_PATH, nChoose,path2)
         accuracy_list.append(accuracy)
-    return set(vocabulary),new_dict_frequency_ham,new_dict_frequency_spam,accuracy_list
+        recall_list.append(recall)
+        precision_list.append(precision)
+        fscore_list.append(f_score)
+    return set(newvocabulary),new_dict_frequency_ham,new_dict_frequency_spam,accuracy_list,recall_list,precision_list,fscore_list
 
-def drop_item_run2(nChoose,vocabulary2,new_dict_frequency_ham,new_dict_frequency_spam,accuracy_list):
+def drop_item_run2(nChoose,vocabulary2,last_dict_frequency_ham,last_dict_frequency_spam,accuracy_list,recall_list,precision_list,fscore_list, path1,path2):
     remove_tem=[1,2,3,4,5,6,7,8,9,10]
     for i in range(1,6):
-        vocabulary2, new_dict_frequency_ham, new_dict_frequency_spam = change_vocabulary2(vocabulary2,new_dict_frequency_ham,new_dict_frequency_spam, i)
-        training2(vocabulary2, new_dict_frequency_ham, new_dict_frequency_spam, SMOOTH)
-        accuracy = test_file2(TEST_PATH, nChoose)
+        newvocabulary, new_dict_frequency_ham, new_dict_frequency_spam = change_vocabulary2(vocabulary2,last_dict_frequency_ham,last_dict_frequency_spam, i)
+        training2(newvocabulary, new_dict_frequency_ham, new_dict_frequency_spam, SMOOTH)
+        accuracy,recall,precision,f_score= test_file2(TEST_PATH, nChoose,path2)
         accuracy_list.append(accuracy)
+        recall_list.append(recall)
+        precision_list.append(precision)
+        fscore_list.append(f_score)
     plt.figure(1)
     plt.title('Test Results')
     plt.plot(remove_tem,accuracy_list)
     plt.ylabel('Accuracy')
-    plt.xlabel('Remove Frequency Word')
+    plt.xlabel('Word Filtering Situation')
+    plt.savefig("Accuracy.png")
+
+    plt.figure(2)
+    plt.title('Test Results')
+    plt.plot(remove_tem,recall_list)
+    plt.ylabel('Recall')
+    plt.xlabel('Word Filtering Situation')
+    plt.savefig("Recall.png")
+
+    plt.figure(3)
+    plt.title('Test Results')
+    plt.plot(remove_tem,precision_list)
+    plt.ylabel('Precision')
+    plt.xlabel('Word Filtering Situation')
+    plt.savefig("Precision.png")
+
+    plt.figure(4)
+    plt.title('Test Results')
+    plt.plot(remove_tem,fscore_list)
+    plt.ylabel('F-measure')
+    plt.xlabel('Word Filtering Situation')
+    plt.savefig("F-measure.png")
     plt.show()
 
-def change_smooth(nChoose):
+def change_smooth(nChoose,path1,path2):
     smooth_list=[]
     for i in np.arange(0,1.1,0.1):
         smooth_list.append(i)
     accuracy_list=[]
-
+    recall_list=[]
+    precision_list=[]
+    fscore_list= []
     ham_file, spam_file = readfile(TRAIN_PATH)
     get_vocabulary(ham_file, spam_file, nChoose)
     for i in range(len(smooth_list)):
         training2(fakevocabulary,dict_frequency_ham, dict_frequency_spam, smooth_list[i])
-        accuracy = test_file2(TEST_PATH, nChoose)
+        accuracy,recall,precision,f_score = test_file2(TEST_PATH, nChoose,path2)
         accuracy_list.append(accuracy)
-
-    plt.figure(3)
+        recall_list.append(recall)
+        precision_list.append(precision)
+        fscore_list.append(f_score)
+    plt.figure(1)
     plt.title('Test Results')
     plt.plot(smooth_list,accuracy_list)
     plt.ylabel('Accuracy')
     plt.xlabel('Smooth Value')
+    plt.savefig("Accuracy.png")
+
+    plt.figure(2)
+    plt.title('Test Results')
+    plt.plot(smooth_list,recall_list)
+    plt.ylabel('Recall')
+    plt.xlabel('Smooth Value')
+    plt.savefig("Recall.png")
+
+    plt.figure(3)
+    plt.title('Test Results')
+    plt.plot(smooth_list,precision_list)
+    plt.ylabel('Precision')
+    plt.xlabel('Smooth Value')
+    plt.savefig("Precision.png")
+
+    plt.figure(4)
+    plt.title('Test Results')
+    plt.plot(smooth_list,fscore_list)
+    plt.ylabel('F-measure')
+    plt.xlabel('Smooth Value')
+    plt.savefig("F-measure.png")
     plt.show()
 
 
@@ -356,11 +442,11 @@ def main():
         run(nChoose,STORE_PATH3,OUTPUT_PATH3)
     if nChoose == "4":
 
-        vocabulary,new_dict_frequency_ham,new_dict_frequency_spam,accuracy_list = drop_item_run(nChoose)
-        drop_item_run2(nChoose,vocabulary,new_dict_frequency_ham,new_dict_frequency_spam,accuracy_list)
+        vocabulary,new_dict_frequency_ham,new_dict_frequency_spam,accuracy_list,recall_list,precision_list,fscore_list = drop_item_run(nChoose,STORE_PATH4,OUTPUT_PATH4)
+        drop_item_run2(nChoose,vocabulary,new_dict_frequency_ham,new_dict_frequency_spam,accuracy_list,recall_list,precision_list,fscore_list,STORE_PATH4,OUTPUT_PATH4)
 
     if nChoose == "5":
-        change_smooth(nChoose)
+        change_smooth(nChoose,STORE_PATH5,OUTPUT_PATH5)
 
 if __name__ == "__main__":
     main()
