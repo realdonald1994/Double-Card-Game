@@ -201,8 +201,8 @@ def training(vocabulary,dic_ham,dic_spam,smooth,path):
         over_dic[item].append(dic_spam.get(item,0)+smooth)
         over_dic[item].append((dic_spam.get(item,0)+smooth)/(count_spam+length))
     for key,value in over_dic.items():
-        print(str(count).strip() + '  ' + str(key).strip() + '  '+str(value[0]).strip()+'  ' \
-              +str(value[1]).strip()+'  '+str(value[2]).strip()+'  '+str(value[3]).strip(),
+        print(str(count).strip() + '  ' + str(key).strip() + '  '+str(value[0]-smooth).strip()+'  ' \
+              +str(value[1]).strip()+'  '+str(value[2]-smooth).strip()+'  '+str(value[3]).strip(),
               file=open(path, 'a'))
         count+=1
 
