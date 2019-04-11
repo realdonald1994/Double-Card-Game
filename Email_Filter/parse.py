@@ -62,7 +62,7 @@ def demo(vocabulary,diction1,diction2,value):
             return demo_vocabulary, new_dict_frequency_ham, new_dict_frequency_spam
         else:
             for i in range(len(demo_vocabulary) - 1, -1, -1):
-                if diction1.get(demo_vocabulary[i],0) + diction2.get(demo_vocabulary[i],0) <= value:
+                if diction1.get(demo_vocabulary[i],0) + diction2.get(demo_vocabulary[i],0) < value:
                     del demo_vocabulary[i]
             new_dict_frequency_ham = {k: v for k, v in diction1.items() if k in demo_vocabulary}
             new_dict_frequency_spam = {k: v for k, v in diction2.items() if k in demo_vocabulary}
@@ -122,6 +122,13 @@ def test_file2(path,nchoose,path2):
     precision_ham = (ham_right)/(test_ham_count)
     recall_ham = (ham_right)/(ham_count)
     F_score_ham = (2*precision_ham*recall_ham)/(precision_ham+recall_ham)
+    # accuracy = 0
+    # precision_spam=0
+    # recall_spam=0
+    # F_score_spam=0
+    # precision_ham=0
+    # recall_ham=0
+    # F_score_ham=0
     print('accuracy: '+str(accuracy)+' '+'recall_ham: '+str(recall_ham)+' '+'precision_ham: '+str(precision_ham)+' '\
           +'fscore_ham: '+str(F_score_ham)+' '+'recall_spam: '+str(recall_spam)+' '+'precision_spam: '+str(precision_spam)+' '\
           +'fscore_spam: '+str(F_score_spam)+' '+'ham right: '+str(ham_right)+' '+'ham wrong: '+str((test_ham_count-ham_right))+' '+'spam right: '\
@@ -201,8 +208,8 @@ def training(vocabulary,dic_ham,dic_spam,smooth,path):
         over_dic[item].append(dic_spam.get(item,0)+smooth)
         over_dic[item].append((dic_spam.get(item,0)+smooth)/(count_spam+length))
     for key,value in over_dic.items():
-        print(str(count).strip() + '  ' + str(key).strip() + '  '+str(value[0]-smooth).strip()+'  ' \
-              +str(value[1]).strip()+'  '+str(value[2]-smooth).strip()+'  '+str(value[3]).strip(),
+        print(str(count).strip() + '  ' + str(key).strip() + '  '+str(round(value[0]-smooth)).strip()+'  ' \
+              +str(value[1]).strip()+'  '+str(round(value[2]-smooth)).strip()+'  '+str(value[3]).strip(),
               file=open(path, 'a'))
         count+=1
 
